@@ -44,7 +44,7 @@
       - Goal: Lightroom plugin
 - Third Sprint (2 weeks)
     - Review/Retro + Sprint planning 1.6. 11am
-    - Scrum master: Su <
+    - Scrum master: Su 
     - Goal:  Finish lightroom plugin, start another imagetool plugin?
 - Fourth Sprint (2 weeks)
     - Review/Retro + Sprint planning 15.6. 11am
