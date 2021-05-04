@@ -3,4 +3,4 @@ This is the repository for the teamproject course, summer term 2021, working on 
 
 Hallo das ist ein Test. Ein anderer Test. 
 
-Das ist offline geändert.
+Das ist offline und online geändert. 
