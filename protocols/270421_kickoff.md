@@ -36,19 +36,19 @@
     - Goal: Form a team, structure yourself (when/where to meet, which tools, when scrum master,…), prepare your tools (git, github, scrum, …), add license to repository.
   - First Sprint (2 weeks)
       - Sprint planning: 4.5. 11am
-      - Scrum master:
+      - Scrum master: Dong Anh
       - Goal: Specify configuration format, learn about lightroom plugins
   - Second Sprint (2 weeks)
       - Review/Retro + Sprint planning: 18.5. 11am
-      - Scrum master:
+      - Scrum master: Regina
       - Goal: Lightroom plugin
 - Third Sprint (2 weeks)
     - Review/Retro + Sprint planning 1.6. 11am
-    - Scrum master: 
+    - Scrum master: Su <
     - Goal:  Finish lightroom plugin, start another imagetool plugin?
 - Fourth Sprint (2 weeks)
     - Review/Retro + Sprint planning 15.6. 11am
-    - Scrum master: 
+    - Scrum master: Melike
     - Goal:  Another imagetool plugin
 - Fifth Sprint (2 weeks)
     - Review/Retro + Sprint planning 29.6. 11am
