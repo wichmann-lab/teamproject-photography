@@ -20,11 +20,19 @@ LrFunctionContext.callWithContext( "showCustomDialog", function( context )
             title = "Enable", -- label text
             value = LrView.bind( "isChecked" ) -- bind button state to data key
             },
-        f:edit_field {
-            value = "Test Hallo",
-            enabled = LrView.bind( "isChecked" ) -- bind state to same key
-            },
-        }
+        --f:edit_field {
+        --    value = "Test Hallo",
+        --    enabled = LrView.bind( "isChecked" ) -- bind state to same key
+        --    },
+        --}
+        f:slider {
+            value = LrView.bind( "sliderOne" ),
+            min = 0,
+            max = 100,
+            width = LrView.share( "slider_width" )
+        },
+    }
+    
             local result = LrDialogs.presentModalDialog(
                 {
                 title = "Custom Dialog",
