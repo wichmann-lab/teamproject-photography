@@ -1,4 +1,4 @@
-local LrDialogs = require 'LrDialogs'
+local LrDialogs = import 'LrDialogs'
 
 MyDummyPluginExportItem = {}
     function MyDummyPluginExportItem.showModalDialog()
