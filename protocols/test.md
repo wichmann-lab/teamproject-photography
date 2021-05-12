@@ -1,1 +1,0 @@
-Hallo, das ist ein Text von Annie.
