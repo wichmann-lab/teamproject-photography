@@ -16,7 +16,7 @@ return {
         },
         {
             title="Dummy Plugin with Radio Button", -- The display text for the menu item
-            file="LibraryMenuItemRadioButton",
+            file="LibraryMenuItemRadioButton.lua",
         }
     }
 
