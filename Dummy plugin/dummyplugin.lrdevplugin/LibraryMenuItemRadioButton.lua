@@ -75,8 +75,8 @@ LrFunctionContext.callWithContext( "showCustomDialog", function( context )
     local props = LrBinding.makePropertyTable( context ) -- create bound table
     local tableOne = LrBinding.makePropertyTable( context )
     local tableTwo = LrBinding.makePropertyTable( context )
-    tableOne.sliderLightExposure = false
-    tableOne.sliderLightContrast = false
+    --tableOne.sliderLightExposure = false
+    --tableOne.sliderLightContrast = false
     -- create view hierarchy
     local f = LrView.osFactory()
 
