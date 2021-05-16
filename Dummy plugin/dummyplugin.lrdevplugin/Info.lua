@@ -17,6 +17,10 @@ return {
         {
             title="Dummy Plugin with Radio Button", -- The display text for the menu item
             file="LibraryMenuItemRadioButton.lua",
+        },
+        {
+            title="Dummy Plugin with Sliders and Checkboxes", -- The display text for the menu item
+            file="LibraryMenuItemCheckboxesandSliders.lua",
         }
     }
 
