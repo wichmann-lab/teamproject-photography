@@ -1,4 +1,9 @@
 {
     "sliderOne": 0.5,
-    "sliderTwo": 0.3
+    "sliderTwo": 0.3,
+    "location": "path to be stored",
+    "format" : ["jpg", "jpeg", "png", "gif"],
+    "maxSize": "200",
+    "testConfig": false,
+    "testMax": 50
 }

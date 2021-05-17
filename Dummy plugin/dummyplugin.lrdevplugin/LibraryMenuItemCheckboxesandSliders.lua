@@ -4,6 +4,23 @@ local LrDialogs = import 'LrDialogs'
 local LrView = import 'LrView'
 local LrColor = import 'LrColor'
 
+-- require 'json'
+local json = loadfile("D:/Uni/teamproject-photography/Dummy plugin/dummyplugin.lrdevplugin/json.lua")()
+local open = io.open
+
+local function read_file(path)
+    local file = open(path, "rb") -- r read mode and b binary mode
+    if not file then return nil end
+    local content = file:read "*a" -- *a or *all reads the whole file
+    file:close()
+    return content
+end
+
+local fileContent = read_file("D:/Uni/teamproject-photography/Dummy plugin/dummyplugin.lrdevplugin/config.json");
+-- print (fileContent);
+-- print (fileContent);
+local configFile = json.decode(fileContent);
+
 MyDummyPluginLibraryItem = {}
 function MyDummyPluginLibraryItem.showCustomDialogWithSliders()
     -- body of show-dialog function
@@ -17,7 +34,7 @@ function MyDummyPluginLibraryItem.showCustomDialogWithSliders()
         tableOne.sliderTwoischecked = false
         tableOne.sliderThreeischecked = false
         tableTwo.sliderOneischecked = false
-        tableTwo.sliderTwoischecked = false
+        tableTwo.sliderTwoischecked = configFile.testConfig
 
         -- create view hierarchy
         local f = LrView.osFactory() -- get view factory object
@@ -41,7 +58,7 @@ function MyDummyPluginLibraryItem.showCustomDialogWithSliders()
                 }, f:slider{            -- Create Slider
                     value = LrView.bind("Slider One"),
                     min = 0,
-                    max = 100,
+                    max = configFile.testMax,
                     enabled = LrView.bind("sliderOneischecked")
                 }},
 
