@@ -5,7 +5,7 @@ local LrView = import 'LrView'
 local LrColor = import 'LrColor'
 
 -- require 'json'
-local json = loadfile("D:/Uni/teamproject-photography/Dummy plugin/dummyplugin.lrdevplugin/json.lua")()
+local json = loadfile("./json.lua")()
 local open = io.open
 
 local function read_file(path)
@@ -16,7 +16,7 @@ local function read_file(path)
     return content
 end
 
-local fileContent = read_file("D:/Uni/teamproject-photography/Dummy plugin/dummyplugin.lrdevplugin/config.json");
+local fileContent = read_file("./config.json");
 -- print (fileContent);
 -- print (fileContent);
 local configFile = json.decode(fileContent);
