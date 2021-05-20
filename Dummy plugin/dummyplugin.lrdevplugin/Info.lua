@@ -21,6 +21,10 @@ return {
         {
             title="Dummy Plugin with Sliders and Checkboxes", -- The display text for the menu item
             file="LibraryMenuItemCheckboxesandSliders.lua",
+        },
+        {
+            title="Dummy Plugin with Observer", -- The display text for the menu item
+            file="LibraryMenuItemObserver.lua",
         }
     }
 
