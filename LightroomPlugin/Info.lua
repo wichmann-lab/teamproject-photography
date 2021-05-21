@@ -1,7 +1,7 @@
 return {
     LrSdkVersion = 9.0,
-    LrToolkitIdentifier = "com.adobe.lightroom.sdk.dummyplugin",
-    LrPluginName = "Dummy Plugin",
+    LrToolkitIdentifier = "com.adobe.lightroom.sdk.teamprojectPlugin",
+    LrPluginName = "Teamprojekt Plugin",
 
 
 }
