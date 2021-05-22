@@ -1,9 +1,1 @@
-{
-    "sliderOne": 0.5,
-    "sliderTwo": 0.3,
-    "location": "path to be stored",
-    "format" : ["jpg", "jpeg", "png", "gif"],
-    "maxSize": "200",
-    "testConfig": false,
-    "testMax": 50
-}
+{"suzhengyu":10,"test":5,"test3":"das ist ein Test.","test2":["1","2"],"SliderOne":0}
