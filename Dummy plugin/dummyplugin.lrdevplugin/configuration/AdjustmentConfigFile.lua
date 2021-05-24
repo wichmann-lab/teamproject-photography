@@ -25,6 +25,7 @@ configFile.suzhengyu = 10
 configFile.test = 5
 configFile.test2 = {"1","2"}
 configFile.test3= "Das ist ein Test"
+configFile.test4= "Ein weiterer Test"
 local foo = json.encode(configFile)
 
 -- writes keywords to config.json
