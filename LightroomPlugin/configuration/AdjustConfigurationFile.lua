@@ -19,7 +19,7 @@ local fileContent = read_file("configurationFile.json")
 local configFile = json.decode(fileContent);
 
 -- adds new keywords to config.json
-
+configFile.contrast = {20, 50}
 local result = json.encode(configFile)
 
 -- writes keywords to config.json
