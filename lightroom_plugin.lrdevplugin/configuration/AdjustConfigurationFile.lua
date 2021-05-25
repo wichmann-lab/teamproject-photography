@@ -1,7 +1,7 @@
 -- find directory
 package.path = package.path .. ";./\\?.lua"
 local json = require("json")
--- local json = loadfile("D:/Uni/SS21/Teamprojekt/ProjectFiles/hello.lrdevplugin/json.lua")()
+-- local json = loadfile("absolute path of json.lua here")()
 local open = io.open
 
 -- function to read a file
@@ -14,9 +14,29 @@ local function read_file(path)
     return content
 end
 
--- tests for functions from json.lua
+-- decodes config.json file to a lua object
 local fileContent = read_file("configurationFile.json")
-local configFile = json.decode(fileContent);
+configFile = json.decode(fileContent);  -- configFile can be accessed outside this file for further use
+
+-- function to add new keyword to config.json
+function write_config(keyword,value)
+    configFile[keyword] = value
+    local encodeFile = json.encode(configFile)
+    local file = open("configurationFile.json","w")
+    file:write(encodeFile)
+    file:close()
+end
+
+-- option 2
+function write_config()
+    local encodeFile = json.encode(configFile)
+    local file = open("configurationFile.json","w")
+    file:write(encodeFile)
+    file:close()
+end
+
+-------------------------------------------------------------------------
+
 
 -- adds new keywords to config.json
 configFile.contrast = {20, 50}
