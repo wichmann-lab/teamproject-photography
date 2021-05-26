@@ -26,6 +26,8 @@ function selectedPhotos.importSelected ()
 end
 -- function for editing each photo
 function selectedPhotos.editPhotos(photo)
-    photo:quickDevelopAdjustWhiteBalance("Temperature", 100)
+    photo:quickDevelopAdjustImage("Contrast", 100)
+    photo:quickDevelopAdjustImage("Highlights", 100)
+    photo:quickDevelopAdjustImage("Saturation", 100)
 end
 selectedPhotos.importSelected()
