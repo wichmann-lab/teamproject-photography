@@ -4,29 +4,20 @@ local LrDialogs = import 'LrDialogs'
 local LrView = import 'LrView'
 local LrTasks = import 'LrTasks'
 local LrApplication = import 'LrApplication'
+local LrDevelopController =import 'LrDevelopController'
 --local LrColor = import 'LrColor'
 --local ImportPhotos = loadfile ("/Users/ngocdonganhvo/Documents/GitHub/teamproject-photography/lightroom_plugin.lrdevplugin")()
 --package.path = package.path .. ";./\\?.lua"
+--package.path = package.path .. ";../?.lua"
+--package.path = "../?.lua;" .. package.path
 --local ImportPhotos = require("ImportPhotos")
-
 MyHWLibraryItem = {}
-function MyHWLibraryItem.importSelected ()
-    LrTasks.startAsyncTask( function()
-        local catalog = LrApplication.activeCatalog()
-        local targetPhotos = catalog:getTargetPhotos()
-        if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(catalog.targetPhotos) .. ' photo(s)?') then
-            for i, photo in ipairs(catalog.targetPhotos) do
-                MyHWLibraryItem.editPhotos(photo)
-            end
-        end
-    end)
-end
 
-function MyHWLibraryItem.editPhotos(photo)
-    photo:quickDevelopAdjustImage("Contrast", -100)
-    photo:quickDevelopAdjustImage("Highlights", -100)
-    photo:quickDevelopAdjustImage("Saturation", -100)
-end
+function MyHWLibraryItem.editPhotos(photo) -- editing the selected pictures 
+    photo:quickDevelopAdjustImage("Contrast", fieldContrast1.value)
+    photo:quickDevelopAdjustImage("Highlights", fieldHighlights1.value)
+    photo:quickDevelopAdjustImage("Saturation", fieldSaturation1.value)
+end 
 
 function MyHWLibraryItem.showcustomDialog()     
     LrFunctionContext.callWithContext("showcustomDialog",function(context)  --function-context call for property table (observable)
@@ -38,6 +29,107 @@ function MyHWLibraryItem.showcustomDialog()
         tableOne.thirdCheckboxIsChecked = false
 
         local f = LrView.osFactory()        -- obtain view factory object
+        fieldContrast1 = f:edit_field{
+            place_horizontal = 0.6,
+            bind = LrView.bind("Checkbox1.1"),
+            width_in_digits = 5,
+            enabled = LrView.bind("firstCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+        }
+
+        fieldContrast2 =f:edit_field{
+            place_horizontal = 0.6,
+            bind = LrView.bind("Checkbox1.2"),
+            width_in_digits = 3,
+            enabled = LrView.bind("firstCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+        }
+        fieldContrast3 =f:edit_field{
+            place_horizontal = 0.6,
+            bind = LrView.bind("Checkbox1.3"),
+            width_in_digits = 3,
+            enabled = LrView.bind("firstCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+        }
+
+        fieldSaturation1 = f:edit_field{
+            place_horizontal = 0.8,
+            bind = LrView.bind("Checkbox2.1"),
+            width_in_digits = 3,
+            enabled = LrView.bind("secondCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+
+        }
+
+        fieldSaturation2 = f:edit_field{
+            place_horizontal = 0.8,
+            bind = LrView.bind("Checkbox2.2"),
+            width_in_digits = 3,
+            enabled = LrView.bind("secondCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+
+        }
+        fieldSaturation3 = f:edit_field{
+            place_horizontal = 0.8,
+            bind = LrView.bind("Checkbox2.3"),
+            width_in_digits = 3,
+            enabled = LrView.bind("secondCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+
+        }
+
+        fieldHighlights1 = f:edit_field{
+            place_horizontal = 0.8,
+            bind = LrView.bind("Checkbox3.1"),
+            width_in_digits = 3,
+            enabled = LrView.bind("thirdCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+
+        }
+        fieldHighlights2 = f:edit_field{
+            place_horizontal = 0.8,
+            bind = LrView.bind("Checkbox3.2"),
+            width_in_digits = 3,
+            enabled = LrView.bind("thirdCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+
+        }
+        fieldHighlights3 = f:edit_field{
+            place_horizontal = 0.8,
+            bind = LrView.bind("Checkbox3.3"),
+            width_in_digits = 3,
+            enabled = LrView.bind("thirdCheckboxIsChecked"),
+            min = -100,
+            max = 100,
+            immediate = true,
+            value = 0
+
+        }
+
         local contents = f:column{
             -- CHANGE THE WINDOW SIZE HERE:
             --width = 400,
@@ -54,30 +146,9 @@ function MyHWLibraryItem.showcustomDialog()
                             checked_value = true,
                             value = LrView.bind("firstCheckboxIsChecked")
                         },
-                        f:edit_field{
-                            place_horizontal = 0.6,
-                            value = LrView.bind("Checkbox1.1"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("firstCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
-                        f:edit_field{
-                            place_horizontal = 0.6,
-                            value = LrView.bind("Checkbox1.2"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("firstCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
-                        f:edit_field{
-                            place_horizontal = 0.6,
-                            value = LrView.bind("Checkbox1.3"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("firstCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
+                        fieldContrast1,
+                        fieldContrast2,
+                        fieldContrast3,
                     },
 
                     f:row{
@@ -86,30 +157,9 @@ function MyHWLibraryItem.showcustomDialog()
                             checked_value = true,
                             value = LrView.bind("secondCheckboxIsChecked")
                         },
-                        f:edit_field{
-                            place_horizontal = 0.8,
-                            value = LrView.bind("Checkbox2.1"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("secondCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
-                        f:edit_field{
-                            place_horizontal = 0.8,
-                            value = LrView.bind("Checkbox2.2"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("secondCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
-                        f:edit_field{
-                            place_horizontal = 0.8,
-                            value = LrView.bind("Checkbox2.3"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("secondCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
+                       fieldSaturation1,
+                       fieldSaturation2,
+                       fieldSaturation3
                     },
                     f:row{
                         f:checkbox{     -- third checkbox with edit fields
@@ -117,30 +167,9 @@ function MyHWLibraryItem.showcustomDialog()
                             checked_value = true,
                             value = LrView.bind("thirdCheckboxIsChecked")
                         },
-                        f:edit_field{
-                            place_horizontal = 0.8,
-                            value = LrView.bind("Checkbox3.1"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("thirdCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
-                        f:edit_field{
-                            place_horizontal = 0.8,
-                            value = LrView.bind("Checkbox3.2"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("thirdCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
-                        f:edit_field{
-                            place_horizontal = 0.8,
-                            value = LrView.bind("Checkbox3.3"),
-                            width_in_digits = 3,
-                            enabled = LrView.bind("thirdCheckboxIsChecked"),
-                            min = -100,
-                            max = 100
-                        },
+                       fieldHighlights1,
+                       fieldHighlights2,
+                       fieldHighlights3
                     },
 
                     f:edit_field{       -- Text or commentary filed
@@ -156,7 +185,16 @@ function MyHWLibraryItem.showcustomDialog()
                 width = 220,
                 height = 20,
                action = function()
-                MyHWLibraryItem.editPhotos()
+                LrTasks.startAsyncTask( function()      -- open window to confirm photo changes
+                    local catalog = LrApplication.activeCatalog()
+                   local targetPhotos = catalog.targetPhotos
+                    if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)?') then
+                        for i, photo in ipairs(catalog.targetPhotos) do
+                          MyHWLibraryItem.editPhotos(photo)
+                        end
+                        return
+                    end
+                end)
                end
             } 
         }
@@ -167,7 +205,7 @@ function MyHWLibraryItem.showcustomDialog()
         })
     end)
 end
-MyHWLibraryItem.importSelected()
+--MyHWLibraryItem.importSelected()
 MyHWLibraryItem.showcustomDialog()
 
 
