@@ -2,10 +2,33 @@ local LrFunctionContext = import 'LrFunctionContext'
 local LrBinding = import 'LrBinding'
 local LrDialogs = import 'LrDialogs'
 local LrView = import 'LrView'
+local LrTasks = import 'LrTasks'
+local LrApplication = import 'LrApplication'
 --local LrColor = import 'LrColor'
+--local ImportPhotos = loadfile ("/Users/ngocdonganhvo/Documents/GitHub/teamproject-photography/lightroom_plugin.lrdevplugin")()
+--package.path = package.path .. ";./\\?.lua"
+--local ImportPhotos = require("ImportPhotos")
 
-LightroomPlugin = {}
-function LightroomPlugin.showcustomDialog()     
+MyHWLibraryItem = {}
+function MyHWLibraryItem.importSelected ()
+    LrTasks.startAsyncTask( function()
+        local catalog = LrApplication.activeCatalog()
+        local targetPhotos = catalog:getTargetPhotos()
+        if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(catalog.targetPhotos) .. ' photo(s)?') then
+            for i, photo in ipairs(catalog.targetPhotos) do
+                MyHWLibraryItem.editPhotos(photo)
+            end
+        end
+    end)
+end
+
+function MyHWLibraryItem.editPhotos(photo)
+    photo:quickDevelopAdjustImage("Contrast", -100)
+    photo:quickDevelopAdjustImage("Highlights", -100)
+    photo:quickDevelopAdjustImage("Saturation", -100)
+end
+
+function MyHWLibraryItem.showcustomDialog()     
     LrFunctionContext.callWithContext("showcustomDialog",function(context)  --function-context call for property table (observable)
         local tableOne = LrBinding.makePropertyTable(context)
         
@@ -132,9 +155,10 @@ function LightroomPlugin.showcustomDialog()
                 place_horizontal = 1.0,
                 width = 220,
                 height = 20,
-                -- action = 
-
-            }
+               action = function()
+                MyHWLibraryItem.editPhotos()
+               end
+            } 
         }
         local result = LrDialogs.presentModalDialog({ --display cuustom dialog
             title = "Lightroom Plugin - Settings",
@@ -143,4 +167,8 @@ function LightroomPlugin.showcustomDialog()
         })
     end)
 end
-LightroomPlugin.showcustomDialog()
+MyHWLibraryItem.importSelected()
+MyHWLibraryItem.showcustomDialog()
+
+
+
