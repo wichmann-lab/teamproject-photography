@@ -1,3 +1,4 @@
+package.path = package.path .. ";configuration/\\?.lua" .. ";./\\?.lua"
 local LrFunctionContext = import 'LrFunctionContext'
 local LrBinding = import 'LrBinding'
 local LrDialogs = import 'LrDialogs'
