@@ -26,6 +26,8 @@ This is the repository for the teamproject course, summer term 2021, working on 
 
 
 ## Getting Started
+![testgif](https://user-images.githubusercontent.com/69016207/120100932-aa5b1e80-c143-11eb-814e-9273eefd4652.gif)
+
 
 ## Usage
 
