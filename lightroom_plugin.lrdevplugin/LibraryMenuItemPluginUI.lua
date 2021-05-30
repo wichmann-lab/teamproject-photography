@@ -16,12 +16,6 @@ local json = require("AdjustConfigurationFile")
 
 MyHWLibraryItem = {}
 
-function MyHWLibraryItem.editPhotos(photo) -- editing the selected pictures 
-    photo:quickDevelopAdjustImage("Contrast", fieldContrast1.value)
-    photo:quickDevelopAdjustImage("Highlights", fieldHighlights1.value)
-    photo:quickDevelopAdjustImage("Saturation", fieldSaturation1.value)
-end 
-
 function MyHWLibraryItem.showcustomDialog()     
     LrFunctionContext.callWithContext("showcustomDialog",function(context)  --function-context call for property table (observable)
         local tableOne = LrBinding.makePropertyTable(context)
@@ -32,6 +26,13 @@ function MyHWLibraryItem.showcustomDialog()
         tableOne.thirdCheckboxIsChecked = false
 
         local f = LrView.osFactory()        -- obtain view factory object
+            
+        function MyHWLibraryItem.editPhotos(photo, valueContrast, valueHighlights, valueSaturation) -- editing the selected pictures 
+            photo:quickDevelopAdjustImage("Contrast", valueContrast)
+            photo:quickDevelopAdjustImage("Highlights", valueHighlights)
+            photo:quickDevelopAdjustImage("Saturation", valueSaturation)
+        end 
+            
         fieldContrast1 = f:edit_field{
             place_horizontal = 0.6,
             bind = LrView.bind("Checkbox1.1"),
@@ -46,7 +47,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldContrast2 =f:edit_field{
             place_horizontal = 0.6,
             bind = LrView.bind("Checkbox1.2"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("firstCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -56,7 +57,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldContrast3 =f:edit_field{
             place_horizontal = 0.6,
             bind = LrView.bind("Checkbox1.3"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("firstCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -67,7 +68,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldSaturation1 = f:edit_field{
             place_horizontal = 0.8,
             bind = LrView.bind("Checkbox2.1"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("secondCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -79,7 +80,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldSaturation2 = f:edit_field{
             place_horizontal = 0.8,
             bind = LrView.bind("Checkbox2.2"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("secondCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -90,7 +91,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldSaturation3 = f:edit_field{
             place_horizontal = 0.8,
             bind = LrView.bind("Checkbox2.3"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("secondCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -102,7 +103,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldHighlights1 = f:edit_field{
             place_horizontal = 0.8,
             bind = LrView.bind("Checkbox3.1"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("thirdCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -113,7 +114,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldHighlights2 = f:edit_field{
             place_horizontal = 0.8,
             bind = LrView.bind("Checkbox3.2"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("thirdCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -124,7 +125,7 @@ function MyHWLibraryItem.showcustomDialog()
         fieldHighlights3 = f:edit_field{
             place_horizontal = 0.8,
             bind = LrView.bind("Checkbox3.3"),
-            width_in_digits = 3,
+            width_in_digits = 5,
             enabled = LrView.bind("thirdCheckboxIsChecked"),
             min = -100,
             max = 100,
@@ -193,7 +194,7 @@ function MyHWLibraryItem.showcustomDialog()
                    local targetPhotos = catalog.targetPhotos
                     if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)?') then
                         for i, photo in ipairs(catalog.targetPhotos) do
-                          importPhotos.editPhotos(photo)
+                           MyHWLibraryItem.editPhotos(photo, fieldContrast1.value, fieldHighlights1.value, fieldSaturation1.value)
                         end
                         return
                     end
