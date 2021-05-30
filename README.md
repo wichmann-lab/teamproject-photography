@@ -29,7 +29,7 @@ This is the repository for the teamproject course, summer term 2021, working on 
 
 ## Usage
 
-###Config file
+### Config file
 
 ## Acknowledgements
 
