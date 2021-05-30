@@ -59,6 +59,7 @@ Add:
 * Gifs and description of the steps
 
 1. Different Features of the plug-in 
+2. How to export the pictures
 
 ### Config file
 
