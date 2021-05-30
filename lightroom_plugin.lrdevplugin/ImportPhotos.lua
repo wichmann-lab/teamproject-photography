@@ -5,13 +5,17 @@ local LrDialogs = import 'LrDialogs'
 local LrView = import 'LrView'
 local LrFunctionContext = import 'LrFunctionContext'
 local LrFileUtils = import 'LrFileUtils'
+local adjustConfigFile = require("AdjustConfigurationFile")
 
 --Logger for this file 
 --importLogger = LrLogger('ImportPhotos')
 --importLogger:enable("logfile")
 
 
-ImportPhotos= {}
+local ImportPhotos= {}
+
+local configFile = adjustConfigFile.configFile
+
 -- function importSelected, selects photos from the catalog and calls the funcion editPhotos()
 function ImportPhotos.importSelected ()
     LrTasks.startAsyncTask( function()
@@ -26,8 +30,10 @@ function ImportPhotos.importSelected ()
 end
 -- function for editing each photo
 function ImportPhotos.editPhotos(photo)
-    photo:quickDevelopAdjustImage("Contrast", 100)
-    photo:quickDevelopAdjustImage("Highlights", 100)
+    photo:quickDevelopAdjustImage("Contrast",adjustConfigFile.getValue(contrast[2]))
+    -- maybe default value is 5, adjustConfigFile.getValue(contrast[2]) = null
+    photo:quickDevelopAdjustImage("Highlights", adjustConfigFile.getValue(highlights))
     photo:quickDevelopAdjustImage("Saturation", 100)
 end
-ImportPhotos.importSelected()
+-- ImportPhotos.importSelected()
+return ImportPhotos

@@ -1,5 +1,6 @@
 -- find directory
 package.path = package.path .. ";./\\?.lua"
+print(package.path)
 local json = require("json")
 -- local json = loadfile("absolute path of json.lua here")()
 local open = io.open
@@ -17,7 +18,7 @@ end
 -- decodes config.json file to a lua object
 local fileContent = read_file("configurationFile.json")
 configFile = json.decode(fileContent);  -- configFile can be accessed outside this file for further use
-
+print(configFile.contrast[2])
 -- function to add new keyword to config.json
 function write_config(keyword,value)
     configFile[keyword] = value
@@ -39,11 +40,13 @@ end
 
 
 -- adds new keywords to config.json
-configFile.contrast = {20, 50}
+-- configFile.contrast = {20, 50}
 local result = json.encode(configFile)
 
 -- writes keywords to config.json
 local file = open("configurationFile.json", "w")
 file:write( result )
 file:close()
+-- configFile.test = 20
+-- write_config()
 os.exit(0)

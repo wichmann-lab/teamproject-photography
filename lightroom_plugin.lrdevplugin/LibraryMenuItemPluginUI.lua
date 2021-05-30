@@ -1,4 +1,3 @@
-package.path = package.path .. ";configuration/\\?.lua" .. ";./\\?.lua"
 local LrFunctionContext = import 'LrFunctionContext'
 local LrBinding = import 'LrBinding'
 local LrDialogs = import 'LrDialogs'
@@ -6,12 +5,15 @@ local LrView = import 'LrView'
 local LrTasks = import 'LrTasks'
 local LrApplication = import 'LrApplication'
 local LrDevelopController =import 'LrDevelopController'
+local importPhotos = require("ImportPhotos")
+local json = require("AdjustConfigurationFile")
 --local LrColor = import 'LrColor'
 --local ImportPhotos = loadfile ("/Users/ngocdonganhvo/Documents/GitHub/teamproject-photography/lightroom_plugin.lrdevplugin")()
 --package.path = package.path .. ";./\\?.lua"
 --package.path = package.path .. ";../?.lua"
 --package.path = "../?.lua;" .. package.path
 --local ImportPhotos = require("ImportPhotos")
+
 MyHWLibraryItem = {}
 
 function MyHWLibraryItem.editPhotos(photo) -- editing the selected pictures 
@@ -191,7 +193,7 @@ function MyHWLibraryItem.showcustomDialog()
                    local targetPhotos = catalog.targetPhotos
                     if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)?') then
                         for i, photo in ipairs(catalog.targetPhotos) do
-                          MyHWLibraryItem.editPhotos(photo)
+                          importPhotos.editPhotos(photo)
                         end
                         return
                     end
