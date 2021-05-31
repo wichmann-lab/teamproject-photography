@@ -1,9 +1,16 @@
+---@diagnostic disable-next-line: undefined-global
 local LrLogger = import 'LrLogger'
+---@diagnostic disable-next-line: undefined-global
 local LrTasks = import 'LrTasks'
+---@diagnostic disable-next-line: undefined-global
 local LrApplication = import 'LrApplication'
+---@diagnostic disable-next-line: undefined-global
 local LrDialogs = import 'LrDialogs'
+---@diagnostic disable-next-line: undefined-global
 local LrView = import 'LrView'
+---@diagnostic disable-next-line: undefined-global
 local LrFunctionContext = import 'LrFunctionContext'
+---@diagnostic disable-next-line: undefined-global
 local LrFileUtils = import 'LrFileUtils'
 local adjustConfigFile = require("AdjustConfigurationFile")
 
@@ -11,12 +18,9 @@ local adjustConfigFile = require("AdjustConfigurationFile")
 --importLogger = LrLogger('ImportPhotos')
 --importLogger:enable("logfile")
 
-
 local ImportPhotos= {}
 
-local configFile = adjustConfigFile.configFile
-
--- function importSelected, selects photos from the catalog and calls the funcion editPhotos()
+--[[ function importSelected, selects photos from the catalog and calls the funcion editPhotos()
 function ImportPhotos.importSelected ()
     LrTasks.startAsyncTask( function()
         local catalog = LrApplication.activeCatalog()
@@ -28,12 +32,13 @@ function ImportPhotos.importSelected ()
         end
     end)
 end
--- function for editing each photo
+]]
+
+-- function for editing each photo 
 function ImportPhotos.editPhotos(photo)
-    photo:quickDevelopAdjustImage("Contrast",adjustConfigFile.getValue(contrast[2]))
-    -- maybe default value is 5, adjustConfigFile.getValue(contrast[2]) = null
-    photo:quickDevelopAdjustImage("Highlights", adjustConfigFile.getValue(highlights))
-    photo:quickDevelopAdjustImage("Saturation", 100)
+    photo:quickDevelopAdjustImage("Contrast",   adjustConfigFile.getValue("contrast"))
+    photo:quickDevelopAdjustImage("Highlights", adjustConfigFile.getValue("highlights"))
+    photo:quickDevelopAdjustImage("Saturation", adjustConfigFile.getValue("saturation"))
 end
 -- ImportPhotos.importSelected()
 return ImportPhotos
