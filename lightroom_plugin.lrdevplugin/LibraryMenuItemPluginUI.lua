@@ -1,19 +1,26 @@
+---@diagnostic disable: undefined-global
+---@diagnostic disable-next-line: undefined-global
 local LrFunctionContext = import 'LrFunctionContext'
+---@diagnostic disable-next-line: undefined-global
 local LrBinding = import 'LrBinding'
+---@diagnostic disable-next-line: undefined-global
 local LrDialogs = import 'LrDialogs'
+---@diagnostic disable-next-line: undefined-global
 local LrView = import 'LrView'
+---@diagnostic disable-next-line: undefined-global
 local LrTasks = import 'LrTasks'
+---@diagnostic disable-next-line: undefined-global
 local LrApplication = import 'LrApplication'
 local LrDevelopController =import 'LrDevelopController'
 local importPhotos = require("ImportPhotos")
-local json = require("AdjustConfigurationFile")
+local adjustConfigFile = require("AdjustConfigurationFile")
 --local LrColor = import 'LrColor'
 --local ImportPhotos = loadfile ("/Users/ngocdonganhvo/Documents/GitHub/teamproject-photography/lightroom_plugin.lrdevplugin")()
 --package.path = package.path .. ";./\\?.lua"
 --package.path = package.path .. ";../?.lua"
 --package.path = "../?.lua;" .. package.path
 --local ImportPhotos = require("ImportPhotos")
-
+local configFile = adjustConfigFile
 MyHWLibraryItem = {}
 
 function MyHWLibraryItem.showcustomDialog()     
@@ -27,12 +34,6 @@ function MyHWLibraryItem.showcustomDialog()
 
         local f = LrView.osFactory()        -- obtain view factory object
             
-        function MyHWLibraryItem.editPhotos(photo, valueContrast, valueHighlights, valueSaturation) -- editing the selected pictures 
-            photo:quickDevelopAdjustImage("Contrast", valueContrast)
-            photo:quickDevelopAdjustImage("Highlights", valueHighlights)
-            photo:quickDevelopAdjustImage("Saturation", valueSaturation)
-        end 
-            
         fieldContrast1 = f:edit_field{
             place_horizontal = 0.6,
             bind = LrView.bind("Checkbox1.1"),
@@ -41,7 +42,7 @@ function MyHWLibraryItem.showcustomDialog()
             min = -100,
             max = 100,
             immediate = true,
-            value = 0
+            value = adjustConfigFile.getValue("contrast")
         }
 
         fieldContrast2 =f:edit_field{
@@ -73,7 +74,7 @@ function MyHWLibraryItem.showcustomDialog()
             min = -100,
             max = 100,
             immediate = true,
-            value = 0
+            value = adjustConfigFile.getValue("saturation")
 
         }
 
@@ -108,7 +109,7 @@ function MyHWLibraryItem.showcustomDialog()
             min = -100,
             max = 100,
             immediate = true,
-            value = 0
+            value = adjustConfigFile.getValue("highlights")
 
         }
         fieldHighlights2 = f:edit_field{
@@ -185,23 +186,55 @@ function MyHWLibraryItem.showcustomDialog()
             },
             f:push_button{          -- Push button 
                 title = "Save",
-                place_horizontal = 1.0,
+                place_horizontal = 0.5,
                 width = 220,
                 height = 20,
-               action = function()
+                action = function()
                 LrTasks.startAsyncTask( function()      -- open window to confirm photo changes
                     local catalog = LrApplication.activeCatalog()
-                   local targetPhotos = catalog.targetPhotos
+                    local targetPhotos = catalog.targetPhotos
+                    
                     if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)?') then
+                        adjustConfigFile.configFile.contrast = fieldContrast1.value
+                        adjustConfigFile.configFile.highlights = fieldHighlights1.value
+                        adjustConfigFile.configFile.saturation = fieldSaturation1.value
+                        adjustConfigFile.write_config()
                         for i, photo in ipairs(catalog.targetPhotos) do
-                           MyHWLibraryItem.editPhotos(photo, fieldContrast1.value, fieldHighlights1.value, fieldSaturation1.value)
+                          importPhotos.editPhotos(photo)
                         end
                         return
                     end
                 end)
                end
-            } 
+            }, 
+            f:push_button{ -- resets the current values to 0
+                title="Reset",
+                place_horizontal = 0.5,
+                width = 220,
+                height = 20, 
+                action = function ()
+                    LrTasks.startAsyncTask( function()      -- open window to confirm photo changes
+                        local catalog = LrApplication.activeCatalog()
+                        local targetPhotos = catalog.targetPhotos
+                        
+                        if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to reset the values of the selected ' .. #(targetPhotos) .. ' photo(s)?') then
+                            fieldContrast1.value = 0
+                            fieldHighlights1.value = 0
+                            fieldSaturation1.value = 0
+                            adjustConfigFile.configFile.contrast = fieldContrast1.value
+                            adjustConfigFile.configFile.highlights = fieldHighlights1.value
+                            adjustConfigFile.configFile.saturation = fieldSaturation1.value 
+                            adjustConfigFile.write_config()
+                            for i, photo in ipairs(catalog.targetPhotos) do
+                              importPhotos.editPhotos(photo)
+                            end
+                            return
+                        end
+                    end)
+                end
+            }
         }
+        
         local result = LrDialogs.presentModalDialog({ --display cuustom dialog
             title = "Lightroom Plugin - Settings",
             contents = contents -- defined view hierarchy
