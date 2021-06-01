@@ -185,7 +185,7 @@ function MyHWLibraryItem.showcustomDialog()
                     }
             },
             f:push_button{          -- Push button 
-                title = "Save",
+                title = "Save & Edit",
                 place_horizontal = 0.5,
                 width = 220,
                 height = 20,
@@ -194,7 +194,7 @@ function MyHWLibraryItem.showcustomDialog()
                     local catalog = LrApplication.activeCatalog()
                     local targetPhotos = catalog.targetPhotos
                     
-                    if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)?') then
+                    if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)? (The Configuration file will be overwritten)') then
                         adjustConfigFile.configFile.contrast = fieldContrast1.value
                         adjustConfigFile.configFile.highlights = fieldHighlights1.value
                         adjustConfigFile.configFile.saturation = fieldSaturation1.value
