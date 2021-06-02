@@ -48,11 +48,11 @@
     - Goal:  Finish lightroom plugin, start another imagetool plugin?
 - Fourth Sprint (2 weeks)
     - Review/Retro + Sprint planning 15.6. 11am
-    - Scrum master: Melike
+    - Scrum master: (Dong Anh)
     - Goal:  Another imagetool plugin
 - Fifth Sprint (2 weeks)
     - Review/Retro + Sprint planning 29.6. 11am
-    - Scrum master: Who volunteers?
+    - Scrum master: Melike
     - Goal: Finish leftover tasks. 
 - Sixth Sprint (2 weeks)
         - Review/Retro + Sprint planning 13.7. 11am
