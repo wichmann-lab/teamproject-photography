@@ -11,7 +11,7 @@
 2. [Features](#features)
 4. [Getting Started](#setup)
 5. [Usage](#usage)
-6. [Contributing] (#contributing)
+6. [Contributing](#contributing)
 7. [Acknowledgements](#acknowledgements)
 8. [License](#license)
 9. [Sources](#sources)
