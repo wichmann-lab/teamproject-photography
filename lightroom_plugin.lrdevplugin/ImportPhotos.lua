@@ -1,24 +1,6 @@
----@diagnostic disable-next-line: undefined-global
-local LrLogger = import 'LrLogger'
----@diagnostic disable-next-line: undefined-global
-local LrTasks = import 'LrTasks'
----@diagnostic disable-next-line: undefined-global
-local LrApplication = import 'LrApplication'
----@diagnostic disable-next-line: undefined-global
-local LrDialogs = import 'LrDialogs'
----@diagnostic disable-next-line: undefined-global
-local LrView = import 'LrView'
----@diagnostic disable-next-line: undefined-global
-local LrFunctionContext = import 'LrFunctionContext'
----@diagnostic disable-next-line: undefined-global
-local LrFileUtils = import 'LrFileUtils'
 local adjustConfigFile = require("AdjustConfigurationFile")
 
---Logger for this file 
---importLogger = LrLogger('ImportPhotos')
---importLogger:enable("logfile")
-
-local ImportPhotos= {}
+local ImportPhotos = {}
 
 --[[ function importSelected, selects photos from the catalog and calls the funcion editPhotos()
 function ImportPhotos.importSelected ()
@@ -36,14 +18,9 @@ end
 
 -- function for editing each photo 
 function ImportPhotos.editPhotos(photo)
-    photo:quickDevelopAdjustImage("Contrast",   adjustConfigFile.getValue("contrast"))
+    photo:quickDevelopAdjustImage("Contrast", adjustConfigFile.getValue("contrast"))
     photo:quickDevelopAdjustImage("Highlights", adjustConfigFile.getValue("highlights"))
     photo:quickDevelopAdjustImage("Saturation", adjustConfigFile.getValue("saturation"))
 end
 
-function ImportPhotos.createdirectory(new_dir)
-    LrFileUtils.createDirectory(new_dir)
-    
-end
--- ImportPhotos.importSelected()
 return ImportPhotos
