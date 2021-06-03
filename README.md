@@ -1,5 +1,5 @@
 ***
-# ADD PROJECT NAME
+# ⭐ THE IMAGE ITERATOR ⭐
 ***
 ***
 
@@ -37,7 +37,7 @@ Add:
 
 ## Getting Started
 
-### Set up
+### 🛠 Set up
 + Make a new directory under the standard home directory called "TheImageIterator".
 
   Home directory..
