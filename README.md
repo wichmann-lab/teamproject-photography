@@ -38,8 +38,13 @@ Add:
 ## Getting Started
 
 ### Set up
++ Make a new directory under the standard home directory called "TheImageIterator".
 
-+ Config file: adding to path home 
+Home directory..
+  for Windows: C/Users/username/
+  for Mac OS: /Users/username/
++ Make sure to save the configuration file "configurationFile.json" under this folder. 
++ Then execute the plugin.  
 
 This is an example gif.
 
@@ -59,15 +64,16 @@ Add:
 
 Add:
 
-* Example for Config file 
-
 * Gifs and description of the steps
 
 1. Different Features of the plug-in 
 2. How to export the pictures
 
 ### Config file
-
+Example for Config file 
+```json
+{"highlights":0,"saturation":0,"contrast":30}
+```
 ## Contributing
 
 ## Acknowledgements
