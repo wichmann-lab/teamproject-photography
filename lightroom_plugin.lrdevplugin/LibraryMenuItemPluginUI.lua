@@ -200,10 +200,10 @@ function MyHWLibraryItem.showcustomDialog()
                     
                     if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)? \n (The Configuration file will be overwritten)') then
                         
-                        importPhotos.createdirectory()
+                        -- importPhotos.createdirectory(new_dir)         directory where user wants to save the photos
 
-                         catalog:withWriteAccessDo("Adding photos", function ()
-                             testCollection = catalog:createCollection("testCollection")
+                        catalog:withWriteAccessDo("Adding photos", function ()
+                             local testCollection = catalog:createCollection("testCollection")
                              testCollection:addPhotos(targetPhotosCopies)
                          end)
                        

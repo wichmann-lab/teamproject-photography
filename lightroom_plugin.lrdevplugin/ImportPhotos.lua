@@ -41,8 +41,8 @@ function ImportPhotos.editPhotos(photo)
     photo:quickDevelopAdjustImage("Saturation", adjustConfigFile.getValue("saturation"))
 end
 
-function ImportPhotos.createdirectory()
-    LrFileUtils.createDirectory("/Users/ngocdonganhvo/Documents/GitHub/teamproject-photography/lightroom_plugin.lrdevplugin/testDirectory")
+function ImportPhotos.createdirectory(new_dir)
+    LrFileUtils.createDirectory(new_dir)
     
 end
 -- ImportPhotos.importSelected()

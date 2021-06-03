@@ -1,10 +1,12 @@
--- find directory
--- package.path = package.path .. ";../?.lua"
--- local json = require("json")
-local myPathLua = "D:/Teamprojekt local/lightroom_plugin.lrdevplugin/json.lua"
-local myPathConfig = "D:/Teamprojekt local/lightroom_plugin.lrdevplugin/configurationFile.json"
-local json = loadfile(myPathLua)()
+local LrPathUtils = import 'LrPathUtils'
+-- local current_dir=io.popen"cd":read'*l'    working directory of LR ist not where the lua scripts are saved
+-------------- path information ------------
+local home = LrPathUtils.getStandardFilePath("home")
+local myPathConfig = home .. "/lrplugin/configurationFile.json"
+local json = require("json")
 local open = io.open
+-- error(home)
+
 
 local adjustConfig= {}
 -- function to read a file from extern source
