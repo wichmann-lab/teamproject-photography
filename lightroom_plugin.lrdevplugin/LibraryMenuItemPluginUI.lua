@@ -13,7 +13,10 @@ local LrTasks = import 'LrTasks'
 local LrApplication = import 'LrApplication'
 local LrDevelopController =import 'LrDevelopController'
 local importPhotos = require("ImportPhotos")
+--local LrCatalog = import 'LrCatalog'
+
 local adjustConfigFile = require("AdjustConfigurationFile")
+
 --local LrColor = import 'LrColor'
 --local ImportPhotos = loadfile ("/Users/ngocdonganhvo/Documents/GitHub/teamproject-photography/lightroom_plugin.lrdevplugin")()
 --package.path = package.path .. ";./\\?.lua"
@@ -193,8 +196,17 @@ function MyHWLibraryItem.showcustomDialog()
                 LrTasks.startAsyncTask( function()      -- open window to confirm photo changes
                     local catalog = LrApplication.activeCatalog()
                     local targetPhotos = catalog.targetPhotos
+                    local targetPhotosCopies = catalog:createVirtualCopies()
                     
                     if 'ok' == LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' .. #(targetPhotos) .. ' photo(s)? \n (The Configuration file will be overwritten)') then
+                        
+                        importPhotos.createdirectory()
+
+                         catalog:withWriteAccessDo("Adding photos", function ()
+                             testCollection = catalog:createCollection("testCollection")
+                             testCollection:addPhotos(targetPhotosCopies)
+                         end)
+                       
                         adjustConfigFile.configFile.contrast = fieldContrast1.value
                         adjustConfigFile.configFile.highlights = fieldHighlights1.value
                         adjustConfigFile.configFile.saturation = fieldSaturation1.value
@@ -202,6 +214,7 @@ function MyHWLibraryItem.showcustomDialog()
                         for i, photo in ipairs(catalog.targetPhotos) do
                           importPhotos.editPhotos(photo)
                         end
+
                         return
                     end
                 end)
@@ -228,6 +241,7 @@ function MyHWLibraryItem.showcustomDialog()
                             for i, photo in ipairs(catalog.targetPhotos) do
                               importPhotos.editPhotos(photo)
                             end
+                            
                             return
                         end
                     end)
@@ -240,6 +254,7 @@ function MyHWLibraryItem.showcustomDialog()
             contents = contents -- defined view hierarchy
           
         })
+        
     end)
 end
 --MyHWLibraryItem.importSelected()
