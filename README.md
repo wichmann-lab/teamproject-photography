@@ -9,7 +9,7 @@
 ## Table of Contents
 1. [About the project](#about-the-project)
 2. [Features](#features)
-4. [Getting Started](#setup)
+4. [Getting Started](#gettingstarted)
 5. [Usage](#usage)
 6. [Contributing](#contributing)
 7. [Acknowledgements](#acknowledgements)
@@ -38,6 +38,8 @@ Add:
 ## Getting Started
 
 ### Set up
+
++ Config file: adding to path home 
 
 This is an example gif.
 
