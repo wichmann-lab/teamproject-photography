@@ -40,9 +40,12 @@ Add:
 ### Set up
 + Make a new directory under the standard home directory called "TheImageIterator".
 
-Home directory..
-  for Windows: C/Users/username/
-  for Mac OS: /Users/username/
+  Home directory..
+
+     + for Windows: C/Users/username/
+  
+     + for Mac OS: /Users/username/
+  
 + Make sure to save the configuration file "configurationFile.json" under this folder. 
 + Then execute the plugin.  
 
