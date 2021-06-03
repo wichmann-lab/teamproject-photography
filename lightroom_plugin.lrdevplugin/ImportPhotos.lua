@@ -40,5 +40,10 @@ function ImportPhotos.editPhotos(photo)
     photo:quickDevelopAdjustImage("Highlights", adjustConfigFile.getValue("highlights"))
     photo:quickDevelopAdjustImage("Saturation", adjustConfigFile.getValue("saturation"))
 end
+
+function ImportPhotos.createdirectory()
+    LrFileUtils.createDirectory("/Users/ngocdonganhvo/Documents/GitHub/teamproject-photography/lightroom_plugin.lrdevplugin/testDirectory")
+    
+end
 -- ImportPhotos.importSelected()
 return ImportPhotos
