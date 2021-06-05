@@ -189,7 +189,9 @@ local function main()
                                 -- ExportPhotos.makeDirectory(new_dir)         directory where user wants to save the photos
 
                                 catalog:withWriteAccessDo("Adding photos", function()
-                                    local testCollection = catalog:createCollection("testCollection") -- if already exists: ERROR!! connect to config file!
+                                    originalCollection = catalog:createCollection("Original") -- if already exists: ERROR!! connect to config file!
+                                    testCollection = catalog:createCollection("Edited photos") -- if already exists: ERROR!! connect to config file!
+                                    originalCollection:addPhotos(targetPhotos)
                                     testCollection:addPhotos(targetPhotosCopies)
                                 end)
 
