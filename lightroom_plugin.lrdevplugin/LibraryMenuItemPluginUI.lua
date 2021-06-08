@@ -9,6 +9,7 @@ local importPhotos = require("ImportPhotos")
 local exportPhotos = require("ExportPhotos")
 local adjustConfigFile = require("AdjustConfigurationFile")
 local configFile = adjustConfigFile.configFile
+local LrColor = import 'LrColor'
 --==============================================================--
 
 local function  photoSettings()
@@ -131,6 +132,10 @@ local function main()
                 value = 0
 
             }
+            pathDisplayConfigFile = f:static_text{
+                title = "Absolute Path (ConfigFile):".. adjustConfigFile.myPathConfig,
+                text_color = LrColor(0,0,0)
+            }
 
             local contents = f:column{
                 -- CHANGE THE WINDOW SIZE HERE:
@@ -138,6 +143,11 @@ local function main()
                 -- height = 400,
                 bind_to_object = tableOne, -- bind tableOne
                 spacing = f:control_spacing(),
+                f:group_box{
+                    title = "Path of ConfigFile",
+                    font = "<system>",
+                    pathDisplayConfigFile
+                },
                 f:group_box{
                     title = "Change settings",
                     font = "<system/bold>",
