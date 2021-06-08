@@ -1,3 +1,4 @@
+--============================SDK===============================--
 local LrFunctionContext = import 'LrFunctionContext'
 local LrBinding = import 'LrBinding'
 local LrDialogs = import 'LrDialogs'
@@ -5,9 +6,10 @@ local LrView = import 'LrView'
 local LrTasks = import 'LrTasks'
 local LrApplication = import 'LrApplication'
 local importPhotos = require("ImportPhotos")
---local exportPhotos = require("ExportPhotos")
+local exportPhotos = require("ExportPhotos")
 local adjustConfigFile = require("AdjustConfigurationFile")
 local configFile = adjustConfigFile.configFile
+--==============================================================--
 
 local function  photoSettings()
      configFile.contrast = fieldContrast1.value
@@ -180,7 +182,7 @@ local function main()
                             end]]
 
                             local targetPhotos = catalog.targetPhotos
-                            local targetPhotosCopies = catalog:createVirtualCopies()
+                            local targetPhotosCopies = targetPhotos
 
                             if 'ok' ==
                                 LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' ..
@@ -188,12 +190,12 @@ local function main()
 
                                 -- ExportPhotos.makeDirectory(new_dir)         directory where user wants to save the photos
 
-                                catalog:withWriteAccessDo("Adding photos", function()
+                                --[[catalog:withWriteAccessDo("Adding photos", function()
                                     originalCollection = catalog:createCollection("Original") -- if already exists: ERROR!! connect to config file!
                                     testCollection = catalog:createCollection("Edited photos") -- if already exists: ERROR!! connect to config file!
                                     originalCollection:addPhotos(targetPhotos)
                                     testCollection:addPhotos(targetPhotosCopies)
-                                end)
+                                end)]]
 
                                 photoSettings()
 
@@ -201,7 +203,7 @@ local function main()
                                 for i, photo in ipairs(catalog.targetPhotos) do
                                     importPhotos.editPhotos(photo)
                                 end
-
+                                exportPhotos.processRenderedPhotos(targetPhotosCopies)
                                 return
                             end
                         end)

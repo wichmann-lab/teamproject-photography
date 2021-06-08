@@ -2,11 +2,12 @@ local LrPathUtils = import 'LrPathUtils'
 -- local current_dir=io.popen"cd":read'*l'    working directory of LR ist not where the lua scripts are saved
 -------------- path information ------------
 local home = LrPathUtils.getStandardFilePath("home")
+--error(home)
 local myPathConfig = home .. "/TheImageIterator/configurationFile.json"
 local json = require("json")
 
 local open = io.open
--- error(home)
+
 
 local adjustConfig = {}
 -- function to read a file from extern source

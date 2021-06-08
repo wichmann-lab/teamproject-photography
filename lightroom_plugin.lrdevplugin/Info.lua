@@ -9,6 +9,9 @@ LrLibraryMenuItems={
         title= "The Image Iterator",
         file ="LibraryMenuItemPluginUI.lua",
     },
-
-    }
+    },
+LrExportMenuItem = {
+    title = "Export Service for the Image Iterator", -- this string appears as the Export destination
+    file = "ExportPhotos.lua", -- the service definition script
+    },
 }
