@@ -201,10 +201,20 @@ local function main()
 
                                 adjustConfigFile.write_config()
                                 for i, photo in ipairs(catalog.targetPhotos) do
-                                    importPhotos.editPhotos(photo)
+                                    importPhotos.editPhotos(photo)                      --edits photos in catalog
                                 end
-                                exportPhotos.processRenderedPhotos(targetPhotosCopies)
-                                return
+                                exportPhotos.processRenderedPhotos(targetPhotosCopies) --export edited targetPhotosCopies from the catalog
+
+                                    fieldContrast1.value = 0
+                                    fieldHighlights1.value = 0
+                                    fieldSaturation1.value = 0
+                                    
+                                    photoSettings()
+
+                                    adjustConfigFile.write_config()
+                                    for i, photo in ipairs(catalog.targetPhotos) do
+                                        importPhotos.editPhotos(photo)
+                                    end
                             end
                         end)
                     end

@@ -18,11 +18,10 @@ local debug, info, warn, err, trace = logger:quick('debug', 'info', 'warn', 'err
 --==============================================================--
 
 local ExportPhotos = {}
-local imgPreviewPath = LrPathUtils.child(_PLUGIN.path, "Export Photos ")
+local imgPreviewPath = LrPathUtils.child(_PLUGIN.path, "Edited Photos ")
 if LrFileUtils.exists(imgPreviewPath) ~= true then
     LrFileUtils.createDirectory(imgPreviewPath)
   end
-local catalog = LrApplication.activeCatalog()
 --local photos = catalog.targetPhotos
 function ExportPhotos.makeDirectory(new_dir)
     LrFileUtils.createDirectory(new_dir)
@@ -62,7 +61,6 @@ function ExportPhotos.processRenderedPhotos(photos)
             if not rendition.wasSkipped then]]
                 local success, pathOrMessage = rendition:waitForRender()
                 if success then
-                    ExportPhotos.makeDirectory("D:/Teamprojekt local/lightroom_plugin.lrdevplugin/SamplePictures/TestDir")
                     --LrFileUtils.delete( pathOrMessage )
                 end
             --end
