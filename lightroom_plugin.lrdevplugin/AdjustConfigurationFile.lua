@@ -3,13 +3,13 @@ local LrPathUtils = import 'LrPathUtils'
 -------------- path information ------------
 local home = LrPathUtils.getStandardFilePath("home")
 --error(home)
-local myPathConfig = home .. "/TheImageIterator/configurationFile.json"
+local adjustConfig = {}
+adjustConfig.myPathConfig = home .. "/TheImageIterator/configurationFile.json"
+adjustConfig.myPathConfig = adjustConfig.myPathConfig:gsub("%\\", "/")
 local json = require("json")
 
 local open = io.open
 
-
-local adjustConfig = {}
 -- function to read a file from extern source
 function read_file(path)
     local file = open(path, "rb") -- r read mode and b binary mode
@@ -23,14 +23,14 @@ end
 
 -- decodes config.json file to a lua object
 -- local fileContent = read_file("configurationFile.json")
-local fileContent = read_file(myPathConfig)
+local fileContent = read_file(adjustConfig.myPathConfig)
 adjustConfig.configFile = json.decode(fileContent); -- configFile can be accessed outside this file for further use
 
 
 -- function to write into configuration file 
 function adjustConfig.write_config()
     local encodeFile = json.encode(adjustConfig.configFile)
-    local file = open(myPathConfig, "w")
+    local file = open(adjustConfig.myPathConfig, "w")
     file:write(encodeFile)
     file:close()
 end
