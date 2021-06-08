@@ -13,9 +13,27 @@ local LrColor = import 'LrColor'
 --==============================================================--
 
 local function  photoSettings()
-     configFile.contrast = fieldContrast1.value
-     configFile.saturation = fieldSaturation1.value
-     configFile.highlights = fieldHighlights1.value
+    configFile.contrast[1] = fieldContrast1.value
+    configFile.saturation[1] = fieldSaturation1.value
+    configFile.highlights[1] = fieldHighlights1.value
+    configFile.contrast[2] = fieldContrast1.value
+    configFile.saturation[2] = fieldSaturation1.value
+    configFile.highlights[2] = fieldHighlights1.value
+    configFile.contrast[3] = fieldContrast1.value
+    configFile.saturation[3] = fieldSaturation1.value
+    configFile.highlights[3] = fieldHighlights1.value
+end
+
+local function resetSettings()
+    configFile.contrast[1] = 0
+    configFile.saturation[1] = 0
+    configFile.highlights[1] = 0
+    configFile.contrast[2] = 0
+    configFile.saturation[2] = 0
+    configFile.highlights[2] = 0
+    configFile.contrast[3] = 0
+    configFile.saturation[3] = 0
+    configFile.highlights[3] = 0
 end
 
 local function main()
@@ -40,7 +58,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = adjustConfigFile.getValue("contrast")
+                value = configFile.contrast[1]
             }
 
             fieldContrast2 = f:edit_field{
@@ -51,7 +69,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = 0
+                value = configFile.contrast[2]
             }
             fieldContrast3 = f:edit_field{
                 place_horizontal = 0.6,
@@ -61,7 +79,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = 0
+                value = configFile.contrast[3]
             }
 
             fieldSaturation1 = f:edit_field{
@@ -72,7 +90,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = adjustConfigFile.getValue("saturation")
+                value = configFile.saturation[1]
 
             }
 
@@ -84,7 +102,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = 0
+                value = configFile.saturation[2]
 
             }
             fieldSaturation3 = f:edit_field{
@@ -95,7 +113,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = 0
+                value = configFile.saturation[3]
 
             }
 
@@ -107,7 +125,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = adjustConfigFile.getValue("highlights")
+                value = configFile.highlights[1]
 
             }
             fieldHighlights2 = f:edit_field{
@@ -118,7 +136,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = 0
+                value = configFile.highlights[2]
 
             }
             fieldHighlights3 = f:edit_field{
@@ -129,7 +147,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = 0
+                value = configFile.highlights[3]
 
             }
             pathDisplayConfigFile = f:static_text{
@@ -238,11 +256,7 @@ local function main()
                             end
                             exportPhotos.processRenderedPhotos(targetPhotosCopies) --export edited targetPhotosCopies from the catalog
 
-                                fieldContrast1.value = 0
-                                fieldHighlights1.value = 0
-                                fieldSaturation1.value = 0
-                                
-                                photoSettings()
+                                resetSettings()
 
                                 adjustConfigFile.write_config()
                                 for i, photo in ipairs(catalog.targetPhotos) do
@@ -266,11 +280,8 @@ local function main()
                             LrDialogs.confirm('Are you sure?',
                                 'Do you want to reset the values of the selected ' .. #(targetPhotos) ..
                                     ' photo(s)? \n (The Configuration file will be overwritten)') then
-                            fieldContrast1.value = 0
-                            fieldHighlights1.value = 0
-                            fieldSaturation1.value = 0
-                            
-                            photoSettings()
+
+                            resetSettings()
 
                             adjustConfigFile.write_config()
                             for i, photo in ipairs(catalog.targetPhotos) do
