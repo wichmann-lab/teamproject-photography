@@ -18,7 +18,7 @@ local debug, info, warn, err, trace = logger:quick('debug', 'info', 'warn', 'err
 --==============================================================--
 
 local ExportPhotos = {}
-local imgPreviewPath = LrPathUtils.child(_PLUGIN.path, "Edited Photos ")
+local imgPreviewPath = LrPathUtils.child(_PLUGIN.path, "Exported Photos ")
 if LrFileUtils.exists(imgPreviewPath) ~= true then
     LrFileUtils.createDirectory(imgPreviewPath)
   end
@@ -39,6 +39,7 @@ function ExportPhotos.processRenderedPhotos(photos)
             LR_useWatermark = false,
             LR_export_destinationPathPrefix = imgPreviewPath,
             LR_export_destinationType = "specificFolder",
+            LR_export_destinationPathSuffix = "TestFolder"
         }
     })
     --local exportParams = exportContext.propertyTable
