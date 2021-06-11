@@ -1,4 +1,5 @@
 local adjustConfigFile = require("AdjustConfigurationFile")
+local configFile = adjustConfigFile.configFile
 
 local ImportPhotos = {}
 
@@ -18,9 +19,9 @@ end
 
 -- function for editing each photo 
 function ImportPhotos.editPhotos(photo)
-    photo:quickDevelopAdjustImage("Contrast", adjustConfigFile.getValue("contrast"))
-    photo:quickDevelopAdjustImage("Highlights", adjustConfigFile.getValue("highlights"))
-    photo:quickDevelopAdjustImage("Saturation", adjustConfigFile.getValue("saturation"))
+    photo:quickDevelopAdjustImage("Contrast", configFile.contrast)
+    photo:quickDevelopAdjustImage("Highlights", configFile.highlights)
+    photo:quickDevelopAdjustImage("Saturation", configFile.saturation)
 end
 
 return ImportPhotos

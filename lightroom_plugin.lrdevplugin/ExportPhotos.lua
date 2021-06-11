@@ -27,7 +27,7 @@ function ExportPhotos.makeDirectory(new_dir)
     LrFileUtils.createDirectory(new_dir)
 end
 
-function ExportPhotos.processRenderedPhotos(photos)
+function ExportPhotos.processRenderedPhotos(photos,folderName)
     LrFunctionContext.callWithContext("export", function(exportContext)
 
     local exportSession = LrExportSession({
@@ -39,7 +39,7 @@ function ExportPhotos.processRenderedPhotos(photos)
             LR_useWatermark = false,
             LR_export_destinationPathPrefix = imgPreviewPath,
             LR_export_destinationType = "specificFolder",
-            LR_export_destinationPathSuffix = "TestFolder"
+            LR_export_destinationPathSuffix = folderName
         }
     })
     --local exportParams = exportContext.propertyTable
