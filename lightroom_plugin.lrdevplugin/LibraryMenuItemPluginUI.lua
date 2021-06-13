@@ -5,7 +5,6 @@ local LrDialogs = import 'LrDialogs'
 local LrView = import 'LrView'
 local LrTasks = import 'LrTasks'
 local LrApplication = import 'LrApplication'
-local importPhotos = require("ImportPhotos")
 local exportPhotos = require("ExportPhotos")
 local adjustConfigFile = require("AdjustConfigurationFile")
 local configFile = adjustConfigFile.configFile
@@ -67,7 +66,7 @@ local function main()
             fieldContrast1 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.1"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("firstCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -78,7 +77,7 @@ local function main()
             fieldContrast2 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.2"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("firstCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -88,7 +87,7 @@ local function main()
             fieldContrast3 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.3"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("firstCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -99,7 +98,7 @@ local function main()
             fieldSaturation1 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox2.1"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("secondCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -111,7 +110,7 @@ local function main()
             fieldSaturation2 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox2.2"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("secondCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -122,7 +121,7 @@ local function main()
             fieldSaturation3 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox2.3"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("secondCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -134,7 +133,7 @@ local function main()
             fieldHighlights1 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox3.1"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("thirdCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -145,7 +144,7 @@ local function main()
             fieldHighlights2 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox3.2"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("thirdCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -156,7 +155,7 @@ local function main()
             fieldHighlights3 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox3.3"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("thirdCheckboxIsChecked"),
                 min = -100,
                 max = 100,
@@ -190,6 +189,7 @@ local function main()
         
                             f:row{f:checkbox{ -- first checkbox with edit fields
                                 title = "Contrast",
+                                width_in_chars = 7,
                                 checked_value = true,
                                 value = LrView.bind("firstCheckboxIsChecked")
                             }, fieldContrast1, fieldContrast2, fieldContrast3,
@@ -198,11 +198,13 @@ local function main()
                             f:row{f:checkbox{ -- second checkbox with edit fields
                                 title = "Saturation",
                                 checked_value = true,
+                                width_in_chars = 7,
                                 value = LrView.bind("secondCheckboxIsChecked")
                             }, fieldSaturation1, fieldSaturation2, fieldSaturation3},
                             f:row{f:checkbox{ -- third checkbox with edit fields
                                 title = "Highlights",
                                 checked_value = true,
+                                width_in_chars = 7,
                                 value = LrView.bind("thirdCheckboxIsChecked")
                             }, fieldHighlights1, fieldHighlights2, fieldHighlights3},
         
@@ -232,7 +234,7 @@ local function main()
                     
             
                 f:push_button{ -- Push button 
-                title = "Save & Edit",
+                title = "Save and Edit",
                 place_horizontal = 1.0,
                 width = 220,
                 height = 20,
@@ -276,7 +278,7 @@ local function main()
                                         for p, photo in ipairs(catalog.targetPhotos) do
                                             editPhotos(photo,i,j,k)                      --edits photos in catalog
                                         end
-                                        exportPhotos.processRenderedPhotos(targetPhotosCopies,"Export Folder" .. "_" .. tostring(contrastArray[i]) .. "_" .. tostring(saturationArray[j]) .. "_" .. tostring(highlightsArray[k])) --export edited targetPhotosCopies from the catalog
+                                        exportPhotos.processRenderedPhotos(targetPhotosCopies,"Export Folder" .. "_c" .. tostring(contrastArray[i]) .. "_s" .. tostring(saturationArray[j]) .. "_h" .. tostring(highlightsArray[k])) --export edited targetPhotosCopies from the catalog
 
                                         for p, photo in ipairs(catalog.targetPhotos) do
                                             resetPhotoEdit(photo)
