@@ -19,15 +19,15 @@ local function  photoSettings()   -- set current photo settings in config.json
         end
     end]]
 
-    configFile.contrast[1] = fieldContrast1.value
-    configFile.saturation[1] = fieldSaturation1.value
-    configFile.highlights[1] = fieldHighlights1.value
-    configFile.contrast[2] = fieldContrast2.value
-    configFile.saturation[2] = fieldSaturation2.value
-    configFile.highlights[2] = fieldHighlights2.value
-    configFile.contrast[3] = fieldContrast3.value
-    configFile.saturation[3] = fieldSaturation3.value
-    configFile.highlights[3] = fieldHighlights3.value
+    configFile.Settings.contrast[1] = fieldContrast1.value
+    configFile.Settings.saturation[1] = fieldSaturation1.value
+    configFile.Settings.highlights[1] = fieldHighlights1.value
+    configFile.Settings.contrast[2] = fieldContrast2.value
+    configFile.Settings.saturation[2] = fieldSaturation2.value
+    configFile.Settings.highlights[2] = fieldHighlights2.value
+    configFile.Settings.contrast[3] = fieldContrast3.value
+    configFile.Settings.saturation[3] = fieldSaturation3.value
+    configFile.Settings.highlights[3] = fieldHighlights3.value
 end
 
 local function resetPhotoEdit(photo)      -- reset all setting
@@ -71,7 +71,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.contrast[1]
+                value = configFile.Settings.contrast[1]
             }
 
             fieldContrast2 = f:edit_field{
@@ -82,7 +82,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.contrast[2]
+                value = configFile.Settings.contrast[2]
             }
             fieldContrast3 = f:edit_field{
                 place_horizontal = 0.6,
@@ -92,7 +92,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.contrast[3]
+                value = configFile.Settings.contrast[3]
             }
 
             fieldSaturation1 = f:edit_field{
@@ -103,7 +103,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.saturation[1]
+                value = configFile.Settings.saturation[1]
 
             }
 
@@ -115,7 +115,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.saturation[2]
+                value = configFile.Settings.saturation[2]
 
             }
             fieldSaturation3 = f:edit_field{
@@ -126,7 +126,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.saturation[3]
+                value = configFile.Settings.saturation[3]
 
             }
 
@@ -138,7 +138,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.highlights[1]
+                value = configFile.Settings.highlights[1]
 
             }
             fieldHighlights2 = f:edit_field{
@@ -149,7 +149,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.highlights[2]
+                value = configFile.Settings.highlights[2]
 
             }
             fieldHighlights3 = f:edit_field{
@@ -160,7 +160,7 @@ local function main()
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.highlights[3]
+                value = configFile.Settings.highlights[3]
 
             }
             pathDisplayConfigFile = f:static_text{
@@ -304,7 +304,7 @@ local function main()
                         if 'ok' ==
                             LrDialogs.confirm('Are you sure?',
                                 'Do you want to reset the values of the selected ' .. #(targetPhotos) ..
-                                    ' photo(s)? \n (The Configuration file will be overwritten)') then
+                                    ' photo(s)?') then
 
                             for i, photo in ipairs(catalog.targetPhotos) do
                                 resetPhotoEdit(photo)
