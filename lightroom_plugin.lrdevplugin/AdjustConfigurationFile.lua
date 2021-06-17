@@ -9,7 +9,7 @@ local adjustConfig = {}
 -- exist the following directory?
 adjustConfig.myPathConfig = home .. "/TheImageIterator/imageIteratorSettings.json"
 adjustConfig.myPathConfig = adjustConfig.myPathConfig:gsub("%\\", "/")
-if LrFileUtils.exists(adjustConfig.myPathConfig) ~= true then
+if LrFileUtils.exists(adjustConfig.myPathConfig) == false then
     LrErrors.throwUserError("Configuration File Error: \nimageIteratorSettings.json is missing. \nCreate file in " .. adjustConfig.myPathConfig)
 end
 local json = require("json")
