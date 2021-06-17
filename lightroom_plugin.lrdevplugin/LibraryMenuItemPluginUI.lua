@@ -5,35 +5,48 @@ local LrDialogs = import 'LrDialogs'
 local LrView = import 'LrView'
 local LrTasks = import 'LrTasks'
 local LrApplication = import 'LrApplication'
-local importPhotos = require("ImportPhotos")
 local exportPhotos = require("ExportPhotos")
 local adjustConfigFile = require("AdjustConfigurationFile")
 local configFile = adjustConfigFile.configFile
 local LrColor = import 'LrColor'
 --==============================================================--
 
-local function  photoSettings()
-    configFile.contrast[1] = fieldContrast1.value
-    configFile.saturation[1] = fieldSaturation1.value
-    configFile.highlights[1] = fieldHighlights1.value
-    configFile.contrast[2] = fieldContrast1.value
-    configFile.saturation[2] = fieldSaturation1.value
-    configFile.highlights[2] = fieldHighlights1.value
-    configFile.contrast[3] = fieldContrast1.value
-    configFile.saturation[3] = fieldSaturation1.value
-    configFile.highlights[3] = fieldHighlights1.value
+local function  photoSettings()   -- set current photo settings in config.json
+
+    --[[for i, config in pairs(configFile) do
+        for j, value in ipairs(config) do
+            value = temp.value
+        end
+    end]]
+
+    configFile.Settings.contrast[1] = fieldContrast1.value
+    configFile.Settings.saturation[1] = fieldSaturation1.value
+    configFile.Settings.highlights[1] = fieldHighlights1.value
+    configFile.Settings.contrast[2] = fieldContrast2.value
+    configFile.Settings.saturation[2] = fieldSaturation2.value
+    configFile.Settings.highlights[2] = fieldHighlights2.value
+    configFile.Settings.contrast[3] = fieldContrast3.value
+    configFile.Settings.saturation[3] = fieldSaturation3.value
+    configFile.Settings.highlights[3] = fieldHighlights3.value
 end
 
-local function resetSettings()
-    configFile.contrast[1] = 0
-    configFile.saturation[1] = 0
-    configFile.highlights[1] = 0
-    configFile.contrast[2] = 0
-    configFile.saturation[2] = 0
-    configFile.highlights[2] = 0
-    configFile.contrast[3] = 0
-    configFile.saturation[3] = 0
-    configFile.highlights[3] = 0
+local function resetPhotoEdit(photo)      -- reset all setting
+    photo:quickDevelopAdjustImage("Contrast", 0)
+    photo:quickDevelopAdjustImage("Highlights", 0)
+    photo:quickDevelopAdjustImage("Saturation", 0)
+end
+
+local function editPhotos(photo,i, j, k)
+
+    -- for i = 1, 3, 1 do
+       -- for j = 1, 3, 1 do
+           -- for k = 1, 3, 1 do
+                photo:quickDevelopAdjustImage("Contrast",contrastArray[i])
+                photo:quickDevelopAdjustImage("Saturation",saturationArray[j])
+                photo:quickDevelopAdjustImage("Highlights",highlightsArray[k])
+           -- end
+       -- end
+   -- end
 end
 
 local function main()
@@ -53,101 +66,101 @@ local function main()
             fieldContrast1 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.1"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("firstCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.contrast[1]
+                value = configFile.Settings.contrast[1]
             }
 
             fieldContrast2 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.2"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("firstCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.contrast[2]
+                value = configFile.Settings.contrast[2]
             }
             fieldContrast3 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.3"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("firstCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.contrast[3]
+                value = configFile.Settings.contrast[3]
             }
 
             fieldSaturation1 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox2.1"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("secondCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.saturation[1]
+                value = configFile.Settings.saturation[1]
 
             }
 
             fieldSaturation2 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox2.2"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("secondCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.saturation[2]
+                value = configFile.Settings.saturation[2]
 
             }
             fieldSaturation3 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox2.3"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("secondCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.saturation[3]
+                value = configFile.Settings.saturation[3]
 
             }
 
             fieldHighlights1 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox3.1"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("thirdCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.highlights[1]
+                value = configFile.Settings.highlights[1]
 
             }
             fieldHighlights2 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox3.2"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("thirdCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.highlights[2]
+                value = configFile.Settings.highlights[2]
 
             }
             fieldHighlights3 = f:edit_field{
                 place_horizontal = 0.8,
                 bind = LrView.bind("Checkbox3.3"),
-                width_in_digits = 5,
+                width_in_digits = 7,
                 enabled = LrView.bind("thirdCheckboxIsChecked"),
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.highlights[3]
+                value = configFile.Settings.highlights[3]
 
             }
             pathDisplayConfigFile = f:static_text{
@@ -176,6 +189,7 @@ local function main()
         
                             f:row{f:checkbox{ -- first checkbox with edit fields
                                 title = "Contrast",
+                                width_in_chars = 7,
                                 checked_value = true,
                                 value = LrView.bind("firstCheckboxIsChecked")
                             }, fieldContrast1, fieldContrast2, fieldContrast3,
@@ -184,11 +198,13 @@ local function main()
                             f:row{f:checkbox{ -- second checkbox with edit fields
                                 title = "Saturation",
                                 checked_value = true,
+                                width_in_chars = 7,
                                 value = LrView.bind("secondCheckboxIsChecked")
                             }, fieldSaturation1, fieldSaturation2, fieldSaturation3},
                             f:row{f:checkbox{ -- third checkbox with edit fields
                                 title = "Highlights",
                                 checked_value = true,
+                                width_in_chars = 7,
                                 value = LrView.bind("thirdCheckboxIsChecked")
                             }, fieldHighlights1, fieldHighlights2, fieldHighlights3},
         
@@ -218,7 +234,7 @@ local function main()
                     
             
                 f:push_button{ -- Push button 
-                title = "Save & Edit",
+                title = "Save and Edit",
                 place_horizontal = 1.0,
                 width = 220,
                 height = 20,
@@ -236,8 +252,8 @@ local function main()
                         local targetPhotosCopies = targetPhotos
 
                         if 'ok' ==
-                            LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' ..
-                                #(targetPhotos) .. ' photo(s)? \n (The Configuration file will be overwritten)') then
+                                LrDialogs.confirm('Are you sure?', 'Do you want to edit the selected ' ..
+                                        #(targetPhotos) .. ' photo(s)? \n (The Configuration file will be overwritten)') then
 
                             -- ExportPhotos.makeDirectory(new_dir)         directory where user wants to save the photos
 
@@ -249,19 +265,28 @@ local function main()
                             end)]]
 
                             photoSettings()
-
                             adjustConfigFile.write_config()
-                            for i, photo in ipairs(catalog.targetPhotos) do
-                                importPhotos.editPhotos(photo)                      --edits photos in catalog
-                            end
-                            exportPhotos.processRenderedPhotos(targetPhotosCopies) --export edited targetPhotosCopies from the catalog
 
-                                resetSettings()
+                            -- define setting arrays for later use
+                            contrastArray = {fieldContrast1.value,fieldContrast2.value,fieldContrast3.value}
+                            saturationArray = {fieldSaturation1.value,fieldSaturation2.value,fieldSaturation3.value}
+                            highlightsArray = {fieldHighlights1.value,fieldHighlights2.value,fieldHighlights3.value}
 
-                                adjustConfigFile.write_config()
-                                for i, photo in ipairs(catalog.targetPhotos) do
-                                    importPhotos.editPhotos(photo)
+                            for i = 1,3 do
+                                for j = 1,3 do
+                                    for k = 1,3 do
+                                        for p, photo in ipairs(catalog.targetPhotos) do
+                                            editPhotos(photo,i,j,k)                      --edits photos in catalog
+                                        end
+                                        exportPhotos.processRenderedPhotos(targetPhotosCopies,"Export Folder" .. "_c" .. tostring(contrastArray[i]) .. "_s" .. tostring(saturationArray[j]) .. "_h" .. tostring(highlightsArray[k])) --export edited targetPhotosCopies from the catalog
+
+                                        for p, photo in ipairs(catalog.targetPhotos) do
+                                            resetPhotoEdit(photo)
+                                        end
+                                    end
                                 end
+
+                            end
                         end
                     end)
                 end
@@ -279,13 +304,10 @@ local function main()
                         if 'ok' ==
                             LrDialogs.confirm('Are you sure?',
                                 'Do you want to reset the values of the selected ' .. #(targetPhotos) ..
-                                    ' photo(s)? \n (The Configuration file will be overwritten)') then
+                                    ' photo(s)?') then
 
-                            resetSettings()
-
-                            adjustConfigFile.write_config()
                             for i, photo in ipairs(catalog.targetPhotos) do
-                                importPhotos.editPhotos(photo)
+                                resetPhotoEdit(photo)
                             end
 
                             return

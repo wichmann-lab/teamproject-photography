@@ -1,11 +1,17 @@
 local LrPathUtils = import 'LrPathUtils'
+local LrErrors = import 'LrErrors'
+local LrFileUtils = import 'LrFileUtils'
 -- local current_dir=io.popen"cd":read'*l'    working directory of LR ist not where the lua scripts are saved
 -------------- path information ------------
 local home = LrPathUtils.getStandardFilePath("home")
 --error(home)
 local adjustConfig = {}
-adjustConfig.myPathConfig = home .. "/TheImageIterator/configurationFile.json"
+-- exist the following directory?
+adjustConfig.myPathConfig = home .. "/TheImageIterator/imageIteratorSettings.json"
 adjustConfig.myPathConfig = adjustConfig.myPathConfig:gsub("%\\", "/")
+if LrFileUtils.exists(adjustConfig.myPathConfig) ~= true then
+    LrErrors.throwUserError("Configuration File Error: \nimageIteratorSettings.json is missing. \nCreate file in " .. adjustConfig.myPathConfig)
+end
 local json = require("json")
 
 local open = io.open

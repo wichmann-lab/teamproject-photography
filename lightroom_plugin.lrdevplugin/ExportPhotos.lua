@@ -1,16 +1,12 @@
 --============================SDK===============================--
-local LrApplicationView = import("LrApplicationView")
-local LrApplication = import("LrApplication")
-local LrBinding = import("LrBinding")
-local LrDevelopController = import("LrDevelopController")
 local LrDialogs = import("LrDialogs")
 local LrExportSession = import("LrExportSession")
 local LrFileUtils = import("LrFileUtils")
 local LrFunctionContext = import("LrFunctionContext")
 local LrLogger = import("LrLogger")
 local LrPathUtils = import("LrPathUtils")
-local LrProgressScope = import("LrProgressScope")
-local LrTasks = import("LrTasks")
+local adjustConfigFile = require("AdjustConfigurationFile")
+local configFile = adjustConfigFile.configFile
 --============================LOGGER============================--
 local logger = LrLogger('ExportLogger')
 logger:enable('print')
@@ -27,19 +23,19 @@ function ExportPhotos.makeDirectory(new_dir)
     LrFileUtils.createDirectory(new_dir)
 end
 
-function ExportPhotos.processRenderedPhotos(photos)
+function ExportPhotos.processRenderedPhotos(photos,folderName)
     LrFunctionContext.callWithContext("export", function(exportContext)
 
     local exportSession = LrExportSession({
         photosToExport= photos,
         exportSettings = {
             LR_collisionHandling = "rename",
-            LR_format = "JPEG",
+            LR_format = configFile.export_format,
             LR_tokens = "{{image_name}}",
             LR_useWatermark = false,
             LR_export_destinationPathPrefix = imgPreviewPath,
             LR_export_destinationType = "specificFolder",
-            LR_export_destinationPathSuffix = "TestFolder"
+            LR_export_destinationPathSuffix = folderName
         }
     })
     --local exportParams = exportContext.propertyTable
