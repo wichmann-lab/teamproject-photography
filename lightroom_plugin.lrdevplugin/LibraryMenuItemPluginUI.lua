@@ -52,8 +52,8 @@ local function editPhotos(photo, i, j, k)
     -- end
     -- end
 end
-local function applyTableMatrix(developSettings)
-    records = {}
+local function applyTableMatrix(developSettings)-- parameter developSetting is table in form of: {"Contrast: [1,2,3], "Saturation": [4,5,6], "Highlights:[7,8,9]"}
+    records = {} -- "supertable"
     i = 1
     for key, value in pairs(developSettings) do
         for firstKey, firstValue in pairs(value) do
@@ -67,7 +67,11 @@ local function applyTableMatrix(developSettings)
             end
         end
     end
-    error(records)
+    return records --[[     [{"Contrast: 1, "Saturation": 4, "Highlights:7"},]
+                            {"Contrast: 1, "Saturation": 4, "Highlights:8"},
+                            {"Contrast: 1, "Saturation": 4, "Highlights:9"},
+                            ....]
+                    ]]
 end
 
 local function main()
@@ -80,11 +84,11 @@ local function main()
             tableOne.firstCheckboxIsChecked = false
             tableOne.secondCheckboxIsChecked = false
             tableOne.thirdCheckboxIsChecked = false
-            --tableOne.my_value = 'value_1'
+            tableOne.my_value = 'value_1'
             tableOne.my_value2 = 'value_2'
             local f = LrView.osFactory() -- obtain view factory object
             developList = { -- the menu items and their values
-            { title = "Contrast", value = 1},
+            { title = "Contrast", value ='value_1'},
             { title = "Saturation", value = 'value_2' },
             { title = "Highlights", value = 'value_3' },
             }
@@ -107,7 +111,7 @@ local function main()
                 --min = -100,
                 --max = 100,
                 --immediate = true,
-                value = LrView.bind('my_value'),
+                value = configFile.Settings[developList[1].title][1]
             }
 
             fieldContrast2 = f:edit_field{
@@ -118,7 +122,7 @@ local function main()
                 --min = -100,
                 --max = 100,
                 immediate = true,
-                value = LrView.bind('my_value')
+                value = configFile.Settings.Contrast[2],
             }
             fieldContrast3 = f:edit_field{
                 place_horizontal = 0.6,
@@ -128,7 +132,7 @@ local function main()
                 --min = -100,
                 --max = 100,
                 immediate = true,
-                value = LrView.bind('my_value')
+                value = configFile.Settings.Contrast[3],
             }
 
             fieldSaturation1 = f:edit_field{
