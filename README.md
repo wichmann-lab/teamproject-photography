@@ -49,6 +49,9 @@ Add:
 + Make sure to save the configuration file "configurationFile.json" under this folder. 
 + Then execute the plugin.  
 
+Add:
+* Error message if config file is missing
+
 This is an example gif.
 
 ![testgif](https://user-images.githubusercontent.com/69016207/120100932-aa5b1e80-c143-11eb-814e-9273eefd4652.gif)
@@ -56,11 +59,12 @@ This is an example gif.
 1. Open the Plug-in Manager after starting Adobe Photoshop Lightroom Desktop: File > Plug-in Manager
 2. Add the plug-in: Add-Button
 3. Choose the pictures you want to edit.
-4. Start the plug-in: Library > Plug-in Extras > ADD NAME OF THE PLUGIN
+4. Start the plug-in: Library > Plug-in Extras > The Image Iterator
 
 Add:
 
 * Gifs 
+* Starting from Downloading the Folder for the plugin 
 
 
 ## Usage
@@ -78,6 +82,10 @@ Example for Config file
 {"highlights":0,"saturation":0,"contrast":30}
 ```
 ## Contributing
+
+### How to compile
+
+### Debugging
 
 ## Acknowledgements
 
