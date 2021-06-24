@@ -45,13 +45,13 @@ function ExportPhotos.processRenderedPhotos(photos,folderName)
 
     --logger:info("EditedPhotos: ", editedPhotos )
 
-    local progressScope = LrDialogs.showModalProgressDialog({
+    --[[local progressScope = LrDialogs.showModalProgressDialog({
         title = "Export in matrix format",
         caption = "Exporting edited photos by TheImageIterator",
         cannotCancel = false,
         functionContext = exportContext
-      })
-        for index, rendition in exportSession:renditions{ progressScope=progressScope, stopIfCanceled = true } do
+      })]]
+        for index, rendition in exportSession:renditions{stopIfCanceled = true } do
             --[[local photo = rendition.photo
             --rendition:waitForRender()
             local photoPath = rendition.destinationPath

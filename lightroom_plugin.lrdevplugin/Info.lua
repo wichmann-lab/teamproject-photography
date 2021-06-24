@@ -8,6 +8,7 @@ LrLibraryMenuItems={
     {
         title= "The Image Iterator",
         file ="LibraryMenuItemPluginUI.lua",
+        --file= "TestComboBox.lua"
     },
     },
 LrExportMenuItem = {
