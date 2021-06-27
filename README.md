@@ -20,15 +20,23 @@
 
 This is the repository for the teamproject course, summer term 2021, working on automating photography manipulation
 
+
+who are we?
+
+We are 4 students at the University of Tübingen and we are all studying computer science (2 computer science, 1 medical informatics, 1 media informatics) and have been working together on this project since the summer semester began.
+on 07/27/2021 is our final presentation of this project
+
 Add:
 
 * is used to edit image data sets
 * language: Lua
-* works with Adobe Lightroom Classic
+* works with Adobe Lightroom Classic 10.3
 
 ## Features
 
 (Of our plug-in)
+
+* The special thing about our plugin is that you can select several images at once and import, export and edit them.
 
 * import and export pictures
 * save pictures in folder
@@ -107,10 +115,14 @@ Example for Config file
 ## Contributing
 
 ### How to compile
+  
+* luac -o
+* 
 
 ### Debugging
 
 ## Acknowledgements
+  
 * interested in image editing
 * programming skills would be an advantage
 
