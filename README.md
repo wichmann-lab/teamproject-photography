@@ -50,7 +50,22 @@ Add:
 + Then execute the plugin.  
 
 Add:
-* Error message if config file is missing
+* Error messages have 3 parts:
+lib/a_name_error.rb:3:in `<main>': undefined local variable or method `hello_world' for main:Object (NameError)
+
+1. The location of the error, the "where".
+lib/a_name_error.rb:3:in `<main>':
+* lib/a_name_error.rb is the file the error occurred in.
+* 3 is the line of code with the error.
+* <main> is the scope of the error.
+  
+2. The description, the "why".
+undefined local variable or method `hello_world' for main:Object
+  
+The interpreter does the best job it can to tell you what it thinks went wrong.
+  
+3. The type of error, the "who".
+(NameError)
 
 This is an example gif.
 
