@@ -88,7 +88,7 @@ local function main()
             tableOne.my_value2 = 'value_2'
             local f = LrView.osFactory() -- obtain view factory object
             developList = { -- the menu items and their values
-            { title = "Contrast", value ='value_1'},
+            { title = "Contrast", value = {'value_1',20,30}},
             { title = "Saturation", value = 'value_2' },
             { title = "Highlights", value = 'value_3' },
             }
@@ -202,8 +202,99 @@ local function main()
                 value = configFile.Settings.Highlights[3]
 
             }
+
+            fieldSetting4 = f:edit_field{
+                place_horizontal = 0.8,
+                bind = LrView.bind("Checkbox3.1"),
+                width_in_digits = 7,
+                enabled = LrView.bind("thirdCheckboxIsChecked"),
+                min = -100,
+                max = 100,
+                immediate = true,
+                value = configFile.Settings.Highlights[1]
+
+            }
+            fieldSetting5 = f:edit_field{
+                place_horizontal = 0.8,
+                bind = LrView.bind("Checkbox3.2"),
+                width_in_digits = 7,
+                enabled = LrView.bind("thirdCheckboxIsChecked"),
+                min = -100,
+                max = 100,
+                immediate = true,
+                value = configFile.Settings.Highlights[2]
+
+            }
+            fieldSetting6 = f:edit_field{
+                place_horizontal = 0.8,
+                bind = LrView.bind("Checkbox3.3"),
+                width_in_digits = 7,
+                enabled = LrView.bind("thirdCheckboxIsChecked"),
+                min = -100,
+                max = 100,
+                immediate = true,
+                value = configFile.Settings.Highlights[3]
+
+            }
+
+            fieldSetting7 = f:edit_field{
+                place_horizontal = 0.8,
+                bind = LrView.bind("Checkbox3.3"),
+                width_in_digits = 7,
+                enabled = LrView.bind("thirdCheckboxIsChecked"),
+                min = -100,
+                max = 100,
+                immediate = true,
+                value = configFile.Settings.Highlights[3]
+
+            }
+
+            fieldSetting8 = f:edit_field{
+                place_horizontal = 0.8,
+                bind = LrView.bind("Checkbox3.3"),
+                width_in_digits = 7,
+                enabled = LrView.bind("thirdCheckboxIsChecked"),
+                min = -100,
+                max = 100,
+                immediate = true,
+                value = configFile.Settings.Highlights[3]
+
+            }
+
+            fieldSetting9 = f:edit_field{
+                place_horizontal = 0.8,
+                bind = LrView.bind("Checkbox3.3"),
+                width_in_digits = 7,
+                enabled = LrView.bind("thirdCheckboxIsChecked"),
+                min = -100,
+                max = 100,
+                immediate = true,
+                value = configFile.Settings.Highlights[3]
+
+            }
+
+            setting1 = f:edit_field{
+                width_in_digits = 10,
+                value = "add setting"
+            }
+            setting2 = f:edit_field{
+                width_in_digits = 10,
+                value = "add setting"
+            }
+            setting3 = f:edit_field{
+                width_in_digits = 10,
+                value = "add setting"
+            }
+            setting4 = f:edit_field{
+                width_in_digits = 10,
+                value = "add setting"
+            }
+            setting5 = f:edit_field{
+                width_in_digits = 10,
+                value = "add setting"
+            }
             pathDisplayConfigFile = f:static_text{
-                title = "Absolute Path (ConfigFile):" .. adjustConfigFile.myPathConfig,
+                title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
                 text_color = LrColor(0, 0, 0)
             }
             local contents = f:column{
@@ -222,26 +313,24 @@ local function main()
                     title = "Change settings",
                     font = "<system/bold>",
 
-                    f:row{popupBox1, 
-                        --[[f:checkbox{ -- first checkbox with edit fields
-                        title = "Contrast",
-                        width_in_chars = 7,
-                        checked_value = true,
-                        value = LrView.bind("firstCheckboxIsChecked")]]
+                    f:row{
+                        setting1,
                         fieldContrast1, fieldContrast2, fieldContrast3},
-                    f:row{f:checkbox{ -- second checkbox with edit fields
-                        title = "Saturation",
-                        checked_value = true,
-                        width_in_chars = 7,
-                        value = LrView.bind("secondCheckboxIsChecked")
-                    }, fieldSaturation1, fieldSaturation2, fieldSaturation3},
-                    popupBox2,
-                    f:row{f:checkbox{ -- third checkbox with edit fields
-                        title = "Highlights",
-                        checked_value = true,
-                        width_in_chars = 7,
-                        value = LrView.bind("thirdCheckboxIsChecked")
-                    }, fieldHighlights1, fieldHighlights2, fieldHighlights3},
+                    f:row{
+                        setting2, 
+                        fieldSaturation1, fieldSaturation2, fieldSaturation3},
+                    
+                    f:row{
+                        setting3, 
+                        fieldHighlights1, fieldHighlights2, fieldHighlights3},
+                    
+                    f:row{
+                        setting4, 
+                        fieldSetting4, fieldSetting5, fieldSetting6},
+
+                    f:row{
+                        setting5, 
+                        fieldSetting7, fieldSetting8, fieldSetting9},
 
                     f:edit_field{ -- Text or commentary filed
                         -- place_horizontal = 0.5,
@@ -250,13 +339,7 @@ local function main()
                         height = 100
                     }
 
-                }}, f:column{f:group_box{f:edit_field{
-                    value = "Add text"
-                }}, f:group_box{f:edit_field{
-                    value = "Add text"
-                }}, f:group_box{f:edit_field{
-                    value = "Add text"
-                }}}},
+                }}},
 
                 f:push_button{ -- Push button 
                     title = "Save and Edit",
@@ -287,11 +370,15 @@ local function main()
                                 local progressBar = LrProgressScope({
                                     title = "TheImageIterator Progress"
                                 })
+                                progressBar:setCancelable(true)
+                                 
                                 if targetPhotosCopies == nil then
                                     -- LrDialogs.message("Nothing selected.")
                                     progressBar:done()
                                     return nil
+                                
                                 else
+                
                                     photoSettings()
                                     adjustConfigFile.write_config()
                                     -- define setting arrays for later use
@@ -305,6 +392,9 @@ local function main()
                                     for i = 1, 3 do
                                         for j = 1, 3 do
                                             for k = 1, 3 do
+                                                if progressBar:isCanceled() then -- cancel progress in catalog (via X)
+                                                    break
+                                                end 
                                                 for p, photo in ipairs(catalog.targetPhotos) do
                                                     --local path =LrPathUtils.standardizePath(photo:getRawMetadata("path"))
                                                         progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)
@@ -326,6 +416,7 @@ local function main()
                                     progressBar:done()
                                 end
                             end
+                        
                         end)
                     end
                 },
