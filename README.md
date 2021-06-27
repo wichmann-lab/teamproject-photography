@@ -111,6 +111,8 @@ Example for Config file
 ### Debugging
 
 ## Acknowledgements
+* interested in image editing
+* programming skills would be an advantage
 
 ## License
 
