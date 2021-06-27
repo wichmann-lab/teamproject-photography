@@ -22,17 +22,17 @@ This is the repository for the teamproject course, summer term 2021, working on 
 
 Add:
 
-* short description of the project and the plug-in 
-* languages, libraries and its versions
-* for which Lightroom version numbers the plug-in works
+* is used to edit image data sets
+* language: Lua
+* works with Adobe Lightroom Classic
 
 ## Features
 
 (Of our plug-in)
 
-* text
-* text
-* text
+* import and export pictures
+* save pictures in folder
+* change settings (contrast, saturation, highlights)
 
 
 ## Getting Started
@@ -49,6 +49,32 @@ Add:
 + Make sure to save the configuration file "configurationFile.json" under this folder. 
 + Then execute the plugin.  
 
+
+* Error messages have 3 parts:
+
+lib/a_name_error.rb:3:in `<main>': undefined local variable or method `hello_world' for main:Object (NameError)
+
+
+1. The location of the error, the "where".
+
+lib/a_name_error.rb:3:in `<main>:
+
+* lib/a_name_error.rb is the file the error occurred in.
+* 3 is the line of code with the error.
+* <main> is the scope of the error.
+  
+  
+2. The description, the "why".
+  
+undefined local variable or method `hello_world' for main:Object
+  
+The interpreter does the best job it can to tell you what it thinks went wrong.
+  
+  
+3. The type of error, the "who".
+  
+(NameError)
+
 This is an example gif.
 
 ![testgif](https://user-images.githubusercontent.com/69016207/120100932-aa5b1e80-c143-11eb-814e-9273eefd4652.gif)
@@ -56,11 +82,12 @@ This is an example gif.
 1. Open the Plug-in Manager after starting Adobe Photoshop Lightroom Desktop: File > Plug-in Manager
 2. Add the plug-in: Add-Button
 3. Choose the pictures you want to edit.
-4. Start the plug-in: Library > Plug-in Extras > ADD NAME OF THE PLUGIN
+4. Start the plug-in: Library > Plug-in Extras > The Image Iterator
 
 Add:
 
 * Gifs 
+* Starting from Downloading the Folder for the plugin 
 
 
 ## Usage
@@ -79,7 +106,13 @@ Example for Config file
 ```
 ## Contributing
 
+### How to compile
+
+### Debugging
+
 ## Acknowledgements
+* interested in image editing
+* programming skills would be an advantage
 
 ## License
 
