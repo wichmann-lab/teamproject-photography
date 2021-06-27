@@ -22,17 +22,17 @@ This is the repository for the teamproject course, summer term 2021, working on 
 
 Add:
 
-* short description of the project and the plug-in 
-* languages, libraries and its versions
-* for which Lightroom version numbers the plug-in works
+* is used to edit image data sets
+* language: Lua
+* works with Adobe Lightroom Classic
 
 ## Features
 
 (Of our plug-in)
 
-* text
-* text
-* text
+* import and export pictures
+* save pictures in folder
+* change settings (contrast, saturation, highlights)
 
 
 ## Getting Started
