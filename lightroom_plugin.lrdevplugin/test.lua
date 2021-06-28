@@ -3,6 +3,9 @@
 --- Created by suzhengyu.
 --- DateTime: 27.06.2021 18:32
 ---
+
+-- https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua
+-- combine arrays recursively
 -- table array: { {1, 2}, {3, 4}, {5, 6} }
 -- Should return { 135, 136, 145, 146, 235, 236, 245, 246 }
 --
@@ -44,6 +47,8 @@ function arrayCombine2(array1, array2)
     return mergedArray
 end -- arrayCombine2
 
+-- function to split string in table
+-- https://www.codegrepper.com/code-examples/lua/lua+split+string+by+delimiter
 function Split(s, delimiter)
     result = {};
     for match in (s..delimiter):gmatch("(.-)"..delimiter) do
@@ -52,13 +57,13 @@ function Split(s, delimiter)
     return result;
 end
 
--- You can set it up this way:
+-- test ArraySettings
 combinedArray = {}
 ArraySettings = {["Contrast"]={0,20,40},["Saturation"] = {40,50,60},["Highlights"] = {10,20,30}}
 print(ArraySettings.Contrast[2])
 table.insert(combinedArray, ArraySettings.Contrast)
 table.insert(combinedArray, ArraySettings.Saturation)
-table.insert(combinedArray,ArraySettings.Highlights)
+table.insert(combinedArray, ArraySettings.Highlights)
 
 SettingsTable = {}
 for key,v in pairs(arrayCombine(combinedArray)) do
@@ -66,18 +71,22 @@ for key,v in pairs(arrayCombine(combinedArray)) do
     SettingsTable[key] = Split(v,",")
 end
 
+-- save all setting-keys in keyset for later use
+n = 0
+keyset = {}
+for k,v in pairs(ArraySettings) do
+    n=n+1
+    keyset[n]=k
+    print(keyset[n])
+end
+
+
 for index, data in ipairs(SettingsTable) do
     print(index)
 
     for key, value in pairs(data) do
-        print('\t', key, value)
+        print('\t', keyset[key], value)
     end
 end
 
-print(ArraySettings[1])
-
--- Or go this way, which may be somewhat cleaner:
-
---[[for i,v in ipairs(arrayCombine({{"A", "B", "C"}, {"D", "E", "F"}})) do
-    print(i,v)
-end]]
+print(SettingsTable[1][2])
