@@ -10,6 +10,7 @@
 -- Should return { 135, 136, 145, 146, 235, 236, 245, 246 }
 --
 -- This uses tail recursion so hopefully lua is smart enough not to blow the stack
+local combine = {}
 function arrayCombine(tableArray)
     -- Define the base cases
     if (tableArray == nil) then
@@ -49,7 +50,7 @@ end -- arrayCombine2
 
 -- function to split string in table
 -- https://www.codegrepper.com/code-examples/lua/lua+split+string+by+delimiter
-function Split(s, delimiter)
+local function Split(s, delimiter)
     result = {};
     for match in (s..delimiter):gmatch("(.-)"..delimiter) do
         table.insert(result, match);
@@ -57,31 +58,45 @@ function Split(s, delimiter)
     return result;
 end
 
+function combine.getCombinedArray(array)
+    combinedArray = {}
+    for keys, v in pairs(array) do
+        table.insert(combinedArray, array[keys])
+    end
+    return combinedArray
+end
 -- test ArraySettings
-combinedArray = {}
+--combinedArray = {}
 ArraySettings = {["Contrast"]={0,20,40},["Saturation"] = {40,50,60},["Highlights"] = {10,20,30}}
-print(ArraySettings.Contrast[2])
-table.insert(combinedArray, ArraySettings.Contrast)
-table.insert(combinedArray, ArraySettings.Saturation)
-table.insert(combinedArray, ArraySettings.Highlights)
+--table.insert(combinedArray, ArraySettings.Contrast)
+--table.insert(combinedArray, ArraySettings.Saturation)
+--table.insert(combinedArray, ArraySettings.Highlights)
 
-SettingsTable = {}
-for key,v in pairs(arrayCombine(combinedArray)) do
-    --print(i,v)
-    SettingsTable[key] = Split(v,",")
+
+function combine.getSettingsTable(array)
+    settingsTable = {}
+    for key,v in pairs(arrayCombine(array)) do
+        settingsTable[key] = Split(v,",")
+    end
+    return settingsTable
 end
 
 -- save all setting-keys in keyset for later use
-n = 0
-keyset = {}
-for k,v in pairs(ArraySettings) do
-    n=n+1
-    keyset[n]=k
-    print(keyset[n])
+function combine.getKeys(array)
+    n = 0
+    keyset = {}
+    for k,v in pairs(array) do
+        n=n+1
+        keyset[n]=k
+    end
+    return keyset
 end
 
+keyset = combine.getKeys(ArraySettings)
+combinedArray = combine.getCombinedArray(ArraySettings)
+settingsTable = combine.getSettingsTable(combinedArray)
 
-for index, data in ipairs(SettingsTable) do
+for index, data in ipairs(settingsTable) do
     print(index)
 
     for key, value in pairs(data) do
@@ -89,4 +104,5 @@ for index, data in ipairs(SettingsTable) do
     end
 end
 
-print(SettingsTable[1][2])
+--print(settingsTable[1][2])
+return combine

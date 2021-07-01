@@ -14,6 +14,7 @@ local catalog = LrApplication.activeCatalog()
 local targetPhotos = catalog.targetPhotos
 local targetPhotosCopies = targetPhotos
 local LrPathUtils = import 'LrPathUtils'
+local combine = require("combine")
 -- ==============================================================--
 
 local function photoSettings() -- set current photo settings in config.json
@@ -41,7 +42,7 @@ local function resetPhotoEdit(photo) -- reset all setting
     photo:quickDevelopAdjustImage("Saturation", 0)
 end
 
-local function editPhotos(photo, i, j, k)
+--[[local function editPhotos(photo, i, j, k)
     -- for i = 1, 3, 1 do
     -- for j = 1, 3, 1 do
     -- for k = 1, 3, 1 do
@@ -51,7 +52,23 @@ local function editPhotos(photo, i, j, k)
     -- end
     -- end
     -- end
+end]]
+
+ArraySettings = configFile.Settings
+keyset = combine.getKeys(ArraySettings)
+combinedArray = combine.getCombinedArray(ArraySettings)
+settingsTable = combine.getSettingsTable(combinedArray)
+
+local function editPhotos(photo, keyset, settingsTable)
+    for index,data in ipairs(settingsTable) do
+        for key, value in pairs(data) do
+            photo:quickDevelopAdjustImage(keyset[key], value)
+        end
+    end
+
 end
+
+
 local function applyTableMatrix(developSettings)-- parameter developSetting is table in form of: {"Contrast: [1,2,3], "Saturation": [4,5,6], "Highlights:[7,8,9]"}
     records = {} -- "supertable"
     i = 1
