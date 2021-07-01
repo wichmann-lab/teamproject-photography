@@ -109,18 +109,11 @@ local function main()
             { title = "Saturation", value = 'value_2' },
             { title = "Highlights", value = 'value_3' },
             }
-            popupBox1 =f:popup_menu {
-                value = LrView.bind('my_value'), -- current value bound to same key as static text
-                items = developList,
-            }
-            popupBox2 =f:popup_menu {
-                value = LrView.bind('my_value1'), -- current value bound to same key as static text
-                items = developList,
-            }
+
             --error(configFile.Settings.Saturation)
             --valueOfBox1 = popupBox1.value
             --valueOfBox1=configFile.Settings[valueOfBox1]
-            fieldContrast1 = f:edit_field{
+            fieldSettingValue1 = f:edit_field{
                 place_horizontal = 0.6,
                 --bind =LrView.bind(popupBox1.value), 
                 width_in_digits = 5,
@@ -131,7 +124,7 @@ local function main()
                 value = configFile.Settings[developList[1].title][1]
             }
 
-            fieldContrast2 = f:edit_field{
+            fieldSettingValue2 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.2"),
                 width_in_digits = 5,
@@ -141,7 +134,7 @@ local function main()
                 immediate = true,
                 value = configFile.Settings.Contrast[2],
             }
-            fieldContrast3 = f:edit_field{
+            fieldSettingValue3 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.3"),
                 width_in_digits = 5,
@@ -152,79 +145,11 @@ local function main()
                 value = configFile.Settings.Contrast[3],
             }
 
-            fieldSaturation1 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox2.1"),
-                width_in_digits = 7,
-                enabled = LrView.bind("secondCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = LrView.bind('my_value1') 
-            }
-
-            fieldSaturation2 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox2.2"),
-                width_in_digits = 7,
-                enabled = LrView.bind("secondCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Saturation[2]
-
-            }
-            fieldSaturation3 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox2.3"),
-                width_in_digits = 7,
-                enabled = LrView.bind("secondCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Saturation[3]
-
-            }
-
-            fieldHighlights1 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.1"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[1]
-
-            }
-            fieldHighlights2 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.2"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[2]
-
-            }
-            fieldHighlights3 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.3"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[3]
-
-            }
-
-            setting1 = f:edit_field{
+            settingTextField = f:edit_field{
                 width_in_chars = 14,
                 value = "Add develop setting"
             }
-    
+
             pathDisplayConfigFile = f:static_text{
                 title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
                 text_color = LrColor(0, 0, 0)
@@ -252,24 +177,8 @@ local function main()
                     f:row{
                         
                         setting1,
-                        fieldContrast1, fieldContrast2, fieldContrast3,
+                        fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
                     },
-                    --[[f:row{
-                        setting2, 
-                        fieldSaturation1, fieldSaturation2, fieldSaturation3},
-                    
-                    f:row{
-                        setting3, 
-                        fieldHighlights1, fieldHighlights2, fieldHighlights3},
-                    
-                    f:row{
-                        setting4, 
-                        fieldSetting4, fieldSetting5, fieldSetting6},
-
-                    f:row{
-                        setting5, 
-                        fieldSetting7, fieldSetting8, fieldSetting9},]]
-
                         f:push_button{
                             title = "ADD",
                             --action = 
