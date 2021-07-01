@@ -106,7 +106,7 @@ local function main()
             fieldContrast1 = f:edit_field{
                 place_horizontal = 0.6,
                 --bind =LrView.bind(popupBox1.value), 
-                width_in_digits = 7,
+                width_in_digits = 5,
                 --enabled = LrView.bind("firstCheckboxIsChecked"),
                 --min = -100,
                 --max = 100,
@@ -117,7 +117,7 @@ local function main()
             fieldContrast2 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.2"),
-                width_in_digits = 7,
+                width_in_digits = 5,
                 --enabled = LrView.bind("firstCheckboxIsChecked"),
                 --min = -100,
                 --max = 100,
@@ -127,7 +127,7 @@ local function main()
             fieldContrast3 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.3"),
-                width_in_digits = 7,
+                width_in_digits = 5,
                 --enabled = LrView.bind("firstCheckboxIsChecked"),
                 --min = -100,
                 --max = 100,
@@ -203,100 +203,17 @@ local function main()
 
             }
 
-            fieldSetting4 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.1"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[1]
-
-            }
-            fieldSetting5 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.2"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[2]
-
-            }
-            fieldSetting6 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.3"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[3]
-
-            }
-
-            fieldSetting7 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.3"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[3]
-
-            }
-
-            fieldSetting8 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.3"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[3]
-
-            }
-
-            fieldSetting9 = f:edit_field{
-                place_horizontal = 0.8,
-                bind = LrView.bind("Checkbox3.3"),
-                width_in_digits = 7,
-                enabled = LrView.bind("thirdCheckboxIsChecked"),
-                min = -100,
-                max = 100,
-                immediate = true,
-                value = configFile.Settings.Highlights[3]
-
-            }
-
             setting1 = f:edit_field{
-                width_in_digits = 10,
-                value = "add setting"
+                width_in_chars = 14,
+                value = "Add develop setting"
             }
-            setting2 = f:edit_field{
-                width_in_digits = 10,
-                value = "add setting"
-            }
-            setting3 = f:edit_field{
-                width_in_digits = 10,
-                value = "add setting"
-            }
-            setting4 = f:edit_field{
-                width_in_digits = 10,
-                value = "add setting"
-            }
-            setting5 = f:edit_field{
-                width_in_digits = 10,
-                value = "add setting"
-            }
+    
             pathDisplayConfigFile = f:static_text{
                 title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
                 text_color = LrColor(0, 0, 0)
             }
+            LrDialogs.message("THE IMAGE ITERATOR \n - Start editing all your photographs! - ","ADD: \n HELP: \n Save and Edit: \n Reset: \n")
+
             local contents = f:column{
                 -- CHANGE THE WINDOW SIZE HERE:
                 -- width = 400,
@@ -309,14 +226,18 @@ local function main()
                     pathDisplayConfigFile
                 },
 
-                f:row{f:column{f:group_box{
+                f:row{f:group_box{
                     title = "Change settings",
                     font = "<system/bold>",
+                    f:row{
+                    
 
                     f:row{
+                        
                         setting1,
-                        fieldContrast1, fieldContrast2, fieldContrast3},
-                    f:row{
+                        fieldContrast1, fieldContrast2, fieldContrast3,
+                    },
+                    --[[f:row{
                         setting2, 
                         fieldSaturation1, fieldSaturation2, fieldSaturation3},
                     
@@ -330,16 +251,32 @@ local function main()
 
                     f:row{
                         setting5, 
-                        fieldSetting7, fieldSetting8, fieldSetting9},
+                        fieldSetting7, fieldSetting8, fieldSetting9},]]
 
-                    f:edit_field{ -- Text or commentary filed
-                        -- place_horizontal = 0.5,
-                        value = "Add text or commentary here",
-                        width = 200,
-                        height = 100
+                        f:push_button{
+                            title = "ADD",
+                            --action = 
+                        },
+                        f:push_button{
+                            title = "HELP",
+                            action = function()
+                                LrDialogs.message("HALLO","", "info")
+                            end
+                        },
                     }
 
-                }}},
+                },
+            
+                }, f:group_box{
+                    title = "Overview Develop Settings",
+                    font = "<system/bold>",
+                        f:static_text{ -- Text or commentary filed
+                        -- place_horizontal = 0.5,
+                        title = tostring(configFile.Settings[1]),
+                         width = 400,
+                         height = 200
+                    }
+                },
 
                 f:push_button{ -- Push button 
                     title = "Save and Edit",
