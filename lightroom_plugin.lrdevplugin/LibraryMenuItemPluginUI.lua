@@ -16,48 +16,18 @@ local targetPhotosCopies = targetPhotos
 local LrPathUtils = import 'LrPathUtils'
 local combine = require("arrayCombine")
 -- ==============================================================--
-
-local function photoSettings() -- set current photo settings in config.json
-
-    --[[for i, config in pairs(configFile) do
-        for j, value in ipairs(config) do
-            value = temp.value
-        end
-    end]]
-
-    configFile.Settings.Contrast[1] = fieldContrast1.value
-    configFile.Settings.Saturation[1] = fieldSaturation1.value
-    configFile.Settings.Highlights[1] = fieldHighlights1.value
-    configFile.Settings.Contrast[2] = fieldContrast2.value
-    configFile.Settings.Saturation[2] = fieldSaturation2.value
-    configFile.Settings.Highlights[2] = fieldHighlights2.value
-    configFile.Settings.Contrast[3] = fieldContrast3.value
-    configFile.Settings.Saturation[3] = fieldSaturation3.value
-    configFile.Settings.Highlights[3] = fieldHighlights3.value
-end
-
 local function resetPhotoEdit(photo) -- reset all setting
     photo:quickDevelopAdjustImage("Contrast", 0)
     photo:quickDevelopAdjustImage("Highlights", 0)
     photo:quickDevelopAdjustImage("Saturation", 0)
 end
 
---[[local function editPhotos(photo, i, j, k)
-    -- for i = 1, 3, 1 do
-    -- for j = 1, 3, 1 do
-    -- for k = 1, 3, 1 do
-    photo:quickDevelopAdjustImage(developList[1].title, contrastArray[i])
-    photo:quickDevelopAdjustImage("Saturation", saturationArray[j])
-    photo:quickDevelopAdjustImage("Highlights", highlightsArray[k])
-    -- end
-    -- end
-    -- end
-end]]
-
 ArraySettings = configFile.Settings
 keyset = combine.getKeys(ArraySettings)
 combinedArray = combine.getCombinedArray(ArraySettings)
 settingsTable = combine.getSettingsTable(combinedArray)
+times = combine.getTimesOfCombinations(ArraySettings)
+overview = combine.overviewSettings(ArraySettings)
 
 function editPhotos(photos, keyset, settingsTable)
     for index,data in ipairs(settingsTable) do
@@ -86,7 +56,8 @@ function editSinglePhoto(photos,data)
         folderName=""
         for key, value in pairs(data) do
             photo:quickDevelopAdjustImage(keyset[key], tonumber(value))
-            progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)
+            progressBar:setPortionComplete(count, times)
+            -- progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)
             folderName= folderName .. keyset[key].. value
         end
         count = count + 1
@@ -105,6 +76,8 @@ function testEditFunction(photos,data)
     --exportPhotos.processRenderedPhotos(photos,folderName)
     return photos
 end
+
+
 
 
 local function applyTableMatrix(developSettings)-- parameter developSetting is table in form of: {"Contrast: [1,2,3], "Saturation": [4,5,6], "Highlights:[7,8,9]"}
@@ -136,9 +109,6 @@ local function main()
         function(context) -- function-context call for property table (observable)
             local tableOne = LrBinding.makePropertyTable(context)
             -- data key for each checkbox with initial boolean value
-            tableOne.firstCheckboxIsChecked = false
-            tableOne.secondCheckboxIsChecked = false
-            tableOne.thirdCheckboxIsChecked = false
             tableOne.my_value = 'value_1'
             tableOne.my_value2 = 'value_2'
             local f = LrView.osFactory() -- obtain view factory object
@@ -155,37 +125,35 @@ local function main()
                 place_horizontal = 0.6,
                 --bind =LrView.bind(popupBox1.value), 
                 width_in_digits = 5,
-                --enabled = LrView.bind("firstCheckboxIsChecked"),
-                --min = -100,
-                --max = 100,
-                --immediate = true,
-                value = configFile.Settings[developList[1].title][1]
+                min = -100,
+                max = 100,
+                immediate = true,
+                value = configFile.Settings[keyset[1]][1]
             }
 
             fieldSettingValue2 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.2"),
                 width_in_digits = 5,
-                --enabled = LrView.bind("firstCheckboxIsChecked"),
-                --min = -100,
-                --max = 100,
+                min = -100,
+                max = 100,
                 immediate = true,
-                value = configFile.Settings.Contrast[2],
+                value = configFile.Settings[keyset[1]][2],
             }
             fieldSettingValue3 = f:edit_field{
                 place_horizontal = 0.6,
                 bind = LrView.bind("Checkbox1.3"),
                 width_in_digits = 5,
-                --enabled = LrView.bind("firstCheckboxIsChecked"),
-                --min = -100,
-                --max = 100,
+                min = -100,
+                max = 100,
                 immediate = true,
-                value = configFile.Settings.Contrast[3],
+                value = configFile.Settings[keyset[1]][3],
             }
 
             settingTextField = f:edit_field{
                 width_in_chars = 14,
-                value = "Add develop setting"
+                immediate = true,
+                value = keyset[1]
             }
 
             pathDisplayConfigFile = f:static_text{
@@ -219,7 +187,13 @@ local function main()
                     },
                         f:push_button{
                             title = "ADD",
-                            --action = 
+                            action = function()
+                                    configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
+                                    adjustConfigFile.write_config()
+                                ArraySettings = configFile.Settings
+                                   overview = combine.overviewSettings(ArraySettings)
+                                end,
+                            bind = LrView.bind('overview')
                         },
                         f:push_button{
                             title = "HELP",
@@ -234,11 +208,13 @@ local function main()
                 }, f:group_box{
                     title = "Overview Develop Settings",
                     font = "<system/bold>",
-                    f:static_text{ -- Text or commentary filed
+                    f:edit_field{ -- Text or commentary filed
                         -- place_horizontal = 0.5,
-                        title = tostring(configFile.Settings[1]),
+                        immediate = true,
+                        value = overview,
+                        bind = LrView.bind('overview'),
                          width = 400,
-                         height = 200
+                         height = 200,
                     }
                 },
 
@@ -269,7 +245,7 @@ local function main()
                                 testCollection:addPhotos(targetPhotosCopies)
                             end)]]
                                 progressBar = LrProgressScope({
-                                    title = "TheImageIterator Progress"
+                                    title = "TheImageIterator-Editing & Exporting Photos"
                                 })
                                 progressBar:setCancelable(true)
                                  

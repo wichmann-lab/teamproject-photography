@@ -72,6 +72,27 @@ ArraySettings = {["Contrast"]={0,20,40},["Saturation"] = {40,50,60},["Highlights
 --table.insert(combinedArray, ArraySettings.Saturation)
 --table.insert(combinedArray, ArraySettings.Highlights)
 
+function combine.getTimesOfCombinations(array)
+    times = 1
+    for key, v in pairs(array) do
+        times = times * #array[key]
+    end
+    return times
+end
+
+function combine.overviewSettings(array)
+    overview = ""
+    for key, v in pairs(ArraySettings) do
+        overview = overview .. key .. ":"
+        for w, value in pairs(v) do
+            overview = overview .. value .. ","
+        end
+        overview = overview .. "\n"
+    end
+    return overview
+end
+
+-- print(combine.overviewSettings(ArraySettings))
 
 function combine.getSettingsTable(array)
     settingsTable = {}
