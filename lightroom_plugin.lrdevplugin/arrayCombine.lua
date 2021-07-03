@@ -95,7 +95,7 @@ end
 keyset = combine.getKeys(ArraySettings)
 combinedArray = combine.getCombinedArray(ArraySettings)
 settingsTable = combine.getSettingsTable(combinedArray)
-
+--[[
 for index, data in ipairs(settingsTable) do
     print(index)
 
@@ -105,4 +105,5 @@ for index, data in ipairs(settingsTable) do
 end
 
 --print(settingsTable[1][2])
+]]
 return combine

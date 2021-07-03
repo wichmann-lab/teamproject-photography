@@ -14,7 +14,7 @@ local catalog = LrApplication.activeCatalog()
 local targetPhotos = catalog.targetPhotos
 local targetPhotosCopies = targetPhotos
 local LrPathUtils = import 'LrPathUtils'
-local combine = require("combine")
+local combine = require("arrayCombine")
 -- ==============================================================--
 
 local function photoSettings() -- set current photo settings in config.json
@@ -59,13 +59,51 @@ keyset = combine.getKeys(ArraySettings)
 combinedArray = combine.getCombinedArray(ArraySettings)
 settingsTable = combine.getSettingsTable(combinedArray)
 
-local function editPhotos(photo, keyset, settingsTable)
+function editPhotos(photos, keyset, settingsTable)
     for index,data in ipairs(settingsTable) do
+        if progressBar:isCanceled() then -- cancel progress in catalog (via X)
+            break
+        end 
+        result = editSinglePhoto(photos,data)
+        exportPhotos.processRenderedPhotos(result,folderName)
+        --result=testEditFunction(photos,data)
+        --exportPhotos.processRenderedPhotos(result,folderName)
+        for p,picture in pairs(result) do
+            --resetPhotoEdit(picture)
+            for key, value in pairs(data) do
+                picture:quickDevelopAdjustImage(keyset[key], 0)
+            end
+        end
+        --progressBar:done()
+   end
+end
+
+function editSinglePhoto(photos,data)
+    for p,photo in pairs(photos) do
+        if progressBar:isCanceled() then -- cancel progress in catalog (via X)
+            break
+        end 
+        folderName=""
         for key, value in pairs(data) do
-            photo:quickDevelopAdjustImage(keyset[key], value)
+            photo:quickDevelopAdjustImage(keyset[key], tonumber(value))
+            progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)
+            folderName= folderName .. keyset[key].. value
+        end
+        count = count + 1
+    end
+    --exportPhotos.processRenderedPhotos(photos,folderName)
+    return photos
+end
+function testEditFunction(photos,data)
+    for p,photo in pairs(photos) do
+        folderName=""
+        for key, value in pairs(data) do
+            photo:quickDevelopAdjustImage(keyset[key], 0)
+            folderName= folderName .. keyset[key].. value
         end
     end
-
+    --exportPhotos.processRenderedPhotos(photos,folderName)
+    return photos
 end
 
 
@@ -176,7 +214,7 @@ local function main()
 
                     f:row{
                         
-                        setting1,
+                        settingTextField,
                         fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
                     },
                         f:push_button{
@@ -196,7 +234,7 @@ local function main()
                 }, f:group_box{
                     title = "Overview Develop Settings",
                     font = "<system/bold>",
-                        f:static_text{ -- Text or commentary filed
+                    f:static_text{ -- Text or commentary filed
                         -- place_horizontal = 0.5,
                         title = tostring(configFile.Settings[1]),
                          width = 400,
@@ -230,7 +268,7 @@ local function main()
                                 originalCollection:addPhotos(targetPhotos)
                                 testCollection:addPhotos(targetPhotosCopies)
                             end)]]
-                                local progressBar = LrProgressScope({
+                                progressBar = LrProgressScope({
                                     title = "TheImageIterator Progress"
                                 })
                                 progressBar:setCancelable(true)
@@ -242,16 +280,17 @@ local function main()
                                 
                                 else
                 
-                                    photoSettings()
+                                    --photoSettings()
                                     adjustConfigFile.write_config()
-                                    -- define setting arrays for later use
+                                    --[[define setting arrays for later use
                                     contrastArray = {fieldContrast1.value, fieldContrast2.value, fieldContrast3.value}
                                     saturationArray = {fieldSaturation1.value, fieldSaturation2.value,
                                                        fieldSaturation3.value}
                                     highlightsArray = {fieldHighlights1.value, fieldHighlights2.value,
                                                        fieldHighlights3.value}
-                                    local count = 0
-                                    -- applyTableMatrix(configFile.Settings)
+                                                       ]]
+                                    count = 0
+                                    --[[
                                     for i = 1, 3 do
                                         for j = 1, 3 do
                                             for k = 1, 3 do
@@ -259,24 +298,21 @@ local function main()
                                                     break
                                                 end 
                                                 for p, photo in ipairs(catalog.targetPhotos) do
-                                                    --local path =LrPathUtils.standardizePath(photo:getRawMetadata("path"))
-                                                        progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)
-                                                        editPhotos(photo, i, j, k) -- edits photos in catalog
-                                                         count = count + 1
-                                                end
-                                                exportPhotos.processRenderedPhotos(targetPhotosCopies,
-                                                    "Export Folder" .. "_c" .. tostring(contrastArray[i]) .. "_s" ..
-                                                        tostring(saturationArray[j]) .. "_h" ..
-                                                        tostring(highlightsArray[k])) -- export edited targetPhotosCopies from the catalog
-                                                for p, photo in ipairs(catalog.targetPhotos) do
-                                                    resetPhotoEdit(photo)
-                                                end
+                                                    local path =LrPathUtils.standardizePath(photo:getRawMetadata("path"))
+                                                        progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)]]
+                                                        editPhotos(targetPhotosCopies, keyset, settingsTable) -- edits photos in catalog
+                                                         --count = count + 1
+                                                --end
+                                                --exportPhotos.processRenderedPhotos(targetPhotosCopies,"Export Folder" .. "_c" .. tostring(contrastArray[i]) .. "_s" ..tostring(saturationArray[j]) .. "_h" ..tostring(highlightsArray[k])) -- export edited targetPhotosCopies from the catalog
+                                                --for p, photo in ipairs(catalog.targetPhotos) do
+                                                    --resetPhotoEdit(photo)
+                                                --end
 
-                                            end
-                                        end
+                                            --end
+                                        --end
 
-                                    end
-                                    progressBar:done()
+                                    --end
+                                    --progressBar:done()
                                 end
                             end
                         
