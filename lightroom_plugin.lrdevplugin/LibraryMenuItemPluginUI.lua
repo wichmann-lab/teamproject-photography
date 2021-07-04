@@ -327,6 +327,10 @@ local function main()
                 contents = contents -- defined view hierarchy
 
             })
+            if result == 'cancel' then
+                progressBar:setCancelable(true)
+                progressBar:cancel()
+            end
 
         end)
 
