@@ -16,27 +16,9 @@ local targetPhotosCopies = targetPhotos
 local LrPathUtils = import 'LrPathUtils'
 local combine = require("arrayCombine")
 -- ==============================================================--
-local function resetPhotoEdit(photo) -- reset all setting
-    photo:quickDevelopAdjustImage("Contrast", 0)
-    photo:quickDevelopAdjustImage("Highlights", 0)
-    photo:quickDevelopAdjustImage("Saturation", 0)
-end
 
 ArraySettings = configFile.Settings
 keyset = combine.getKeys(ArraySettings)
-function debugging(array)
-    result=""
-    
-    for test, dataTest in pairs(array) do
-        c=0
-        for key, value in pairs(dataTest) do
-            result= result.. "Key:".. keyset[key] .."Value".. value
-            c=c+1
-        end
-        result= result .. "\n".. c
-    end
-return result
-end
 combinedArray = combine.getCombinedArray(ArraySettings)
 settingsTable = combine.getSettingsTable(combinedArray)
 times = combine.getTimesOfCombinations(ArraySettings)
@@ -75,29 +57,14 @@ function editSinglePhoto(keyset,photos,data)
     --exportPhotos.processRenderedPhotos(photos,folderName)
     return photos
 end
-
-
-local function applyTableMatrix(developSettings)-- parameter developSetting is table in form of: {"Contrast: [1,2,3], "Saturation": [4,5,6], "Highlights:[7,8,9]"}
-    records = {} -- "supertable"
-    i = 1
-    for key, value in pairs(developSettings) do
-        for firstKey, firstValue in pairs(value) do
-            for secondKey, secondValue in pairs(value) do
-                for thirdKey, thirdValue in pairs(value) do
-                    records[i]["test"] = firstValue
-                    -- records[i][secondKey]= secondValue
-                    -- records[i][thirdKey]=thirdValue
-                    i = i + 1
-                end
-            end
-        end
+ function resetPhotoEdit() -- reset all setting
+    for key, value in pairs(keyset) do
+        configFile.Settings[value] = {0, 0, 0,}
+        adjustConfigFile.write_config()
     end
-    return records --[[     [{"Contrast: 1, "Saturation": 4, "Highlights:7"},]
-                            {"Contrast: 1, "Saturation": 4, "Highlights:8"},
-                            {"Contrast: 1, "Saturation": 4, "Highlights:9"},
-                            ....]
-                    ]]
+
 end
+
 
 local function main()
 
@@ -301,22 +268,9 @@ local function main()
                     place_horizontal = 1.0,
                     width = 220,
                     height = 20,
-                    action = function()
-                        LrTasks.startAsyncTask(function() -- open window to confirm photo changes
-                            local catalog = LrApplication.activeCatalog()
-                            local targetPhotos = catalog.targetPhotos
-
-                            if 'ok' ==
-                                LrDialogs.confirm('Are you sure?', 'Do you want to reset the values of the selected ' ..
-                                    #(targetPhotos) .. ' photo(s)?') then
-
-                                for i, photo in ipairs(catalog.targetPhotos) do
-                                    resetPhotoEdit(photo)
-                                end
-
-                                return
-                            end
-                        end)
+                    action = function()          
+                        resetPhotoEdit()
+                                
                     end
                 }
 
