@@ -34,7 +34,7 @@ function editPhotos(photos, keyset, settingsTable)
         if progressBar:isCanceled() then -- cancel progress in catalog (via X)
             break
         end 
-        result = editSinglePhoto(photos,data)
+        result = editSinglePhoto(keyset,photos,data)
         exportPhotos.processRenderedPhotos(result,folderName)
         --result=testEditFunction(photos,data)
         --exportPhotos.processRenderedPhotos(result,folderName)
@@ -44,11 +44,11 @@ function editPhotos(photos, keyset, settingsTable)
                 picture:quickDevelopAdjustImage(keyset[key], 0)
             end
         end
-        --progressBar:done()
    end
+   progressBar:done()
 end
 
-function editSinglePhoto(photos,data)
+function editSinglePhoto(keyset,photos,data)
     for p,photo in pairs(photos) do
         if progressBar:isCanceled() then -- cancel progress in catalog (via X)
             break
@@ -56,8 +56,7 @@ function editSinglePhoto(photos,data)
         folderName=""
         for key, value in pairs(data) do
             photo:quickDevelopAdjustImage(keyset[key], tonumber(value))
-            progressBar:setPortionComplete(count, times)
-            -- progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)
+            progressBar:setPortionComplete(count, times* #targetPhotosCopies)
             folderName= folderName .. keyset[key].. value
         end
         count = count + 1
@@ -65,19 +64,6 @@ function editSinglePhoto(photos,data)
     --exportPhotos.processRenderedPhotos(photos,folderName)
     return photos
 end
-function testEditFunction(photos,data)
-    for p,photo in pairs(photos) do
-        folderName=""
-        for key, value in pairs(data) do
-            photo:quickDevelopAdjustImage(keyset[key], 0)
-            folderName= folderName .. keyset[key].. value
-        end
-    end
-    --exportPhotos.processRenderedPhotos(photos,folderName)
-    return photos
-end
-
-
 
 
 local function applyTableMatrix(developSettings)-- parameter developSetting is table in form of: {"Contrast: [1,2,3], "Saturation": [4,5,6], "Highlights:[7,8,9]"}
@@ -188,10 +174,14 @@ local function main()
                         f:push_button{
                             title = "ADD",
                             action = function()
-                                    configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
-                                    adjustConfigFile.write_config()
-                                ArraySettings = configFile.Settings
-                                   overview = combine.overviewSettings(ArraySettings)
+                                    --configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
+                                    --adjustConfigFile.write_config()
+                                --ArraySettings = configFile.Settings
+                                --keyset = combine.getKeys(ArraySettings)
+                                --combinedArray = combine.getCombinedArray(ArraySettings)
+                                --settingsTable = combine.getSettingsTable(combinedArray)
+                                --times = combine.getTimesOfCombinations(ArraySettings)
+                                --overview = combine.overviewSettings(ArraySettings)
                                 end,
                             bind = LrView.bind('overview')
                         },
@@ -257,7 +247,7 @@ local function main()
                                 else
                 
                                     --photoSettings()
-                                    adjustConfigFile.write_config()
+                                    --adjustConfigFile.write_config()
                                     --[[define setting arrays for later use
                                     contrastArray = {fieldContrast1.value, fieldContrast2.value, fieldContrast3.value}
                                     saturationArray = {fieldSaturation1.value, fieldSaturation2.value,
@@ -276,7 +266,8 @@ local function main()
                                                 for p, photo in ipairs(catalog.targetPhotos) do
                                                     local path =LrPathUtils.standardizePath(photo:getRawMetadata("path"))
                                                         progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)]]
-                                                        editPhotos(targetPhotosCopies, keyset, settingsTable) -- edits photos in catalog
+                                                        editPhotos(targetPhotosCopies, keyset, settingsTable)
+                                                        error("editPhotos wurde ausgeführt")-- edits photos in catalog
                                                          --count = count + 1
                                                 --end
                                                 --exportPhotos.processRenderedPhotos(targetPhotosCopies,"Export Folder" .. "_c" .. tostring(contrastArray[i]) .. "_s" ..tostring(saturationArray[j]) .. "_h" ..tostring(highlightsArray[k])) -- export edited targetPhotosCopies from the catalog
