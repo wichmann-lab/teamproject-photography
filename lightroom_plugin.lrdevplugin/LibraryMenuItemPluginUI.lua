@@ -24,6 +24,19 @@ end
 
 ArraySettings = configFile.Settings
 keyset = combine.getKeys(ArraySettings)
+function debugging(array)
+    result=""
+    
+    for test, dataTest in pairs(array) do
+        c=0
+        for key, value in pairs(dataTest) do
+            result= result.. "Key:".. keyset[key] .."Value".. value
+            c=c+1
+        end
+        result= result .. "\n".. c
+    end
+return result
+end
 combinedArray = combine.getCombinedArray(ArraySettings)
 settingsTable = combine.getSettingsTable(combinedArray)
 times = combine.getTimesOfCombinations(ArraySettings)
@@ -36,15 +49,13 @@ function editPhotos(photos, keyset, settingsTable)
         end 
         result = editSinglePhoto(keyset,photos,data)
         exportPhotos.processRenderedPhotos(result,folderName)
-        --result=testEditFunction(photos,data)
-        --exportPhotos.processRenderedPhotos(result,folderName)
+        folderName =""
         for p,picture in pairs(result) do
-            --resetPhotoEdit(picture)
             for key, value in pairs(data) do
                 picture:quickDevelopAdjustImage(keyset[key], 0)
             end
         end
-   end
+    end
    progressBar:done()
 end
 
@@ -266,8 +277,7 @@ local function main()
                                                 for p, photo in ipairs(catalog.targetPhotos) do
                                                     local path =LrPathUtils.standardizePath(photo:getRawMetadata("path"))
                                                         progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)]]
-                                                        editPhotos(targetPhotosCopies, keyset, settingsTable)
-                                                        error("editPhotos wurde ausgeführt")-- edits photos in catalog
+                                                        editPhotos(targetPhotosCopies, keyset, settingsTable)-- edits photos in catalog
                                                          --count = count + 1
                                                 --end
                                                 --exportPhotos.processRenderedPhotos(targetPhotosCopies,"Export Folder" .. "_c" .. tostring(contrastArray[i]) .. "_s" ..tostring(saturationArray[j]) .. "_h" ..tostring(highlightsArray[k])) -- export edited targetPhotosCopies from the catalog
