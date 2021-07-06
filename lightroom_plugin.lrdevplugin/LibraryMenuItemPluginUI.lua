@@ -170,12 +170,8 @@ local function main()
                             action = function()
                                    configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
                                     adjustConfigFile.write_config()
-                                ArraySettings = configFile.Settings
-                                keyset = combine.getKeys(ArraySettings)
-                                combinedArray = combine.getCombinedArray(ArraySettings)
-                                settingsTable = combine.getSettingsTable(combinedArray)
-                                times = combine.getTimesOfCombinations(ArraySettings)
-                                overview = combine.overviewSettings(ArraySettings)
+                                    configFile = adjustConfigFile.configFile
+                                
 
                                 -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
                                 overviewTextField.text_color = LrColor( 0, 0, 0 )
@@ -199,7 +195,6 @@ local function main()
                     font = "<system/bold>",
                     overviewTextField
                 },
-
                 f:push_button{ -- Push button 
                     title = "Save and Edit",
                     place_horizontal = 1.0,
@@ -237,40 +232,15 @@ local function main()
                                     return nil
                                 
                                 else
-                
-                                    --photoSettings()
-                                    --adjustConfigFile.write_config()
-                                    --[[define setting arrays for later use
-                                    contrastArray = {fieldContrast1.value, fieldContrast2.value, fieldContrast3.value}
-                                    saturationArray = {fieldSaturation1.value, fieldSaturation2.value,
-                                                       fieldSaturation3.value}
-                                    highlightsArray = {fieldHighlights1.value, fieldHighlights2.value,
-                                                       fieldHighlights3.value}
-                                                       ]]
+                                    ArraySettings = configFile.Settings
+                                    keyset = combine.getKeys(ArraySettings)
+                                    combinedArray = combine.getCombinedArray(ArraySettings)
+                                    settingsTable = combine.getSettingsTable(combinedArray)
+                                    times = combine.getTimesOfCombinations(ArraySettings)
+                                    overview = combine.overviewSettings(ArraySettings)
                                     count = 0
-                                    --[[
-                                    for i = 1, 3 do
-                                        for j = 1, 3 do
-                                            for k = 1, 3 do
-                                                if progressBar:isCanceled() then -- cancel progress in catalog (via X)
-                                                    break
-                                                end 
-                                                for p, photo in ipairs(catalog.targetPhotos) do
-                                                    local path =LrPathUtils.standardizePath(photo:getRawMetadata("path"))
-                                                        progressBar:setPortionComplete(count, 3 * 3 * 3 * #targetPhotosCopies)]]
-                                                        editPhotos(targetPhotosCopies, keyset, settingsTable)-- edits photos in catalog
-                                                         --count = count + 1
-                                                --end
-                                                --exportPhotos.processRenderedPhotos(targetPhotosCopies,"Export Folder" .. "_c" .. tostring(contrastArray[i]) .. "_s" ..tostring(saturationArray[j]) .. "_h" ..tostring(highlightsArray[k])) -- export edited targetPhotosCopies from the catalog
-                                                --for p, photo in ipairs(catalog.targetPhotos) do
-                                                    --resetPhotoEdit(photo)
-                                                --end
-
-                                            --end
-                                        --end
-
-                                    --end
-                                    --progressBar:done()
+                                    editPhotos(targetPhotosCopies, keyset, settingsTable)-- edits photos in catalog
+                                                        
                                 end
                             end
                         
@@ -292,17 +262,16 @@ local function main()
 
             local result = LrDialogs.presentModalDialog({ -- display cuustom dialog
                 title = "Lightroom Plugin - Settings",
-                contents = contents -- defined view hierarchy
+                contents = contents, -- defined view hierarchy
+                cancelVerb = "< exclude >",
+                actionVerb = "Cancel"
 
             })
-            if result == 'cancel' then
-                if progressBar:isDone() == false then
-                
-                 progressBar:setCancelable(true)
-                progressBar:cancel()
-
+            if (result == 'ok') then
+                if progressBar ~= nil  then
+                    progressBar:setCancelable(true)
+                    progressBar:cancel()
                 end
-    
             end
            
         end)
