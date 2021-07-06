@@ -72,15 +72,11 @@ local function main()
     LrFunctionContext.callWithContext("showcustomDialog",
         function(context) -- function-context call for property table (observable)
             local tableOne = LrBinding.makePropertyTable(context)
-            -- data key for each checkbox with initial boolean value
-            tableOne.my_value = 'value_1'
-            tableOne.my_value2 = 'value_2'
+             --ANNIE
+            tableOne.myObservedText = overview
+           
             local f = LrView.osFactory() -- obtain view factory object
-            developList = { -- the menu items and their values
-            { title = "Contrast", value = {'value_1',20,30}},
-            { title = "Saturation", value = 'value_2' },
-            { title = "Highlights", value = 'value_3' },
-            }
+            
 
             --error(configFile.Settings.Saturation)
             --valueOfBox1 = popupBox1.value
@@ -119,6 +115,26 @@ local function main()
                 immediate = true,
                 value = keyset[1]
             }
+--ANNIE
+            overviewTextField= f:static_text{ --  
+                        -- place_horizontal = 0.5,
+                        --immediate = true,
+                        title = tableOne.myObservedText,
+                        text_color = LrColor( 1, 0, 0 ),
+                       -- bind = LrView.bind('overview'),
+                         width = 400,
+                         height = 200,
+                    }
+
+                    --ANNIE
+            local updateOverviewSettings = function ()
+                overviewTextField.title = overview  
+                overviewTextField = LrColor( 1, 0, 0 ) -- make the text red
+
+                end
+
+            tableOne:addObserver( "myObservedText", updateOverviewSettings )
+
 
             pathDisplayConfigFile = f:static_text{
                 title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
@@ -152,14 +168,19 @@ local function main()
                         f:push_button{
                             title = "ADD",
                             action = function()
-                                    --configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
-                                    --adjustConfigFile.write_config()
-                                --ArraySettings = configFile.Settings
-                                --keyset = combine.getKeys(ArraySettings)
-                                --combinedArray = combine.getCombinedArray(ArraySettings)
-                                --settingsTable = combine.getSettingsTable(combinedArray)
-                                --times = combine.getTimesOfCombinations(ArraySettings)
-                                --overview = combine.overviewSettings(ArraySettings)
+                                   configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
+                                    adjustConfigFile.write_config()
+                                ArraySettings = configFile.Settings
+                                keyset = combine.getKeys(ArraySettings)
+                                combinedArray = combine.getCombinedArray(ArraySettings)
+                                settingsTable = combine.getSettingsTable(combinedArray)
+                                times = combine.getTimesOfCombinations(ArraySettings)
+                                overview = combine.overviewSettings(ArraySettings)
+
+                                -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
+                                overviewTextField.text_color = LrColor( 0, 0, 0 )
+                                tableOne.myObservedText = settingTextField.value
+
                                 end,
                             bind = LrView.bind('overview')
                         },
@@ -176,14 +197,7 @@ local function main()
                 }, f:group_box{
                     title = "Overview Develop Settings",
                     font = "<system/bold>",
-                    f:edit_field{ -- Text or commentary filed
-                        -- place_horizontal = 0.5,
-                        immediate = true,
-                        value = overview,
-                        bind = LrView.bind('overview'),
-                         width = 400,
-                         height = 200,
-                    }
+                    overviewTextField
                 },
 
                 f:push_button{ -- Push button 
@@ -212,9 +226,9 @@ local function main()
                                 originalCollection:addPhotos(targetPhotos)
                                 testCollection:addPhotos(targetPhotosCopies)
                             end)]]
-                                progressBar = LrProgressScope({
-                                    title = "TheImageIterator-Editing & Exporting Photos"
-                                })
+                            progressBar = LrProgressScope({
+                                title = "TheImageIterator-Editing & Exporting Photos"
+                            })
                                 progressBar:setCancelable(true)
                                  
                                 if targetPhotosCopies == nil then
@@ -282,10 +296,15 @@ local function main()
 
             })
             if result == 'cancel' then
-                progressBar:setCancelable(true)
+                if progressBar:isDone() == false then
+                
+                 progressBar:setCancelable(true)
                 progressBar:cancel()
-            end
 
+                end
+    
+            end
+           
         end)
 
 end
