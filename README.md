@@ -41,6 +41,7 @@ Add:
 * import and export pictures
 * save pictures in folder
 * change settings (contrast, saturation, highlights)
+* available settings: Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Clarity, Vibrance, Saturation
 
 
 ## Getting Started
