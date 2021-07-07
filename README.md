@@ -86,7 +86,7 @@ The interpreter does the best job it can to tell you what it thinks went wrong.
 
 This is an example gif.
 
-![testgif](https://user-images.githubusercontent.com/69016207/120100932-aa5b1e80-c143-11eb-814e-9273eefd4652.gif)
+![testgif](testgif.gif)
 
 1. Open the Plug-in Manager after starting Adobe Photoshop Lightroom Desktop: File > Plug-in Manager
 2. Add the plug-in: Add-Button
