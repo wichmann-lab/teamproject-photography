@@ -23,6 +23,7 @@ combinedArray = combine.getCombinedArray(ArraySettings)
 settingsTable = combine.getSettingsTable(combinedArray)
 times = combine.getTimesOfCombinations(ArraySettings)
 overview = combine.overviewSettings(ArraySettings)
+developSettingsTable={"Exposure", "Contrast", "Highlights", "Shadows", "Whites", "Blacks", "Clarity", "Vibrance","Saturation"}
 
 function editPhotos(photos, keyset, settingsTable)
     for index,data in ipairs(settingsTable) do
@@ -158,32 +159,39 @@ local function main()
                     title = "Change settings",
                     font = "<system/bold>",
                     f:row{
-                    
-
-                    f:row{
-                        
-                        settingTextField,
-                        fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
-                    },
+                        f:row{
+                            
+                            settingTextField,
+                            fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
+                        },
                         f:push_button{
                             title = "ADD",
                             action = function()
-                                   configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
-                                    adjustConfigFile.write_config()
-                                    configFile = adjustConfigFile.configFile
-                                
-
+                                    settingTextField.value = settingTextField.value:lower()
+                                    settingTextField.value = settingTextField.value:gsub("^%l", string.upper)
+                                   for index, value in ipairs(developSettingsTable) do
+                                        if value == settingTextField.value then
+                                            configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
+                                            adjustConfigFile.write_config()
+                                            ArraySettings = configFile.Settings
+                                        end
+                                    end
+                                keyset = combine.getKeys(ArraySettings)
+                                combinedArray = combine.getCombinedArray(ArraySettings)
+                                settingsTable = combine.getSettingsTable(combinedArray)
+                                times = combine.getTimesOfCombinations(ArraySettings)
+                                overview = combine.overviewSettings(ArraySettings)
+                                configFile = adjustConfigFile.configFile   
                                 -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
                                 overviewTextField.text_color = LrColor( 0, 0, 0 )
                                 tableOne.myObservedText = settingTextField.value
-
                                 end,
                             bind = LrView.bind('overview')
                         },
                         f:push_button{
                             title = "HELP",
                             action = function()
-                                LrDialogs.message("HALLO","", "info")
+                                LrDialogs.message("Available settings: \n- Exposure,\n- Contrast,\n- Highlights,\n- Shadows,\n- Whites,\n- Blacks,\n- Clarity,\n- Vibrance,\n- Saturation","", "Available settings")
                             end
                         },
                     }
@@ -202,35 +210,18 @@ local function main()
                     height = 20,
                     action = function()
                         LrTasks.startAsyncTask(function() -- open window to confirm photo changes
-                            -- select number of edited photos
-                            --[[local targetPhotos = catalog.targetPhotos
-                        if configFile.allPhotos == true then
-                             targetPhotos = catalog:getAllPhotos()
-                        end]]
-
                             if 'ok' ==
                                 LrDialogs.confirm('Are you sure?',
                                     'Do you want to edit the selected ' .. #(targetPhotos) ..
                                         ' photo(s)? \n (The Configuration file will be overwritten)') then
-
-                                -- ExportPhotos.makeDirectory(new_dir)         directory where user wants to save the photos
-
-                                --[[catalog:withWriteAccessDo("Adding photos", function()
-                                originalCollection = catalog:createCollection("Original") -- if already exists: ERROR!! connect to config file!
-                                testCollection = catalog:createCollection("Edited photos") -- if already exists: ERROR!! connect to config file!
-                                originalCollection:addPhotos(targetPhotos)
-                                testCollection:addPhotos(targetPhotosCopies)
-                            end)]]
                             progressBar = LrProgressScope({
                                 title = "TheImageIterator-Editing & Exporting Photos"
                             })
                                 progressBar:setCancelable(true)
                                  
                                 if targetPhotosCopies == nil then
-                                    -- LrDialogs.message("Nothing selected.")
                                     progressBar:done()
                                     return nil
-                                
                                 else
                                     ArraySettings = configFile.Settings
                                     keyset = combine.getKeys(ArraySettings)
