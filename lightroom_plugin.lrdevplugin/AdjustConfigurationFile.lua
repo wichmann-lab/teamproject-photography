@@ -41,6 +41,12 @@ function adjustConfig.write_config()
     file:close()
 end
 
+-- function to reload configuration file
+function adjustConfig.reload_config()
+    local fileContent = read_file(adjustConfig.myPathConfig)
+    adjustConfig.configFile = json.decode(fileContent)
+end
+
 -------------------------------------------------------------------------
 
 -- function to get keyword value

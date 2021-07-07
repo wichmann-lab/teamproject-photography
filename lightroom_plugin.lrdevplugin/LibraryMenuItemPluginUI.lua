@@ -130,7 +130,7 @@ local function main()
                     --ANNIE
             local updateOverviewSettings = function ()
                 overviewTextField.title = overview  
-                overviewTextField = LrColor( 1, 0, 0 ) -- make the text red
+                overviewTextField.text_color = LrColor( 1, 0, 0 ) -- make the text red
 
                 end
 
@@ -167,21 +167,30 @@ local function main()
                         f:push_button{
                             title = "ADD",
                             action = function()
-                                    settingTextField.value = settingTextField.value:lower()
-                                    settingTextField.value = settingTextField.value:gsub("^%l", string.upper)
-                                   for index, value in ipairs(developSettingsTable) do
-                                        if value == settingTextField.value then
-                                            configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
-                                            adjustConfigFile.write_config()
-                                            ArraySettings = configFile.Settings
-                                        end
+                                settingTextField.value = settingTextField.value:lower()
+                                settingTextField.value = settingTextField.value:gsub("^%l", string.upper)
+                                res = 0
+                                for index, value in ipairs(developSettingsTable) do
+                                    if value == settingTextField.value then
+                                        res = 1
+                                        break
                                     end
-                                keyset = combine.getKeys(ArraySettings)
+                                end
+                                if res == 1 then
+                                    configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
+                                    adjustConfigFile.write_config()
+                                    configFile = adjustConfigFile.configFile
+                                   -- ArraySettings = configFile.Settings
+                                else
+                                    LrDialogs.showError("Unavailable Setting! Please check the given list in README or HELP!")
+                                end
+                                --adjustConfigFile.reload_config()
+                                --[[keyset = combine.getKeys(ArraySettings)
                                 combinedArray = combine.getCombinedArray(ArraySettings)
                                 settingsTable = combine.getSettingsTable(combinedArray)
                                 times = combine.getTimesOfCombinations(ArraySettings)
                                 overview = combine.overviewSettings(ArraySettings)
-                                configFile = adjustConfigFile.configFile   
+                                configFile = adjustConfigFile.configFile]]
                                 -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
                                 overviewTextField.text_color = LrColor( 0, 0, 0 )
                                 tableOne.myObservedText = settingTextField.value
