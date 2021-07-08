@@ -256,7 +256,9 @@ local function main()
                                     times = combine.getTimesOfCombinations(ArraySettings)
                                     overview = combine.overviewSettings(ArraySettings)
                                     count = 0
-                                    editPhotos(targetPhotosCopies, keyTable, settingsTable)-- edits photos in catalog
+                                    editPhotos(targetPhotosCopies, keyTable, settingsTable)-- edits photos in catalog     
+                                    LrDialogs.message("Successfully edited and exported the photographs to the ExportedPhotos folder! \n (See Plug-in folder)")
+                          
                                                         
                                 end
                             end
