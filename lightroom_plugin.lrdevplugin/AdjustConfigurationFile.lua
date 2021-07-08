@@ -1,11 +1,13 @@
 local LrPathUtils = import 'LrPathUtils'
 local LrErrors = import 'LrErrors'
 local LrFileUtils = import 'LrFileUtils'
+local LrDialogs = import 'LrDialogs'
 -- local current_dir=io.popen"cd":read'*l'    working directory of LR ist not where the lua scripts are saved
 -------------- path information ------------
 local home = LrPathUtils.getStandardFilePath("home")
 --error(home)
 local adjustConfig = {}
+local arrayCombine = require ("arrayCombine")
 -- exist the following directory?
 adjustConfig.myPathConfig = home .. "/TheImageIterator/imageIteratorSettings.json"
 adjustConfig.myPathConfig = adjustConfig.myPathConfig:gsub("%\\", "/")
@@ -45,6 +47,21 @@ end
 function adjustConfig.reload_config()
     local fileContent = read_file(adjustConfig.myPathConfig)
     adjustConfig.configFile = json.decode(fileContent)
+end
+
+function adjustConfig.configFileNil()
+    configTable = arrayCombine.getKeys(adjustConfig.configFile)
+    result = 0
+    settings = adjustConfig.configFile.Settings
+    for key,value in ipairs(configTable) do
+        if value == "Settings" then
+            result = 1
+        end
+    end
+    --error(result)
+    if (adjustConfig.configFile.Settings == nil and result == 1) or result == 0 then
+        LrDialogs.showError("Caution! \n No initial settings in configuration file. Add settings to imageIteratorSettings.lua. (See example in README)") 
+    end
 end
 
 -------------------------------------------------------------------------
