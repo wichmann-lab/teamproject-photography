@@ -18,40 +18,40 @@ local combine = require("arrayCombine")
 -- ==============================================================--
 
 ArraySettings = configFile.Settings
-keyset = combine.getKeys(ArraySettings)
+keyTable = combine.getKeys(ArraySettings)
 combinedArray = combine.getCombinedArray(ArraySettings)
 settingsTable = combine.getSettingsTable(combinedArray)
 times = combine.getTimesOfCombinations(ArraySettings)
 overview = combine.overviewSettings(ArraySettings)
 developSettingsTable={"Exposure", "Contrast", "Highlights", "Shadows", "Whites", "Blacks", "Clarity", "Vibrance","Saturation"}
 
-function editPhotos(photos, keyset, settingsTable)
+function editPhotos(photos, keyTable, settingsTable)
     for index,data in ipairs(settingsTable) do
         if progressBar:isCanceled() then -- cancel progress in catalog (via X)
             break
         end 
-        result = editSinglePhoto(keyset,photos,data)
+        result = editSinglePhoto(keyTable,photos,data)
         exportPhotos.processRenderedPhotos(result,folderName)
         folderName =""
         for p,picture in pairs(result) do
             for key, value in pairs(data) do
-                picture:quickDevelopAdjustImage(keyset[key], 0)
+                picture:quickDevelopAdjustImage(keyTable[key], 0)
             end
         end
     end
    progressBar:done()
 end
 
-function editSinglePhoto(keyset,photos,data)
+function editSinglePhoto(keyTable,photos,data)
     for p,photo in pairs(photos) do
         if progressBar:isCanceled() then -- cancel progress in catalog (via X)
             break
         end 
         folderName=""
         for key, value in pairs(data) do
-            photo:quickDevelopAdjustImage(keyset[key], tonumber(value))
+            photo:quickDevelopAdjustImage(keyTable[key], tonumber(value))
             progressBar:setPortionComplete(count, times* #targetPhotosCopies)
-            folderName= folderName .. keyset[key].. value
+            folderName= folderName .. keyTable[key].. value
         end
         count = count + 1
     end
@@ -59,12 +59,15 @@ function editSinglePhoto(keyset,photos,data)
     return photos
 end
  function resetPhotoEdit() -- reset all setting
-    for key, value in pairs(keyset) do
+    for key, value in pairs(keyTable) do
         configFile.Settings[value] = {0, 0, 0,}
         adjustConfigFile.write_config()
     end
 
 end
+
+--adjustConfigFile.configFileNil()
+
 
 
 local function main()
@@ -74,8 +77,10 @@ local function main()
         function(context) -- function-context call for property table (observable)
             local tableOne = LrBinding.makePropertyTable(context)
              --ANNIE
+            observerFieldSetting = 0
             tableOne.myObservedText = overview
-           
+            tableOne.myObservedField1 = observerFieldSetting
+   
             local f = LrView.osFactory() -- obtain view factory object
             
 
@@ -84,37 +89,37 @@ local function main()
             --valueOfBox1=configFile.Settings[valueOfBox1]
             fieldSettingValue1 = f:edit_field{
                 place_horizontal = 0.6,
-                --bind =LrView.bind(popupBox1.value), 
                 width_in_digits = 5,
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.Settings[keyset[1]][1]
+                value = configFile.Settings[keyTable[1]][1],
+                bind = LrView.bind("observerFieldSetting")
             }
 
             fieldSettingValue2 = f:edit_field{
                 place_horizontal = 0.6,
-                bind = LrView.bind("Checkbox1.2"),
                 width_in_digits = 5,
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.Settings[keyset[1]][2],
+                value = configFile.Settings[keyTable[1]][2],
+                bind = LrView.bind("observerFieldSetting")
             }
             fieldSettingValue3 = f:edit_field{
                 place_horizontal = 0.6,
-                bind = LrView.bind("Checkbox1.3"),
                 width_in_digits = 5,
                 min = -100,
                 max = 100,
                 immediate = true,
-                value = configFile.Settings[keyset[1]][3],
+                value = configFile.Settings[keyTable[1]][3],
+                bind = LrView.bind("observerFieldSetting")
             }
 
             settingTextField = f:edit_field{
                 width_in_chars = 14,
                 immediate = true,
-                value = keyset[1]
+                value = keyTable[1]
             }
 --ANNIE
             showValue_st= f:static_text{ --  
@@ -129,25 +134,23 @@ local function main()
 
                     --ANNIE
             local updateOverviewSettings = function ()
-<<<<<<< Updated upstream
-                overviewTextField.title = overview  
-                overviewTextField.text_color = LrColor( 1, 0, 0 ) -- make the text red
-
-                end
-=======
                 showValue_st.title = overview
                 showValue_st.text_color = LrColor( 1, 0, 0 ) -- make the text red
->>>>>>> Stashed changes
-
                end
+
             tableOne:addObserver( "myObservedText", updateOverviewSettings )
+            tableOne:addObserver( "myObservedField1", updateOverviewSettings )
+            tableOne:addObserver( "myObservedField2", updateOverviewSettings )
+            tableOne:addObserver( "myObservedField3", updateOverviewSettings )
 
 
             pathDisplayConfigFile = f:static_text{
                 title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
                 text_color = LrColor(0, 0, 0)
             }
-             LrDialogs.message("THE IMAGE ITERATOR \n - Start editing all your photographs! - ","ADD-Button: Add settings and different values for those. The selected photographs will be edited with all combinations of settings and values. \n HELP-Button: Opens window, shows which settings are available. \n Save and Edit- Button: Start the editing and exporting progress. \n Reset-Button: Reset the values of all settings in the configuration file to 0. \n CANCEL-Button: Cancel the editing and exporting progress. \n (alternative: via X at the right end of the progress bar in the catalog window) \n EXIT-Button: Close the Plug-in window \n", "warning")
+             LrDialogs.message("THE IMAGE ITERATOR \n - Start editing all your photographs! - ",
+             "<b>ADD-Button:</b>  Add settings and different values for those. The selected photographs will be edited with all combinations of settings and values. \n HELP-Button: Opens window, shows which settings are available. \n Save and Edit- Button: Start the editing and exporting progress. \n Reset-Button: Reset the values of all settings in the configuration file to 0. \n CANCEL-Button: Cancel the editing and exporting progress. \n (alternative: via X at the right end of the progress bar in the catalog window) \n EXIT-Button: Close the Plug-in window \n",
+              "warning")
 
             local contents = f:column{
                 -- CHANGE THE WINDOW SIZE HERE:
@@ -165,20 +168,14 @@ local function main()
                     title = "Add and change settings",
                     font = "<system/bold>",
                     f:row{
-<<<<<<< Updated upstream
-                        f:row{
-                            
-                            settingTextField,
-                            fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
-                        },
-=======
+
                     
 
                     f:row{
                         settingTextField,
                         fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
                     },
->>>>>>> Stashed changes
+
                         f:push_button{
                             title = "ADD",
                             action = function()
@@ -188,38 +185,39 @@ local function main()
                                 for index, value in ipairs(developSettingsTable) do
                                     if value == settingTextField.value then
                                         res = 1
-                                        break
+                                        --break
                                     end
                                 end
                                 if res == 1 then
                                     configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
                                     adjustConfigFile.write_config()
                                     configFile = adjustConfigFile.configFile
-                                   -- ArraySettings = configFile.Settings
+                                   ArraySettings = configFile.Settings
                                 else
                                     LrDialogs.showError("Unavailable Setting! Please check the given list in README or HELP!")
                                 end
                                 --adjustConfigFile.reload_config()
-                                --[[keyset = combine.getKeys(ArraySettings)
+                                keyTable = combine.getKeys(ArraySettings)
                                 combinedArray = combine.getCombinedArray(ArraySettings)
                                 settingsTable = combine.getSettingsTable(combinedArray)
                                 times = combine.getTimesOfCombinations(ArraySettings)
                                 overview = combine.overviewSettings(ArraySettings)
-                                configFile = adjustConfigFile.configFile]]
+                                configFile = adjustConfigFile.configFile
                                 -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
                                 showValue_st.text_color = LrColor( 0, 0, 0 )
                                 tableOne.myObservedText = settingTextField.value
-                                end,
+                                tableOne.myObservedField1 = fieldSettingValue1.value --!!!
+                                tableOne.myObservedField2 = fieldSettingValue2.value
+                                tableOne.myObservedField3 = fieldSettingValue3.value
+
+                            end,
                             bind = LrView.bind('overview')
                         },
                         f:push_button{
                             title = "HELP",
                             action = function()
-<<<<<<< Updated upstream
-                                LrDialogs.message("Available settings: \n- Exposure,\n- Contrast,\n- Highlights,\n- Shadows,\n- Whites,\n- Blacks,\n- Clarity,\n- Vibrance,\n- Saturation","", "Available settings")
-=======
                                 LrDialogs.message("The following editing settings are available:"," Exposure \n Contrast \n Highlights \n Shadows \n Whites \n Blacks \n Clarity \n Vibrance \n Saturation", "info")
->>>>>>> Stashed changes
+
                             end
                         },
                     }
@@ -252,13 +250,13 @@ local function main()
                                     return nil
                                 else
                                     ArraySettings = configFile.Settings
-                                    keyset = combine.getKeys(ArraySettings)
+                                    keyTable = combine.getKeys(ArraySettings)
                                     combinedArray = combine.getCombinedArray(ArraySettings)
                                     settingsTable = combine.getSettingsTable(combinedArray)
                                     times = combine.getTimesOfCombinations(ArraySettings)
                                     overview = combine.overviewSettings(ArraySettings)
                                     count = 0
-                                    editPhotos(targetPhotosCopies, keyset, settingsTable)-- edits photos in catalog
+                                    editPhotos(targetPhotosCopies, keyTable, settingsTable)-- edits photos in catalog
                                                         
                                 end
                             end
