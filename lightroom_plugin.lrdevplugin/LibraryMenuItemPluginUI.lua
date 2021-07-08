@@ -117,7 +117,7 @@ local function main()
                 value = keyset[1]
             }
 --ANNIE
-            overviewTextField= f:static_text{ --  
+            showValue_st= f:static_text{ --  
                         -- place_horizontal = 0.5,
                         --immediate = true,
                         title = tableOne.myObservedText,
@@ -129,11 +129,17 @@ local function main()
 
                     --ANNIE
             local updateOverviewSettings = function ()
+<<<<<<< Updated upstream
                 overviewTextField.title = overview  
                 overviewTextField.text_color = LrColor( 1, 0, 0 ) -- make the text red
 
                 end
+=======
+                showValue_st.title = overview
+                showValue_st.text_color = LrColor( 1, 0, 0 ) -- make the text red
+>>>>>>> Stashed changes
 
+               end
             tableOne:addObserver( "myObservedText", updateOverviewSettings )
 
 
@@ -141,7 +147,7 @@ local function main()
                 title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
                 text_color = LrColor(0, 0, 0)
             }
-            LrDialogs.message("THE IMAGE ITERATOR \n - Start editing all your photographs! - ","ADD: \n HELP: \n Save and Edit: \n Reset: \n")
+             LrDialogs.message("THE IMAGE ITERATOR \n - Start editing all your photographs! - ","ADD-Button: Add settings and different values for those. The selected photographs will be edited with all combinations of settings and values. \n HELP-Button: Opens window, shows which settings are available. \n Save and Edit- Button: Start the editing and exporting progress. \n Reset-Button: Reset the values of all settings in the configuration file to 0. \n CANCEL-Button: Cancel the editing and exporting progress. \n (alternative: via X at the right end of the progress bar in the catalog window) \n EXIT-Button: Close the Plug-in window \n", "warning")
 
             local contents = f:column{
                 -- CHANGE THE WINDOW SIZE HERE:
@@ -151,19 +157,28 @@ local function main()
                 spacing = f:control_spacing(),
                 f:group_box{
                     title = "Path of ConfigFile",
-                    font = "<system>",
+                    font = "<system/bold>",
                     pathDisplayConfigFile
                 },
 
                 f:row{f:group_box{
-                    title = "Change settings",
+                    title = "Add and change settings",
                     font = "<system/bold>",
                     f:row{
+<<<<<<< Updated upstream
                         f:row{
                             
                             settingTextField,
                             fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
                         },
+=======
+                    
+
+                    f:row{
+                        settingTextField,
+                        fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
+                    },
+>>>>>>> Stashed changes
                         f:push_button{
                             title = "ADD",
                             action = function()
@@ -192,7 +207,7 @@ local function main()
                                 overview = combine.overviewSettings(ArraySettings)
                                 configFile = adjustConfigFile.configFile]]
                                 -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
-                                overviewTextField.text_color = LrColor( 0, 0, 0 )
+                                showValue_st.text_color = LrColor( 0, 0, 0 )
                                 tableOne.myObservedText = settingTextField.value
                                 end,
                             bind = LrView.bind('overview')
@@ -200,7 +215,11 @@ local function main()
                         f:push_button{
                             title = "HELP",
                             action = function()
+<<<<<<< Updated upstream
                                 LrDialogs.message("Available settings: \n- Exposure,\n- Contrast,\n- Highlights,\n- Shadows,\n- Whites,\n- Blacks,\n- Clarity,\n- Vibrance,\n- Saturation","", "Available settings")
+=======
+                                LrDialogs.message("The following editing settings are available:"," Exposure \n Contrast \n Highlights \n Shadows \n Whites \n Blacks \n Clarity \n Vibrance \n Saturation", "info")
+>>>>>>> Stashed changes
                             end
                         },
                     }
@@ -210,7 +229,7 @@ local function main()
                 }, f:group_box{
                     title = "Overview Develop Settings",
                     font = "<system/bold>",
-                    overviewTextField
+                    showValue_st
                 },
                 f:push_button{ -- Push button 
                     title = "Save and Edit",
@@ -263,11 +282,12 @@ local function main()
             local result = LrDialogs.presentModalDialog({ -- display cuustom dialog
                 title = "Lightroom Plugin - Settings",
                 contents = contents, -- defined view hierarchy
-                cancelVerb = "< exclude >",
-                actionVerb = "Cancel"
+               -- cancelVerb = "< exclude >",
+                actionVerb = "EXIT",
+                cancelVerb = "CANCEL"
 
             })
-            if (result == 'ok') then
+            if (result == 'cancel') then
                 if progressBar ~= nil  then
                     progressBar:setCancelable(true)
                     progressBar:cancel()
