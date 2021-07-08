@@ -149,7 +149,7 @@ local function main()
                 text_color = LrColor(0, 0, 0)
             }
              LrDialogs.message("THE IMAGE ITERATOR \n - Start editing all your photographs! - ",
-             "<b>ADD-Button:</b>  Add settings and different values for those. The selected photographs will be edited with all combinations of settings and values. \n HELP-Button: Opens window, shows which settings are available. \n Save and Edit- Button: Start the editing and exporting progress. \n Reset-Button: Reset the values of all settings in the configuration file to 0. \n CANCEL-Button: Cancel the editing and exporting progress. \n (alternative: via X at the right end of the progress bar in the catalog window) \n EXIT-Button: Close the Plug-in window \n",
+             "ADD-Button: Add settings and different values for those. The selected photographs will be edited with all combinations of settings and values. \n HELP-Button: Opens window, shows which settings are available. \n Save and Edit- Button: Start the editing and exporting progress. \n Reset-Button: Reset the values of all settings in the configuration file to 0. \n CANCEL-Button: Cancel the editing and exporting progress. \n (alternative: via X at the right end of the progress bar in the catalog window) \n EXIT-Button: Close the Plug-in window \n",
               "warning")
 
             local contents = f:column{

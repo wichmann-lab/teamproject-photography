@@ -33,7 +33,21 @@ end
 -- local fileContent = read_file("configurationFile.json")
 local fileContent = read_file(adjustConfig.myPathConfig)
 adjustConfig.configFile = json.decode(fileContent); -- configFile can be accessed outside this file for further use
+configTable = arrayCombine.getKeys(adjustConfig.configFile)  -- 1D table: keywords in configFile
+result = 0
+for key,value in pairs(configTable) do
+    if configTable[key] == "Settings" then
+        result = 1
+    end
+end
 
+if result == 1 then
+    if next(adjustConfig.configFile.Settings) == nil then
+        LrErrors.throwUserError("Caution! \n No initial settings in configuration file. Add settings to imageIteratorSettings.lua. (See example in README)")
+    end
+    else
+    LrErrors.throwUserError("Caution! \n No initial settings in configuration file. Add settings to imageIteratorSettings.lua. (See example in README)")
+end
 
 -- function to write into configuration file 
 function adjustConfig.write_config()
