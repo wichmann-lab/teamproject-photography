@@ -24,10 +24,12 @@ settingsTable = combine.getSettingsTable(combinedArray)
 times = combine.getTimesOfCombinations(ArraySettings)
 overview = combine.overviewSettings(ArraySettings)
 developSettingsTable={"Exposure", "Contrast", "Highlights", "Shadows", "Whites", "Blacks", "Clarity", "Vibrance","Saturation"}
+showSuccess = true
 
 function editPhotos(photos, keyTable, settingsTable)
     for index,data in ipairs(settingsTable) do
         if progressBar:isCanceled() then -- cancel progress in catalog (via X)
+            showSuccess = false
             break
         end 
         result = editSinglePhoto(keyTable,photos,data)
@@ -39,6 +41,7 @@ function editPhotos(photos, keyTable, settingsTable)
             end
         end
     end
+    
    progressBar:done()
 end
 
@@ -70,6 +73,7 @@ end
 
 
 
+
 local function main()
 
     -- Display dialog box
@@ -80,6 +84,9 @@ local function main()
             observerFieldSetting = 0
             tableOne.myObservedText = overview
             tableOne.myObservedField1 = observerFieldSetting
+            tableOne.myObservedField2 = observerFieldSetting
+            tableOne.myObservedField3 = observerFieldSetting
+            tableOne.buttonEnabled = true
    
             local f = LrView.osFactory() -- obtain view factory object
             
@@ -116,7 +123,7 @@ local function main()
                 bind = LrView.bind("observerFieldSetting")
             }
 
-            settingTextField = f:edit_field{
+            fieldSettingText = f:edit_field{
                 width_in_chars = 14,
                 immediate = true,
                 value = keyTable[1]
@@ -142,8 +149,6 @@ local function main()
             tableOne:addObserver( "myObservedField1", updateOverviewSettings )
             tableOne:addObserver( "myObservedField2", updateOverviewSettings )
             tableOne:addObserver( "myObservedField3", updateOverviewSettings )
-
-
             pathDisplayConfigFile = f:static_text{
                 title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
                 text_color = LrColor(0, 0, 0)
@@ -169,27 +174,26 @@ local function main()
                     font = "<system/bold>",
                     f:row{
 
-                    
-
+                
                     f:row{
-                        settingTextField,
+                        fieldSettingText,
                         fieldSettingValue1, fieldSettingValue2, fieldSettingValue3,
                     },
 
                         f:push_button{
                             title = "ADD",
                             action = function()
-                                settingTextField.value = settingTextField.value:lower()
-                                settingTextField.value = settingTextField.value:gsub("^%l", string.upper)
+                                fieldSettingText.value = fieldSettingText.value:lower()
+                                fieldSettingText.value = fieldSettingText.value:gsub("^%l", string.upper)
                                 res = 0
                                 for index, value in ipairs(developSettingsTable) do
-                                    if value == settingTextField.value then
+                                    if value == fieldSettingText.value then
                                         res = 1
                                         --break
                                     end
                                 end
                                 if res == 1 then
-                                    configFile.Settings[settingTextField.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
+                                    configFile.Settings[fieldSettingText.value] = {fieldSettingValue1.value,fieldSettingValue2.value,fieldSettingValue3.value}
                                     adjustConfigFile.write_config()
                                     configFile = adjustConfigFile.configFile
                                    ArraySettings = configFile.Settings
@@ -205,13 +209,13 @@ local function main()
                                 configFile = adjustConfigFile.configFile
                                 -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
                                 showValue_st.text_color = LrColor( 0, 0, 0 )
-                                tableOne.myObservedText = settingTextField.value
+                                tableOne.myObservedText = fieldSettingText.value
                                 tableOne.myObservedField1 = fieldSettingValue1.value --!!!
                                 tableOne.myObservedField2 = fieldSettingValue2.value
                                 tableOne.myObservedField3 = fieldSettingValue3.value
 
                             end,
-                            bind = LrView.bind('overview')
+                           -- bind = LrView.bind('overview')
                         },
                         f:push_button{
                             title = "HELP",
@@ -234,6 +238,7 @@ local function main()
                     place_horizontal = 1.0,
                     width = 220,
                     height = 20,
+                    enabled = LrView.bind ("buttonEnabled"),
                     action = function()
                         LrTasks.startAsyncTask(function() -- open window to confirm photo changes
                             if 'ok' ==
@@ -244,6 +249,7 @@ local function main()
                                 title = "TheImageIterator-Editing & Exporting Photos"
                             })
                                 progressBar:setCancelable(true)
+    
                                  
                                 if targetPhotosCopies == nil then
                                     progressBar:done()
@@ -256,16 +262,21 @@ local function main()
                                     times = combine.getTimesOfCombinations(ArraySettings)
                                     overview = combine.overviewSettings(ArraySettings)
                                     count = 0
-                                    editPhotos(targetPhotosCopies, keyTable, settingsTable)-- edits photos in catalog     
-                                    LrDialogs.message("Successfully edited and exported the photographs to the ExportedPhotos folder! \n (See Plug-in folder)")
-                          
-                                                        
+                                    tableOne.buttonEnabled = false
+                                    editPhotos(targetPhotosCopies, keyTable, settingsTable)-- edits photos in catalog  
+                                    tableOne.buttonEnabled = true                 
                                 end
                             end
-                        
+
+                            if showSuccess == true then
+                                LrDialogs.message("Successfully edited and exported the photographs to the ExportedPhotos folder! \n (See Plug-in folder)")
+                            end
+
                         end)
                     end
                 },
+
+                
                 f:push_button{ -- resets the current values to 0
                     title = "Reset",
                     place_horizontal = 1.0,
@@ -273,7 +284,16 @@ local function main()
                     height = 20,
                     action = function()          
                         resetPhotoEdit()
-                                
+                        -- Updates UI after resetting
+                        
+                        keyTable = combine.getKeys(ArraySettings)
+                        combinedArray = combine.getCombinedArray(ArraySettings)
+                        settingsTable = combine.getSettingsTable(combinedArray)
+                        times = combine.getTimesOfCombinations(ArraySettings)
+                        overview = combine.overviewSettings(ArraySettings)
+                        configFile = adjustConfigFile.configFile
+                        tableOne.myObservedText = overview
+                            
                     end
                 }
 
@@ -288,6 +308,7 @@ local function main()
 
             })
             if (result == 'cancel') then
+                showSuccess = false
                 if progressBar ~= nil  then
                     progressBar:setCancelable(true)
                     progressBar:cancel()
