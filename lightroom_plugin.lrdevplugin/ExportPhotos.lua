@@ -29,7 +29,7 @@ function ExportPhotos.processRenderedPhotos(photos,folderName)
     local exportSession = LrExportSession({
         photosToExport= photos,
         exportSettings = {
-            LR_collisionHandling = "rename",
+            LR_collisionHandling = "skip",
             LR_format = configFile.export_format,
             LR_tokens = "{{image_name}}",
             LR_useWatermark = false,
