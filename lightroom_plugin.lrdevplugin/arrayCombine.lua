@@ -33,20 +33,19 @@ function arrayCombine(tableArray)
     table.insert(tableArray, mergedArray)
 
     return arrayCombine(tableArray)
-end -- arrayCombine
+end
 
 
 function arrayCombine2(array1, array2)
     local mergedArray = {}
-
     for _, elementA in ipairs(array1) do
         for _, elementB in ipairs(array2) do
             table.insert(mergedArray, elementA..","..elementB)
-        end -- for
-    end -- for
+        end
+    end
 
     return mergedArray
-end -- arrayCombine2
+end
 
 -- function to split string in table
 -- https://www.codegrepper.com/code-examples/lua/lua+split+string+by+delimiter
@@ -65,12 +64,6 @@ function combine.getCombinedArray(array)
     end
     return combinedArray
 end
--- test ArraySettings
---combinedArray = {}
-ArraySettings = {["Contrast"]={0,20,40},["Saturation"] = {40,50,60},["Highlights"] = {10,20,30}}
---table.insert(combinedArray, ArraySettings.Contrast)
---table.insert(combinedArray, ArraySettings.Saturation)
---table.insert(combinedArray, ArraySettings.Highlights)
 
 function combine.getTimesOfCombinations(array)
     times = 1
@@ -80,19 +73,6 @@ function combine.getTimesOfCombinations(array)
     return times
 end
 
-function combine.overviewSettings(array)
-    overview = ""
-    for key, v in pairs(ArraySettings) do
-        overview = overview .. key .. ":"
-        for w, value in pairs(v) do
-            overview = overview .. value .. ","
-        end
-        overview = overview .. "\n"
-    end
-    return overview
-end
-
--- print(combine.overviewSettings(ArraySettings))
 
 function combine.getSettingsTable(array)
     settingsTable = {}
@@ -113,18 +93,4 @@ function combine.getKeys(array)
     return keyset
 end
 
-keyset = combine.getKeys(ArraySettings)
-combinedArray = combine.getCombinedArray(ArraySettings)
-settingsTable = combine.getSettingsTable(combinedArray)
---[[
-for index, data in ipairs(settingsTable) do
-    print(index)
-
-    for key, value in pairs(data) do
-        print('\t', keyset[key], value)
-    end
-end
-
---print(settingsTable[1][2])
-]]
 return combine
