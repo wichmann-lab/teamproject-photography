@@ -37,11 +37,10 @@ Add:
 (Of our plug-in)
 
 * The special thing about our plugin is that you can select several images at once and import, export and edit them.
-
-* import and export pictures
-* save pictures in folder
+* includes export of your selected images in a matrix-modification format
 * processes the images using all possible combinations e.g. Contrast = [10,20], Saturation = [30,40]
-* the following combinations will be applied on your selected photos: {[Contrast = 10, Saturation = 30],[Contrast = 10 , Saturation = 40], [Contrast = 20, Saturation = 30], [Contrast = 20 , Saturation = 40]}
+the following combinations will be applied on your selected photos:
+{[Contrast = 10, Saturation = 30],[Contrast = 10 , Saturation = 40], [Contrast = 20, Saturation = 30], [Contrast = 20 , Saturation = 40]}
 * available settings: Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Clarity, Vibrance, Saturation
 
 
@@ -52,11 +51,11 @@ Add:
 
   Home directory..
 
-     + for Windows: C/Users/username/
+     + for Windows: C/Users/username/TheImageIterator
   
-     + for Mac OS: /Users/username/
+     + for Mac OS: /Users/username/TheImageIterator
   
-+ Make sure to save the configuration file "configurationFile.json" under this folder. 
++ Make sure to save the configuration file "imageIteratorSettings.json" under this folder. 
 + Then execute the plugin.  
 
 
