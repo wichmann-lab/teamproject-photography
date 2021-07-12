@@ -61,6 +61,7 @@ function editSinglePhoto(keyTable,photos,data)
     --exportPhotos.processRenderedPhotos(photos,folderName)
     return photos
 end
+
  function resetPhotoEdit() -- reset all setting
     for key, value in pairs(keyTable) do
         configFile.Settings[value] = {0, 0, 0,}
@@ -72,21 +73,18 @@ end
 --adjustConfigFile.configFileNil()
 
 
-
-
 local function main()
-
     -- Display dialog box
     LrFunctionContext.callWithContext("showcustomDialog",
         function(context) -- function-context call for property table (observable)
-            local tableOne = LrBinding.makePropertyTable(context)
+            local propertyTable = LrBinding.makePropertyTable(context)
              --ANNIE
             observerFieldSetting = 0
-            tableOne.myObservedText = overview
-            tableOne.myObservedField1 = observerFieldSetting
-            tableOne.myObservedField2 = observerFieldSetting
-            tableOne.myObservedField3 = observerFieldSetting
-            tableOne.buttonEnabled = true
+            propertyTable.myObservedText = overview
+            propertyTable.myObservedField1 = observerFieldSetting
+            propertyTable.myObservedField2 = observerFieldSetting
+            propertyTable.myObservedField3 = observerFieldSetting
+            propertyTable.buttonEnabled = true
    
             local f = LrView.osFactory() -- obtain view factory object
             
@@ -128,31 +126,27 @@ local function main()
                 immediate = true,
                 value = keyTable[1]
             }
---ANNIE
             showValue_st= f:static_text{ --  
-                        -- place_horizontal = 0.5,
-                        --immediate = true,
-                        title = tableOne.myObservedText,
+                        title = propertyTable.myObservedText,
                         text_color = LrColor( 1, 0, 0 ),
-                       -- bind = LrView.bind('overview'),
                          width = 400,
                          height = 200,
-                    }
-
-                    --ANNIE
-            local updateOverviewSettings = function ()
-                showValue_st.title = overview
-                showValue_st.text_color = LrColor( 1, 0, 0 ) -- make the text red
-               end
-
-            tableOne:addObserver( "myObservedText", updateOverviewSettings )
-            tableOne:addObserver( "myObservedField1", updateOverviewSettings )
-            tableOne:addObserver( "myObservedField2", updateOverviewSettings )
-            tableOne:addObserver( "myObservedField3", updateOverviewSettings )
+            }
             pathDisplayConfigFile = f:static_text{
                 title = "Absolute Path (ConfigFile): \n"  .. adjustConfigFile.myPathConfig,
                 text_color = LrColor(0, 0, 0)
             }
+
+            local updateOverviewSettings = function ()
+                showValue_st.title = overview
+                showValue_st.text_color = LrColor( 1, 0, 0 ) -- make the text red
+                end
+
+            propertyTable:addObserver( "myObservedText", updateOverviewSettings )
+            propertyTable:addObserver( "myObservedField1", updateOverviewSettings )
+            propertyTable:addObserver( "myObservedField2", updateOverviewSettings )
+            propertyTable:addObserver( "myObservedField3", updateOverviewSettings )
+
              LrDialogs.message("THE IMAGE ITERATOR \n - Start editing all your photographs! - ",
              "ADD-Button: Add settings and different values for those. The selected photographs will be edited with all combinations of settings and values. \n HELP-Button: Opens window, shows which settings are available. \n Save and Edit- Button: Start the editing and exporting progress. \n Reset-Button: Reset the values of all settings in the configuration file to 0. \n CANCEL-Button: Cancel the editing and exporting progress. \n (alternative: via X at the right end of the progress bar in the catalog window) \n EXIT-Button: Close the Plug-in window \n",
               "warning")
@@ -161,8 +155,9 @@ local function main()
                 -- CHANGE THE WINDOW SIZE HERE:
                 -- width = 400,
                 -- height = 400,
-                bind_to_object = tableOne, -- bind tableOne
+                bind_to_object = propertyTable, -- bind propertyTable
                 spacing = f:control_spacing(),
+
                 f:group_box{
                     title = "Path of ConfigFile",
                     font = "<system/bold>",
@@ -173,7 +168,6 @@ local function main()
                     title = "Add and change settings",
                     font = "<system/bold>",
                     f:row{
-
                 
                     f:row{
                         fieldSettingText,
@@ -207,16 +201,16 @@ local function main()
                                 times = combine.getTimesOfCombinations(ArraySettings)
                                 overview = combine.overviewSettings(ArraySettings)
                                 configFile = adjustConfigFile.configFile
-                                -- ANNIE (für UI muss das noch zu action hinzugefügt werden)
+                                -- UI 
                                 showValue_st.text_color = LrColor( 0, 0, 0 )
-                                tableOne.myObservedText = fieldSettingText.value
-                                tableOne.myObservedField1 = fieldSettingValue1.value --!!!
-                                tableOne.myObservedField2 = fieldSettingValue2.value
-                                tableOne.myObservedField3 = fieldSettingValue3.value
+                                propertyTable.myObservedText = fieldSettingText.value
+                                propertyTable.myObservedField1 = fieldSettingValue1.value --!!!
+                                propertyTable.myObservedField2 = fieldSettingValue2.value
+                                propertyTable.myObservedField3 = fieldSettingValue3.value
 
                             end,
-                           -- bind = LrView.bind('overview')
                         },
+
                         f:push_button{
                             title = "HELP",
                             action = function()
@@ -246,7 +240,7 @@ local function main()
                                     'Do you want to edit the selected ' .. #(targetPhotos) ..
                                         ' photo(s)? \n (The Configuration file will be overwritten)') then
                             progressBar = LrProgressScope({
-                                title = "TheImageIterator-Editing & Exporting Photos"
+                                title = "TheImageIterator - Editing & Exporting Photos"
                             })
                                 progressBar:setCancelable(true)
     
@@ -262,9 +256,9 @@ local function main()
                                     times = combine.getTimesOfCombinations(ArraySettings)
                                     overview = combine.overviewSettings(ArraySettings)
                                     count = 0
-                                    tableOne.buttonEnabled = false
+                                    propertyTable.buttonEnabled = false
                                     editPhotos(targetPhotosCopies, keyTable, settingsTable)-- edits photos in catalog  
-                                    tableOne.buttonEnabled = true                 
+                                    propertyTable.buttonEnabled = true                 
                                 end
                             end
 
@@ -285,14 +279,13 @@ local function main()
                     action = function()          
                         resetPhotoEdit()
                         -- Updates UI after resetting
-                        
                         keyTable = combine.getKeys(ArraySettings)
                         combinedArray = combine.getCombinedArray(ArraySettings)
                         settingsTable = combine.getSettingsTable(combinedArray)
                         times = combine.getTimesOfCombinations(ArraySettings)
                         overview = combine.overviewSettings(ArraySettings)
                         configFile = adjustConfigFile.configFile
-                        tableOne.myObservedText = overview
+                        propertyTable.myObservedText = overview
                             
                     end
                 }
