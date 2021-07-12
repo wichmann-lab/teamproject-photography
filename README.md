@@ -40,7 +40,8 @@ Add:
 
 * import and export pictures
 * save pictures in folder
-* change settings (contrast, saturation, highlights)
+* processes the images using all possible combinations e.g. Contrast = [10,20], Saturation = [30,40]
+* the following combinations will be applied on your selected photos: {[Contrast = 10, Saturation = 30],[Contrast = 10 , Saturation = 40], [Contrast = 20, Saturation = 30], [Contrast = 20 , Saturation = 40]}
 * available settings: Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Clarity, Vibrance, Saturation
 
 
