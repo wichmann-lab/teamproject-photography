@@ -1,4 +1,4 @@
--- ============================SDK===============================--
+-- ============================General===============================--
 local LrFunctionContext = import 'LrFunctionContext'
 local LrBinding = import 'LrBinding'
 local LrDialogs = import 'LrDialogs'
@@ -15,7 +15,7 @@ local targetPhotos = catalog.targetPhotos
 local targetPhotosCopies = targetPhotos
 local LrPathUtils = import 'LrPathUtils'
 local combine = require("arrayCombine")
--- ==============================================================--
+-- ==================================================================--
 
 ArraySettings = configFile.Settings
 keyTable = combine.getKeys(ArraySettings)
@@ -26,24 +26,53 @@ overview = combine.overviewSettings(ArraySettings)
 developSettingsTable={"Exposure", "Contrast", "Highlights", "Shadows", "Whites", "Blacks", "Clarity", "Vibrance","Saturation"}
 showSuccess = true
 
-function editPhotos(photos, keyTable, settingsTable)
-    for index,data in ipairs(settingsTable) do
-        if progressBar:isCanceled() then -- cancel progress in catalog (via X)
-            showSuccess = false
-            break
-        end 
-        result = editSinglePhoto(keyTable,photos,data)
-        exportPhotos.processRenderedPhotos(result,folderName)
-        folderName =""
-        for p,picture in pairs(result) do
-            for key, value in pairs(data) do
-                picture:quickDevelopAdjustImage(keyTable[key], 0)
+-- isAvailable() checks whether a setting from the configuration file is not available
+-- throws an error in the event of impermissible inputs
+function isAvailable()
+    for key, val in pairs(keyTable) do
+        val = val:lower()
+        val = val:gsub("^%l", string.upper)
+        available = true
+        for index, value in ipairs(developSettingsTable) do
+            if value ~= val then
+                available = false
+                --break
+            else
+                available = true
+                break
             end
         end
+        if available == false then
+            return false
+        end
     end
-    
-   progressBar:done()
+    return true
 end
+
+function editPhotos(photos, keyTable, settingsTable)
+    if isAvailable() then
+        for index,data in ipairs(settingsTable) do
+            if progressBar:isCanceled() then -- cancel progress in catalog (via X)
+                showSuccess = false
+                break
+            end 
+            result = editSinglePhoto(keyTable,photos,data)
+            exportPhotos.processRenderedPhotos(result,folderName)
+            folderName =""
+            for p,picture in pairs(result) do
+                for key, value in pairs(data) do
+                    picture:quickDevelopAdjustImage(keyTable[key], 0)
+                end
+            end
+        end
+    else
+        showSuccess = false
+        LrDialogs.showError("\nUnavailable setting(s) in imageIteratorSettings.json! Please change the setting(s) in ".. adjustConfigFile.myPathConfig .. "\nand reload the TheImageIterator Plug-in.")
+    end
+    progressBar:done()
+end
+
+
 
 function editSinglePhoto(keyTable,photos,data)
     for p,photo in pairs(photos) do
