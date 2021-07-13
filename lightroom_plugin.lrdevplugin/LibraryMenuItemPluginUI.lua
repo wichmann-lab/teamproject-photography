@@ -176,7 +176,7 @@ local function main()
 
             fieldSettingText =
                 f:edit_field {
-                width_in_chars = 14,
+                width_in_chars = 13,
                 immediate = true,
                 value = keyTable[1]
             }
@@ -188,10 +188,11 @@ local function main()
                 width = 400,
                 height = 200
             }
+
             pathDisplayConfigFile =
                 f:static_text {
                 title = "Absolute Path (ConfigFile): \n" .. adjustConfigFile.myPathConfig,
-                text_color = black
+                text_color = black,
             }
             local updateOverviewSettings = function()
                 showValue_st.title = overview
@@ -203,16 +204,31 @@ local function main()
             propertyTable:addObserver("myObservedField2", updateOverviewSettings)
             propertyTable:addObserver("myObservedField3", updateOverviewSettings)
 
-            LrDialogs.message(
-                "THE IMAGE ITERATOR \n - Start editing all your photographs! - ",
-                "ADD-Button: Add settings and different values for those. The selected photographs will be edited with all combinations of settings and values. \n HELP-Button: Opens window, shows which settings are available. \n Save and Edit- Button: Start the editing and exporting progress. \n Reset-Button: Reset the values of all settings in the configuration file to 0. \n CANCEL-Button: Cancel the editing and exporting progress. \n (alternative: via X at the right end of the progress bar in the catalog window) \n EXIT-Button: Close the Plug-in window \n",
-                "warning"
-            )
+            
 
             local contents =
                 f:column {
                 bind_to_object = propertyTable, -- bind propertyTable
                 spacing = f:control_spacing(),
+                f:group_box{
+                    title = "Get started with the Plug-in",
+                    text_color = LrColor("blue"),
+                    font = "<system/bold>",
+                    f:row{
+                    f:static_text{                    
+                        title = "Click here to get information about the UI",
+                        text_color = black
+                    },
+                f:push_button{
+                    title = "SUPPORT",
+                    action = function ()
+                        LrDialogs.message(
+                            "THE IMAGE ITERATOR \n - Start editing all your photographs! - ",
+                            "- ADD-Button -\nAdd settings and different values for those. The selected photographs will be edited with all combinations of settings and values.\n- HELP-Button -\nOpens window, shows which settings are available.\n- Save and Edit-Button -\nStart the editing and exporting progress.\n- Reset-Button -\nReset the values of all settings in the configuration file to 0.\n- CANCEL PROGRESS AND EXIT-Button -\nCancel the editing and exporting progress (alternative: via X at the right end of the progress bar in the catalog window), Plug-in will be closed.\n - EXIT-Button -\nClose the Plug-in window\n- Path to ConfigFile -\nDisplays the path where the configuration file should be or is \n- Overview Develop Settings -\nDisplays all settings and values, that were initially in the configuration file or added via ADD-Button", "info")                         
+                    end
+                }
+            }
+                },
                 f:group_box {
                     title = "Path of ConfigFile",
                     font = "<system/bold>",
@@ -278,6 +294,7 @@ local function main()
                 },
                 f:group_box {
                     title = "Overview Develop Settings",
+                    text_color = LrColor("blue"),
                     font = "<system/bold>",
                     showValue_st
                 },
@@ -317,13 +334,15 @@ local function main()
                                         editPhotos(targetPhotosCopies, keyTable, settingsTable)
                                         propertyTable.buttonEnabled = true
                                     end
+
+                                    if showSuccess == true then
+                                        LrDialogs.message(
+                                            "Successfully edited and exported the photographs to the ExportedPhotos folder! \n (See Plug-in folder)"
+                                        )
+                                    end
                                 end
 
-                                if showSuccess == true then
-                                    LrDialogs.message(
-                                        "Successfully edited and exported the photographs to the ExportedPhotos folder! \n (See Plug-in folder)"
-                                    )
-                                end
+                                
                             end
                         )
                     end
@@ -346,10 +365,10 @@ local function main()
                 LrDialogs.presentModalDialog(
                 {
                     -- display cuustom dialog
-                    title = "Lightroom Plugin - Settings",
+                    title = "The Image Iterator - Lightroom Plug-in",
                     contents = contents, -- defined view hierarchy
                     actionVerb = "EXIT",
-                    cancelVerb = "CANCEL PROGRESS"
+                    cancelVerb = "CANCEL PROGRESS AND EXIT"
                 }
             )
             if (result == "cancel") then --cancel the progress after pushing the "Cancel"-Button
