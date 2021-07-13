@@ -224,8 +224,7 @@ local function main()
                     action = function ()
                         LrDialogs.message(
                             "THE IMAGE ITERATOR \n - Start editing all your photographs! - ",
-                            "- ADD-Button -\nAdd settings and different values for those. The selected photographs will be edited with all combinations of settings and values.\n- HELP-Button -\nOpens window, shows which settings are available.\n- Save and Edit-Button -\nStart the editing and exporting progress.\n- Reset-Button -\nReset the values of all settings in the configuration file to 0.\n- CANCEL PROGRESS AND EXIT-Button -\nCancel the editing and exporting progress (alternative: via X at the right end of the progress bar in the catalog window), Plug-in will be closed.\n - EXIT-Button -\nClose the Plug-in window\n- Path to ConfigFile -\nDisplays the path where the configuration file should be or is \n- Overview Develop Settings -\nDisplays all settings and values, that were initially in the configuration file or added via ADD-Button", "info")                         
-                    end
+                            "- ADD-Button -\nAdd settings and different values for those. The selected photographs will be edited with all combinations of settings and values.\n- HELP-Button -\nOpens window, shows which settings are available.\n- SAVE AND EDIT-Button -\nInitiate the editing and exporting progress.\n- RESET-Button -\nReset the values of all settings in the configuration file to 0.\n- CANCEL PROGRESS AND EXIT-Button -\nCancel the editing and exporting progress (alternative: via X at the right end of the progress bar in the catalog window), Plug-in will be closed.\n- EXIT-Button -\nClose the Plug-in window.\n- Path to ConfigFile -\nDisplays the path where the configuration file should be or is.\n- Overview Develop Settings -\nDisplays all settings and values, that were initially in the configuration file or added via ADD-Button.", "info")                       end
                 }
             }
                 },
@@ -299,7 +298,7 @@ local function main()
                     showValue_st
                 },
                 f:push_button {
-                    title = "Save and Edit",
+                    title = "SAVE AND EDIT",
                     place_horizontal = 1.0,
                     width = 220,
                     height = 20,
@@ -348,7 +347,7 @@ local function main()
                     end
                 },
                 f:push_button {
-                    title = "Reset",
+                    title = "RESET",
                     place_horizontal = 1.0,
                     width = 220,
                     height = 20,
