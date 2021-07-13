@@ -349,7 +349,7 @@ local function main()
                     title = "Lightroom Plugin - Settings",
                     contents = contents, -- defined view hierarchy
                     actionVerb = "EXIT",
-                    cancelVerb = "CANCEL"
+                    cancelVerb = "CANCEL PROGRESS"
                 }
             )
             if (result == "cancel") then --cancel the progress after pushing the "Cancel"-Button
