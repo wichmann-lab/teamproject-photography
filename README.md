@@ -139,10 +139,10 @@ If you are not sure, here is the License for the "json.lua" file: (You can find 
 All the external sources used in our plug-in are listed at the end of this README.
 We changed the lines 85 and 96 for a better look of our configuration file.
 
-*The file called "AdjustConfigurationFile.lua" is the interface between the "LibraryMenuItemPluginUI.lua" and the configuration file. 
+* The file called "AdjustConfigurationFile.lua" is the interface between the "LibraryMenuItemPluginUI.lua" and the configuration file. 
   It checks whether the configuration file exists, reads the configuration file, writes into the configuration file and more. For the last two tasks the "json.lua" is absolutely necessary. 
   
-*Another file is the "arrayCombine.lua". It's an external file as well. [Click here for getting to the source.]("BITTE NOCH EINFÜGEN"). 
+* Another file is the "arrayCombine.lua". It's an external file as well. [Click here for getting to the source.]("BITTE NOCH EINFÜGEN"). 
 Because it's code from stackoverflow, it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
   
 We modified the code for our usage. This file gets the settings from the configuration file and creates a new table with all the possible combinations from the settings of our configuration file. The code is well commented, so you should read the comments for understanding each function. 
