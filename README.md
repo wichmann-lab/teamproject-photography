@@ -9,7 +9,7 @@
 ## Table of Contents
 1. [About the project](#about-the-project)
 2. [Features](#features)
-4. [Getting Started](#gettingstarted)
+4. [Getting Started](#getting-started)
 5. [Usage](#usage)
 6. [Contributing](#contributing)
 7. [Acknowledgements](#acknowledgements)
