@@ -76,15 +76,11 @@ Add:
 
 ## Usage
 
-![supportwindow](README-files/supportwindow.png)
-<img src="README-files/supportwindow.png" width="100" height="100">
+<img src="README-files/supportwindow.png" width="100" height="70">
 
 ![addsetting](README-files/addsetting.gif)
-![helpwindow](README-files/helpwindow.png)
-<img src="README-files/helpwindow.png" width="100" height="100">
-![error_unavailablesettingTextfield](README-files/error_unavailablesettingTextfield.jpeg)
+<img src="README-files/helpwindow.png" width="100" height="80">
 <img src="README-files/error_unavailablesettingTextfield.jpeg" width="100" height="100">
-![error_unavailablesettingConfig](README-files/error_unavailablesettingConfig.jpeg)
 <img src="README-files/error_unavailablesettingConfig.jpeg" width="100" height="100">
 
 ![export](README-files/export.gif)
