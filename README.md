@@ -21,10 +21,10 @@
 This is the repository for the teamproject course, summer term 2021, working on automating photography manipulation
 
 
-who are we?
+### Who are we?
 
-We are 4 students at the University of Tübingen and we are all studying computer science (2 computer science, 1 medical informatics, 1 media informatics) and have been working together on this project since the summer semester began.
-on 07/27/2021 is our final presentation of this project
+We are 4 students at the University of Tübingen and we are all studying computer science. 
+The plugin is part of the teamproject of the University of Tübingen.
 
 Add:
 
