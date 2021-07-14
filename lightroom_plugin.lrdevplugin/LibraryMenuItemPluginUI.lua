@@ -11,7 +11,7 @@ local LrApplication = import "LrApplication"
 -- Imported files
 local exportPhotos = require("ExportPhotos")
 local adjustConfigFile = require("AdjustConfigurationFile")
-local combine = require("arrayCombine")
+local combine = require("DevelopSettingsCombinations")
 -- Common shortcuts
 local configFile = adjustConfigFile.configFile
 local catalog = LrApplication.activeCatalog()
@@ -34,7 +34,6 @@ showSuccess = true
 observerFieldSetting = 0
 black = LrColor(0, 0, 0)
 red = LrColor(1, 0, 0)
-exists = false 
 -- ==================================================================--
 
 
@@ -96,6 +95,7 @@ function editPhotos(photos, keyTable, settingsTable)
         )
     end
     progressBar:done()
+    available = true
 end
 
 -- edits each photo with a specific settings combination
@@ -249,6 +249,7 @@ local function main()
                                 action = function() -- adds setting to configuration file after pushing the "ADD"-Button
                                     fieldSettingText.value = fieldSettingText.value:lower()
                                     fieldSettingText.value = fieldSettingText.value:gsub("^%l", string.upper)
+                                    exists = false 
                                     for index, value in ipairs(developSettingsTable) do
                                         if value == fieldSettingText.value then
                                             exists = true
