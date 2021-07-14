@@ -62,7 +62,7 @@ the following combinations will be applied on your selected photos: <br>
 
 1. Open the Plug-in Manager after starting Adobe Photoshop Lightroom Desktop: File > Plug-in Manager
 2. Add the plug-in: Add-Button
-![addplugin](README-files/addplugin.gif)
+![README-files/addplugin](addplugin.gif)
 
 4. Choose the pictures you want to edit.
 5. Start the plug-in: Library > Plug-in Extras > The Image Iterator
