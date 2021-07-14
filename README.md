@@ -101,7 +101,7 @@ Example for Config file
 ```json
 {"Highlights":[0,20,50],"Saturation":[10,0,30],"Contrast":[30,40,60]}
 ```
-## Contributing
+## 💻👥Contributing
 
 ### How to start programming my own plug-in?
 * Read the Lightroom Classic SDK guide. (You don't have to read each chapter). We would recommend reading the first two chapters of the SDK.
