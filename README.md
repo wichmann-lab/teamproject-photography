@@ -76,7 +76,7 @@ Add:
 
 ## Usage
 
-![supportwindow](README-files/supportwindow.png)
+![supportwindow](README-files/supportwindow.png){:height="50%" width="50%"}
 
 ![addsetting](README-files/addsetting.gif)
 ![helpwindow](README-files/helpwindow.png)
