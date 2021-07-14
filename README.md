@@ -136,6 +136,7 @@ Because it's code from stackoverflow, it is licensed under (https://stackoverflo
 We modified the code for our usage. This file gets the settings from the configuration file and creates a new table with all the possible combinations from the settings of our configuration file. The code is well commented, so you should read the comments for understanding each function. 
   
 * The last file is the "ExportPhotos.lua". A very short file with the duty to export our images.
+
 So for summary: 
   * LibraryMenuItemPluginUI.lua
   * json.lua
