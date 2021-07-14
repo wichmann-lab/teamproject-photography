@@ -116,7 +116,9 @@ Example for Config file
  }
 ```
 It's important that the structure is preserved. 
-```json { "export_format":"JPEG", "Settings":{}} ```
+```json
+{ "export_format":"JPEG", "Settings":{}}
+```
 If there is no "Settings" key or no "export_format", the plug-in won't work. 
 Of course you can add more keys, but don't delete the existing ones. Otherwise we cannot guarantee that the plug-in will work.
 
