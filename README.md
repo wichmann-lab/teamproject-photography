@@ -124,7 +124,7 @@ Of course you can add more keys, but don't delete the existing ones. Otherwise w
 
 You can add more settings in the key called "Settings". 
 If you want to modify the configuration file, you have to write the settings in lower case (first letter in upper case).
-The settings should look lilke this ```"Settingname":[x,y,z] ```.
+The added settings should look like this ```"Settingname":[x,y,z] ```.
 ## 💻👥Contributing
 
 ### How to start programming my own plug-in?
