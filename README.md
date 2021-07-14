@@ -176,6 +176,21 @@ The "ExportPhotos.lua" file is responsible for the export of our images. You don
 <pre><code> function ExportPhotos.processRenderedPhotos(photos, folderName)</code></pre> gets the images and the foldername for the export. 
 This function creates an exportsession where you can change the settings for the export e.g. the format. 
 We used <pre><code> LR_export_destinationPathSuffix = folderName </code></pre> for exporting in different folders. Each time the function <code> function ExportPhotos.processRenderedPhotos(photos, folderName)</code> is called, the photos will be exported in the associated folders. If you want to export all of the images into one folder then you have to change the variable <code> folderName </code> into a string.
+### Editing images
+We use the function <code> photo:quickDevelopAdjustImage(settingName, size)</code> from the class called "LrPhoto" for editing our images.
+The following settings are available for editing with this function: 
+* Exposure
+* Contrast
+* Highlights
+* Shadows
+* Whites
+* Blacks
+* Clarity
+* Vibrance
+* Saturation
+
+You can find more settings in the Namespace "LrDevelopController". The settings that we have not listed, <b> can not be used </b> within the  <code> photo:quickDevelopAdjustImage(settingName, size)</code>. 
+If you want more available settings, you have to implement the whole Develop Controller. 
 ### Debugging
 
 ## Acknowledgements
