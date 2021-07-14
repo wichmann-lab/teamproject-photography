@@ -79,7 +79,7 @@ Add:
 <img src="README-files/supportwindow.png" width="200" height="300">
 
 ![addsetting](README-files/addsetting.gif)
-<img src="README-files/helpwindow.png" width="200" height="300">
+<img src="README-files/helpwindow.png" width="200" height="290">
 <img src="README-files/error_unavailablesettingTextfield.jpeg" width="500" height="550">
 <img src="README-files/error_unavailablesettingConfig.jpeg" width="500" height="550">
 ![reset](README-files/reset.gif)
