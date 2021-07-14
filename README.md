@@ -18,13 +18,13 @@
 
 ## About the project 
 
-This is the repository for the teamproject course, summer term 2021, working on automating photography manipulation
+This is the repository for the teamproject course, summer term 2021, working on automating photography manipulation.
+The plugin is part of the teamproject of the University of Tübingen.
 
 
 ### Who are we?
 
 We are 4 students at the University of Tübingen and we are all studying computer science. 
-The plugin is part of the teamproject of the University of Tübingen.
 
 Add:
 
