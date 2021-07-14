@@ -317,7 +317,7 @@ local function main()
                                     progressBar = -- creates porgressbar for counting the renditions
                                         LrProgressScope(
                                         {
-                                            title = "TheImageIterator - Editing & Exporting Photos"
+                                            title = "TheImageIterator-Editing & Exporting Photos"
                                         }
                                     )
                                     progressBar:setCancelable(true)
