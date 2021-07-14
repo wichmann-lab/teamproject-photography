@@ -161,7 +161,7 @@ So for summary:
 
 ### Import of the images
 The most easiest way for importing images into our plug-in is to import them into the Lightroom Classic Catalog and select them. 
-  <code> local catalog = LrApplication.activeCatalog()
+  <code> local catalog = LrApplication.activeCatalog() <br>
 local targetPhotos = catalog.targetPhotos </code>
   So targetPhotos are the selected photos in the catalog. It's that simple. 
 
