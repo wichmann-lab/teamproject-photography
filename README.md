@@ -121,8 +121,8 @@ The configuration file contains the settings for editing and other infomation. Y
 We implemented <code> export_format </code> and our Settings for editing. If you want to save for example the metadata, you have to implement functions in the plugin. 
 In short, the configuration file contains information for the processing.
 
-Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called <b>"json.lua"</b>. It's an external file from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). This file makes decoding and encoding easier.  
-
+* Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called <b>"json.lua"</b>. It's an external file from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). This file makes decoding and encoding easier. 
+We changed the lines 85 and 96 for a better look of our configuration file. 
 Here is the License for the <b>"json.lua"</b> file: (You can find it in the json.lua as well.)
 >-- Copyright (c) 2020 rxi
 --
@@ -146,7 +146,6 @@ Here is the License for the <b>"json.lua"</b> file: (You can find it in the json
 --
   
 All the external sources used in our plug-in are listed at the end of this README.
-We changed the lines 85 and 96 for a better look of our configuration file.
 
 * The file called <b>"AdjustConfigurationFile.lua"</b> is the interface between the <b>"LibraryMenuItemPluginUI.lua"</b> and the configuration file. 
   It checks whether the configuration file exists, reads the configuration file, writes into the configuration file and more.
@@ -154,8 +153,7 @@ We changed the lines 85 and 96 for a better look of our configuration file.
   
 * Another file is the <b>"arrayCombine.lua"</b>. It's an external file as well. [Click here for getting to the source.]("BITTE NOCH EINFÜGEN"). 
 Because it's code from Stack Overflow, it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
-  
-We modified the code for our usage. This file gets the settings from the configuration file and creates a new table with all the possible combinations from the settings of our configuration file. The code is well commented, so you should read the comments for understanding each function. 
+  We modified the code for our usage. This file gets the settings from the configuration file and creates a new table with all the possible combinations from the settings of our configuration file. The code is well commented, so you should read the comments for understanding each function. 
   
 * The last file is the <b>"ExportPhotos.lua"</b>. A very short file with the duty to export our images.
 
