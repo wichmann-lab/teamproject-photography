@@ -116,11 +116,39 @@ Example for Config file
 ```
 ## Contributing
 
-### How to compile
-  
-* luac -o
-* 
+### How to start programming my own plug-in?
+* Read the Lightroom Classic SDK guide. (You don't have to read each chapter. We would recommend to read the first two chapters of the SDK.
+* Try to programm your own small "Hello World" plug-in using the SDK.
 
+### Which files do I need?
+* Info.lua : This file describes your plug-in e.g. the Lightroom Version, the title of your plug-in and more
+* Main file or as we call it "the UI file": in our case this file is called "LibraryMenuItemPluginUI.lua"
+It is called by the Info.lua file as the main script.
+This is where the magic happens. This file implements the whole User Interface of our plug-in as well as a few functions. (Those are interacting with UI-objects for example the text-fields.)
+### Which files do I need for contributing to TheImageIterator?
+* In our case the most important file is the configuration file called "imageIteratorSettings.json". Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called "json.lua". It's a external file. 
+
+If you are not sure, here is the License for the "json.lua" file: (You can find it in the json.lua as well.)
+>-- Copyright (c) 2020 rxi
+--
+-- Permission is hereby granted, free of charge, to any person obtaining a copy of
+-- this software and associated documentation files (the "Software"), to deal in
+-- the Software without restriction, including without limitation the rights to
+-- use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+-- of the Software, and to permit persons to whom the Software is furnished to do
+-- so, subject to the following conditions:
+--
+-- The above copyright notice and this permission notice shall be included in all
+-- copies or substantial portions of the Software.
+--
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+-- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+-- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+-- SOFTWARE.
+--
 ### Debugging
 
 ## Acknowledgements
