@@ -113,7 +113,13 @@ Example for Config file
 It is called by the Info.lua file as the main script.
 This is where the magic happens. This file implements the whole User Interface of our plug-in as well as a few functions. (Those are interacting with UI-objects for example the text-fields.)
 ### Which files do I need for contributing to TheImageIterator?
-* In our case the most important file is the configuration file called "imageIteratorSettings.json". Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called "json.lua". It's an external file from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). 
+* In our case the most important file is the configuration file called "imageIteratorSettings.json". 
+You can save the settings in the configuration file or use our UI for modifying the configuration file.
+The configuration file contains the settings for editing and other infomations. You can store everything about the settings, the export and more in this file. 
+We implemented <code> export_format </code> and our Settings for editing. If you want to save for example the metadata, you have to implement functions in the plugin. 
+In short, the configuration file contains information for the processing.
+
+Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called "json.lua". It's an external file from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). 
 
 If you are not sure, here is the License for the "json.lua" file: (You can find it in the json.lua as well.)
 >-- Copyright (c) 2020 rxi
