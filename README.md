@@ -160,11 +160,16 @@ So for summary:
   * ExportPhotos.lua
 
 ### Import of the images
-The most easiest way for importing images into our plug-in is to import them into the Lightroom Classic Catalog and select them. 
+The most easiest way for importing images into our plug-in is to import them into the Lightroom Classic Catalog and select them.
+
  <pre><code>local catalog = LrApplication.activeCatalog()
 local targetPhotos = catalog.targetPhotos</code></pre>
-  In this code the targetPhotos are the selected photos in the catalog. Now you can work with them. It's that simple. 
-
+In this code the targetPhotos are the selected photos in the catalog. Now you can work with them. It's that simple. 
+### Export images
+The "ExportPhotos.lua" file is responsible for the export of our images. You don't have to implement a ExportServiceProvider.
+<pre><code> function ExportPhotos.processRenderedPhotos(photos, folderName)</code></pre> gets the images and the foldername for the export. 
+This function creates an exportsession where you can change the settings for the export e.g. the format. 
+We used <pre><code> LR_export_destinationPathSuffix = folderName </code></pre> for exporting in different folders. Each time the function <code> function ExportPhotos.processRenderedPhotos(photos, folderName)</code> is called, the photos will be exported in other folders. 
 ### Debugging
 
 ## Acknowledgements
