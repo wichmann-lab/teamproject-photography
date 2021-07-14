@@ -126,7 +126,7 @@ Example for Config file
 It is called by the Info.lua file as the main script.
 This is where the magic happens. This file implements the whole User Interface of our plug-in as well as a few functions. (Those are interacting with UI-objects for example the text-fields.)
 ### Which files do I need for contributing to TheImageIterator?
-* In our case the most important file is the configuration file called "imageIteratorSettings.json". Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called "json.lua". It's an external file from [this source] (https://github.com/rxi/json.lua/blob/master/json.lua). 
+* In our case the most important file is the configuration file called "imageIteratorSettings.json". Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called "json.lua". It's an external file from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). 
 
 If you are not sure, here is the License for the "json.lua" file: (You can find it in the json.lua as well.)
 >-- Copyright (c) 2020 rxi
@@ -152,11 +152,17 @@ If you are not sure, here is the License for the "json.lua" file: (You can find 
   
 All the external sources used in our plug-in are listed at the end of this README.
 We changed the lines 85 and 96 for a better look of our configuration file.
+
+*The file called "AdjustConfigurationFile.lua" is the interface between the "LibraryMenuItemPluginUI.lua" and the configuration file. 
+  It checks whether the configuration file exists, reads the configuration file, writes into the configuration file and more. For the last two tasks the "json.lua" is absolutely necessary. 
   
-Another file is the "arrayCombine.lua". It's an external file as well. [Click here for getting to the source.]("BITTE NOCH EINFÜGEN"). 
-Because it's a code from stackoverflow it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
+*Another file is the "arrayCombine.lua". It's an external file as well. [Click here for getting to the source.]("BITTE NOCH EINFÜGEN"). 
+Because it's code from stackoverflow, it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
   
 We modified the code for our usage. This file gets the settings from the configuration file and creates a new table with all the possible combinations from the settings of our configuration file. The code is well commented, so you should read the comments for understanding each function. 
+  
+* The last file is the "ExportPhotos.lua". A very short file with the duty to export our images.
+
 ### Debugging
 
 ## Acknowledgements
