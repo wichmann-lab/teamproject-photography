@@ -99,7 +99,21 @@ Add:
 ### Config file
 Example for Config file 
 ```json
-{"Highlights":[0,20,50],"Saturation":[10,0,30],"Contrast":[30,40,60]}
+{ 
+"export_format":"JPEG", 
+"Settings":{ 
+"Contrast":[ 
+0, 
+0, 
+0
+ ], 
+"Highlights":[ 
+0, 
+0, 
+0
+ ]
+ }
+ }
 ```
 ## 💻👥Contributing
 
