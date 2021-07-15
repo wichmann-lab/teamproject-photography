@@ -63,9 +63,9 @@ the following combinations will be applied on your selected photos: <br>
 
 ## 💡 Usage
 + After opening the Plug-in you can see the path of your created configuration file under the standard home directory.
-+ `Overview Develop settings` displays the all settings, that were initially added to the configuration file (see [Config file](#config-file))
++ `Overview Develop settings` displays all settings, that were initially added to the configuration file (see [Config file](#config-file))
 
-+ If you need any help for using the Plug-in press the SUPPORT-Button to. The following window will pop up:
++ If you need any help for using the Plug-in press the SUPPORT-Button. The following window will pop up:
 <img src="README-files/supportwindow.png" width="200" height="300">
 
 + Add settings by typing them into the text field and set (max. 3) different values for these. Press the ADD-Button afterwards. 
@@ -80,7 +80,7 @@ CAUTION: If you add a setting and delete it afterwards in the configuration file
 
 + After adding the preferred settings and values correctly start the editing and exporting progress by using the SAVE AND EDIT-Button and confirming the progress. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin`and there will be all edited photographs. 
 ![export](README-files/export.gif)
-(Update: Window after editing and exporting progress was changed)
+(Update: GIF not up to date, window to confirm progress was changed)
 + You have two options to cancel the progress:
 1. By using the CANCEL PROGRESS AND EXIT-Button. The progress will immediately stop and the Plug-in will be closed.
 ![cancelbutton](README-files/cancelbutton.gif)
@@ -95,7 +95,7 @@ CAUTION: If you add a setting and delete it afterwards in the configuration file
 + If there is an unavailable setting or an invalid text in the configuration file already and you want to start the editing and exporting progress by using the SAVE AND EDIT-Button the following error will be generated: 
 <img src="README-files/error_unavailablesettingConfig.jpeg" width="500" height="550">
 
-+ Open the configuration file [`imageIteratorSettings.json`] and remove every setting that is not mentioned in the   list of available settings.
++ Open the configuration file [`imageIteratorSettings.json`], remove every setting that is not mentioned in the list of available settings and reload the Plug-in.
 
 ### Config file
 Example for Config file 
@@ -118,8 +118,7 @@ Example for Config file
 ```
 
 If there is no directory under the standard home directory with the configuration file in it or if the directory exists but the configuration file is missing the following error will occur: 
-
-<img src="README-files/error_noconfigfile.png" width="200" height="260">
+<img src="README-files/error_noconfigfile.png" width="200" height="290">
 
 
 It's important that the structure is preserved. 
@@ -128,10 +127,10 @@ It's important that the structure is preserved.
 ```
 If there is no "Settings" key or no "export_format", the plug-in won't work and the following error messages will appear: 
 + Missing keys: 
-<img src="README-files/error_nokey.png" width="200" height="260">
+<img src="README-files/error_nokey.png" width="200" height="290">
 
 + Missing values for "Settings": 
- <img src="README-files/error_novaluesinkey.png" width="200" height="260">
+ <img src="README-files/error_novaluesinkey.png" width="200" height="290">
 
 Of course you can add more keys, but don't delete the existing ones. Otherwise we cannot guarantee that the plug-in will work.
 
