@@ -312,7 +312,7 @@ local function main()
                                             "Are you sure?",
                                             "Do you want to edit the selected " ..
                                                 #(targetPhotos) ..
-                                                    " photo(s)? \n (The Configuration file will be overwritten)"
+                                                    " photo(s)?"
                                         )
                                 then
                                     progressBar = -- creates porgressbar for counting the renditions
