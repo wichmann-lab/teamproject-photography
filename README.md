@@ -118,6 +118,7 @@ Example for Config file
 ```
 
 If there is no directory under the standard home directory with the configuration file in it or if the directory exists but the configuration file is missing the following error will occur: 
+
 <img src="README-files/error_noconfigfile.png" width="200" height="290">
 
 
@@ -234,8 +235,7 @@ If you want more available settings, you have to implement the whole Develop Con
 
 ## Acknowledgements
   
-* interested in image editing
-* programming skills would be an advantage
+
 
 ## License
 
