@@ -63,12 +63,15 @@ Add:
 
 ## 💡 Usage
 + After opening the Plug-in you can see the path of your created configuration file under the standard home directory.
-+ `Overview Develop settings` displays all settings, that were initially added to the configuration file (see [Config file](#config-file))
++ `Overview Develop settings` displays all settings, that were initially added to the configuration file (see [Config file](#config-file)) and the current content of the key "Settings" in the configuration file.
 
 + If you need any help for using the Plug-in press the SUPPORT-Button. The following window will pop up:
 <img src="README-files/supportwindow.png" width="200" height="300">
 
 + Add settings by typing them into the text field and set (max. 3) different values for these. Press the ADD-Button afterwards. 
++ The added setting is now visible in `Overview Develop settings`
++ Every new added setting and every new changes of values for a setting will make the text color of `Overview Develop settings` <span style="color:red">red</span>. If noting is changed and the ADD-Button is used again the text color will turn <span style="color:black">black</span>.
+
 ![addsetting](README-files/addsetting.gif)
 + Use the HELP-Button so see a list of all available settings.
 <img src="README-files/helpwindow.png" width="200" height="290">
