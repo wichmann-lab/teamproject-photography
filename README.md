@@ -118,7 +118,8 @@ Example for Config file
 ```
 
 If there is no directory under the standard home directory with the configuration file in it or if the directory exists but the configuration file is missing the following error will occur: 
-<img src="README-files/error_noconfigfile.png" width="200" height="290">
+
+<img src="README-files/error_noconfigfile.png" width="200" height="260">
 
 
 It's important that the structure is preserved. 
@@ -127,10 +128,10 @@ It's important that the structure is preserved.
 ```
 If there is no "Settings" key or no "export_format", the plug-in won't work and the following error messages will appear: 
 + Missing keys: 
-<img src="README-files/error_nokey.png" width="200" height="290">
+<img src="README-files/error_nokey.png" width="200" height="260">
 
 + Missing values for "Settings": 
- <img src="README-files/error_novaluesinkey.png" width="200" height="290">
+ <img src="README-files/error_novaluesinkey.png" width="200" height="260">
 
 Of course you can add more keys, but don't delete the existing ones. Otherwise we cannot guarantee that the plug-in will work.
 
