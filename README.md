@@ -1,5 +1,5 @@
 ***
-# ⭐ THE IMAGE ITERATOR ⭐
+# ⭐ THE IMAGE ITERATOR 📸 ⭐
 ***
 ***
 
@@ -16,7 +16,7 @@
 8. [License](#license)
 9. [Sources](#sources)
 
-## About the project 
+## 👥About the project 
 
 This is the repository for the teamproject course, summer term 2021, working on automating photography manipulation.
 The plugin is part of the teamproject of the University of Tübingen.
@@ -32,9 +32,7 @@ Add:
 * language: Lua
 * works with Adobe Lightroom Classic 10.3
 
-## Features
-
-(Of our plug-in)
+## 🌅 Features
 
 * The special thing about our plugin is that you can select several images at once and import, export and edit them.
 * includes export of your selected images in a matrix-modification format
@@ -44,9 +42,10 @@ the following combinations will be applied on your selected photos: <br>
 * available settings: Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Clarity, Vibrance, Saturation
 
 
-## Getting Started
+##🛠 Getting Started
 
-### 🛠 Set up
+### Set up
++ Download the whole project or only the folder `lightroom_plugin.lrdevplugin`. The folder itself can be anywhere on your computer.
 + Create a new directory called "TheImageIterator" under the standard home directory.
 
   Home directory..
@@ -57,44 +56,40 @@ the following combinations will be applied on your selected photos: <br>
   
 + Make sure to save the configuration file [`imageIteratorSettings.json`](lightroom_plugin.lrdevplugin/imageIteratorSettings.json) under this folder. 
 + Add the Plug-in in Lightroom Classic: File -> Plug-in Manager... -> Add -> Select the folder of the plugin `lightroom_plugin.lrdevplugin` -> Done
-+ Execute the Plug-in: Library -> Plug-in Extras -> The Image Iterator
-
-
-1. Open the Plug-in Manager after starting Adobe Photoshop Lightroom Desktop: File > Plug-in Manager
-2. Add the plug-in: Add-Button
 ![addplugin](README-files/addingplugin.gif)
-
-4. Choose the pictures you want to edit.
-5. Start the plug-in: Library > Plug-in Extras > The Image Iterator
++ Choose the pictures you want to edit.
++ Execute the Plug-in: Library -> Plug-in Extras -> The Image Iterator
 ![openplugin](README-files/openplugin.gif)
 
-Add:
+##💡 Usage
++ After opening the Plug-in you can see the path of your created configuration file under the standard home directory.
++ `Overview Develop settings` displays the all settings, that were initially added to the configuration file (see [Configfile](#config-file))
 
-* Gifs 
-* Starting from Downloading the Folder for the plugin 
-
-
-## Usage
-
++ If you need any help for using the Plug-in press the SUPPORT-Button to. The following window will pop up:
 <img src="README-files/supportwindow.png" width="200" height="300">
 
++ Add settings by typing them into the text field and set (max. 3) different values for these. Press the ADD-Button afterwards. 
 ![addsetting](README-files/addsetting.gif)
++ Use the HELP-Button so see a list of all available settings.
 <img src="README-files/helpwindow.png" width="200" height="290">
-<img src="README-files/error_unavailablesettingTextfield.jpeg" width="500" height="550">
-<img src="README-files/error_unavailablesettingConfig.jpeg" width="500" height="550">
+
++ You can reset the values of every setting to 0 by using the RESET-Button.  
 ![reset](README-files/reset.gif)
 
++ After adding the preferred settings and values correctly you can start the editing and exporting progress by using the SAVE AND EDIT-Button. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in the `lightroom_plugin.lrdevplugin`and there will be all edited photographs. 
 ![export](README-files/export.gif)
++ You have two options to cancel the progress:
+1. By using the CANCEL PROGRESS AND EXIT-Button. The progress will immediately stop and the Plug-in will be closed.
 ![cancelbutton](README-files/cancelbutton.gif)
+2. By closing the Plug-in and using the X at the right end of the progress bar.
 ![cancelX](README-files/cancelX.gif)
-
-
-Add:
-
-* Gifs and description of the steps
-
-1. Different Features of the plug-in 
-2. How to export the pictures
+### Errors
++ If you want to add an unavailable setting or an invalid text (in example here: Helloworld) the following error will generated:  
+<img src="README-files/error_unavailablesettingTextfield.jpeg" width="500" height="550">
++ You can find all available settings by using the HELP-Button or see [Editing images](#editing-images)
++ If there is an unavailable setting or an invalid text in the configuration file already and you want to start the editing and exporting progress by using the SAVE AND EDIT-Button the following error will be generated: 
+<img src="README-files/error_unavailablesettingConfig.jpeg" width="500" height="550">
++ Open the configuration file [`imageIteratorSettings.json`] and remove every setting that is not mentioned in the   list of available settings.
 
 ### Config file
 Example for Config file 
@@ -125,7 +120,7 @@ Of course you can add more keys, but don't delete the existing ones. Otherwise w
 You can add more settings in the key called "Settings". 
 If you want to modify the configuration file, you have to write the settings in lower case (first letter in upper case).
 The added settings should look like this ```"Settingname":[x,y,z] ```.
-## 💻👥Contributing
+## 💻Contributing
 
 ### How to start programming my own plug-in?
 * Read the Lightroom Classic SDK guide. (You don't have to read each chapter). We would recommend reading the first two chapters of the SDK.
