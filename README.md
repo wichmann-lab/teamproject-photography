@@ -78,7 +78,7 @@ CAUTION: If you add a setting and delete it afterwards in the configuration file
 + You can reset the values of every setting to 0 by using the RESET-Button.  
 ![reset](README-files/reset.gif)
 
-+ After adding the preferred settings and values correctly start the editing and exporting progress by using the SAVE AND EDIT-Button and confirming the progress. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin`and there will be all edited photographs. 
++ After adding the preferred settings and values correctly start the editing and exporting progress by using the SAVE AND EDIT-Button and confirming the progress. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin` (first time using SAVE AND EDIT-Button) and there will be all edited photographs. For later use, all photographs will be stored in this folder.
 ![export](README-files/export.gif)
 (Update: GIF not up to date, window to confirm progress was changed)
 + You have two options to cancel the progress:
@@ -96,6 +96,11 @@ CAUTION: If you add a setting and delete it afterwards in the configuration file
 <img src="README-files/error_unavailablesettingConfig.jpeg" width="500" height="550">
 
 + Open the configuration file [`imageIteratorSettings.json`], remove every setting that is not mentioned in the list of available settings and reload the Plug-in.
+
++ Don't delete the `Exported Photos` folder, remove the content only, the following error will occur otherwise:
+<img src="README-files/error_exportedphotos.jpeg" width="500" height="550">
+
++ To solve this reload the Plug-in and start it again.
 
 ### Config file
 Example for Config file 
@@ -118,7 +123,6 @@ Example for Config file
 ```
 
 If there is no directory under the standard home directory with the configuration file in it or if the directory exists but the configuration file is missing the following error will occur: 
-
 <img src="README-files/error_noconfigfile.png" width="200" height="290">
 
 
@@ -235,7 +239,8 @@ If you want more available settings, you have to implement the whole Develop Con
 
 ## Acknowledgements
   
-
+* interested in image editing
+* programming skills would be an advantage
 
 ## License
 
