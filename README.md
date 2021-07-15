@@ -78,8 +78,9 @@ CAUTION: If you add a setting and delete it afterwards in the configuration file
 + You can reset the values of every setting to 0 by using the RESET-Button.  
 ![reset](README-files/reset.gif)
 
-+ After adding the preferred settings and values correctly start the editing and exporting progress by using the SAVE AND EDIT-Button. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin`and there will be all edited photographs. 
++ After adding the preferred settings and values correctly start the editing and exporting progress by using the SAVE AND EDIT-Button and confirming the progress. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin`and there will be all edited photographs. 
 ![export](README-files/export.gif)
+(Update: Window after editing and exporting progress was changed)
 + You have two options to cancel the progress:
 1. By using the CANCEL PROGRESS AND EXIT-Button. The progress will immediately stop and the Plug-in will be closed.
 ![cancelbutton](README-files/cancelbutton.gif)
@@ -115,11 +116,22 @@ Example for Config file
  }
  }
 ```
+
+If there is no directory under the standard home directory with the configuration file in it or if the directory exists but the configuration file is missing the following error will occur: 
+<img src="README-files/error_noconfigfile.png" width="200" height="290">
+
+
 It's important that the structure is preserved. 
 ```json
 { "export_format":"JPEG", "Settings":{}}
 ```
-If there is no "Settings" key or no "export_format", the plug-in won't work. 
+If there is no "Settings" key or no "export_format", the plug-in won't work and the following error messages will appear: 
++ Missing keys: 
+<img src="README-files/error_nokey.png" width="200" height="290">
+
++ Missing values for "Settings": 
+ <img src="README-files/error_novaluesinkey.png" width="200" height="290">
+
 Of course you can add more keys, but don't delete the existing ones. Otherwise we cannot guarantee that the plug-in will work.
 
 You can add more settings in the key called "Settings". 
