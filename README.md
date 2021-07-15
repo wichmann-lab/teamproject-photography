@@ -101,6 +101,7 @@ CAUTION: If you add a setting and delete it afterwards in the configuration file
 + Open the configuration file [`imageIteratorSettings.json`], remove every setting that is not mentioned in the list of available settings and reload the Plug-in.
 
 + Don't delete the `Exported Photos` folder, remove the content only, the following error will occur otherwise:
++ 
 <img src="README-files/error_exportedphotos.jpeg" width="500" height="550">
 
 + To solve this reload the Plug-in and start it again.
@@ -126,6 +127,7 @@ Example for Config file
 ```
 
 If there is no directory under the standard home directory with the configuration file in it or if the directory exists but the configuration file is missing the following error will occur: 
+
 <img src="README-files/error_noconfigfile.png" width="200" height="290">
 
 
