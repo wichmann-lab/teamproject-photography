@@ -26,11 +26,6 @@ The plugin is part of the teamproject of the University of Tübingen.
 
 We are 4 students at the University of Tübingen and we are all studying computer science. 
 
-Add:
-
-* is used to edit image data sets
-* language: Lua
-* works with Adobe Lightroom Classic 10.3
 
 ## 🌅Features
 
@@ -43,6 +38,11 @@ the following combinations will be applied on your selected photos: <br>
 
 
 ## 🛠Getting Started
+
+Add:
+
+* language: Lua
+* works with Adobe Lightroom Classic 10.3
 
 ### Set up
 + Download the whole project or only the folder `lightroom_plugin.lrdevplugin`. The folder itself can be anywhere on your computer.
