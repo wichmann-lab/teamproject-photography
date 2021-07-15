@@ -102,7 +102,7 @@ CAUTION: If you add a setting and delete it afterwards in the configuration file
 
 + Don't delete the `Exported Photos` folder, remove the content only, the following error will occur otherwise:
 + 
-<img src="README-files/error_exportedphotos.jpg" width="500" height="550">
+<img src="README-files/error_exportedphotos.jpg" width="200" height="290">
 
 + To solve this reload the Plug-in and start it again.
 
