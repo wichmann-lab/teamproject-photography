@@ -70,7 +70,7 @@ Add:
 
 + Add settings by typing them into the text field and set (max. 3) different values for these. Press the ADD-Button afterwards. 
 + The added setting is now visible in `Overview Develop settings`
-+ Every new added setting and every new changes of values for a setting will make the text color of `Overview Develop settings` <span style="color:red">red</span>. If noting is changed and the ADD-Button is used again the text color will turn <span style="color:black">black</span>.
++ Every new added setting and every new changes of values for a setting will make the text color of `Overview Develop settings` red. If noting has changed and the ADD-Button is used again the text color will turn black.
 
 ![addsetting](README-files/addsetting.gif)
 + Use the HELP-Button so see a list of all available settings.
