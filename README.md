@@ -32,7 +32,7 @@ Add:
 * language: Lua
 * works with Adobe Lightroom Classic 10.3
 
-## 🌅 Features
+## 🌅Features
 
 * The special thing about our plugin is that you can select several images at once and import, export and edit them.
 * includes export of your selected images in a matrix-modification format
@@ -42,7 +42,7 @@ the following combinations will be applied on your selected photos: <br>
 * available settings: Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Clarity, Vibrance, Saturation
 
 
-##🛠 Getting Started
+## 🛠Getting Started
 
 ### Set up
 + Download the whole project or only the folder `lightroom_plugin.lrdevplugin`. The folder itself can be anywhere on your computer.
@@ -61,7 +61,7 @@ the following combinations will be applied on your selected photos: <br>
 + Execute the Plug-in: Library -> Plug-in Extras -> The Image Iterator
 ![openplugin](README-files/openplugin.gif)
 
-##💡 Usage
+## 💡 Usage
 + After opening the Plug-in you can see the path of your created configuration file under the standard home directory.
 + `Overview Develop settings` displays the all settings, that were initially added to the configuration file (see [Configfile](#config-file))
 
