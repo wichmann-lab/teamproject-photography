@@ -73,10 +73,12 @@ the following combinations will be applied on your selected photos: <br>
 + Use the HELP-Button so see a list of all available settings.
 <img src="README-files/helpwindow.png" width="200" height="290">
 
+CAUTION: If you add a setting and delete it afterwards in the configuration file you have to RELOAD the Plug-in (File -> Plug-in Manager -> RELOAD-Button -> Done) Now you can execute the Plug-in again. 
+
 + You can reset the values of every setting to 0 by using the RESET-Button.  
 ![reset](README-files/reset.gif)
 
-+ After adding the preferred settings and values correctly you can start the editing and exporting progress by using the SAVE AND EDIT-Button. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin`and there will be all edited photographs. 
++ After adding the preferred settings and values correctly start the editing and exporting progress by using the SAVE AND EDIT-Button. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin`and there will be all edited photographs. 
 ![export](README-files/export.gif)
 + You have two options to cancel the progress:
 1. By using the CANCEL PROGRESS AND EXIT-Button. The progress will immediately stop and the Plug-in will be closed.
@@ -84,7 +86,7 @@ the following combinations will be applied on your selected photos: <br>
 2. By closing the Plug-in and using the X at the right end of the progress bar.
 ![cancelX](README-files/cancelX.gif)
 ### Errors
-+ If you want to add an unavailable setting or an invalid text (in example here: Helloworld) the following error will generated:  
++ If you add an unavailable setting or an invalid text (in example here: Helloworld) the following error will generated:  
 <img src="README-files/error_unavailablesettingTextfield.jpeg" width="500" height="550">
 
 + You can find all available settings by using the HELP-Button or see [Editing images](#editing-images)
