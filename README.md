@@ -9,12 +9,12 @@
 ## Table of Contents
 1. [About the project](#about-the-project)
 2. [Features](#features)
-4. [Getting Started](#getting-started)
-5. [Usage](#usage)
-6. [Contributing](#contributing)
-7. [Acknowledgements](#acknowledgements)
-8. [License](#license)
-9. [Sources](#sources)
+3. [Getting Started](#getting-started)
+4. [Usage](#usage)
+5. [Contributing](#contributing)
+6. [Acknowledgements](#acknowledgements)
+7. [License](#license)
+8. [Sources](#sources)
 
 ## 👥About the project 
 
@@ -66,7 +66,7 @@ Add:
 + `Overview Develop settings` displays all settings, that were initially added to the configuration file (see [Config file](#config-file)) and the current content of the key "Settings" in the configuration file.
 
 + If you need any help for using the Plug-in press the SUPPORT-Button. The following window will pop up:
-<img src="README-files/supportwindow.png" width="200" height="300">
+<p align="center"><img src="README-files/supportwindow.png" width="259" height="433"></p>
 
 + Add settings by typing them into the text field and set (max. 3) different values for these. Press the ADD-Button afterwards. 
 + The added setting is now visible in `Overview Develop settings`
