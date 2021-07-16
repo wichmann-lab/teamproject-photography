@@ -154,22 +154,22 @@ The added settings should look like this ```"Settingname":[x,y,z] ```.
 * Try to program your own small "Hello World" plug-in using the SDK.
 
 ### Which files do I need?
-* <b> Info.lua:</b> This file describes your plug-in e.g. the Lightroom Version, the title of your plug-in and more
-* Main file or as we call it "the UI file": in our case this file is called <b>"LibraryMenuItemPluginUI.lua"</b>
-It is called by the <b>Info.lua</b> file as the main script.
-This is where the magic happens. This file implements the whole User Interface of our plug-in as well as a few functions.
+* `Info.lua`: This file describes your Plug-in e.g. the Lightroom Version, the title of your Plug-in and more
+* Main file or as we call it "the UI file": in our case this file is called `LibraryMenuItemPluginUI.lua`
+It is called by the `Info.lua` file as the main script.
+This is where the magic happens. This file implements the whole User Interface of our Plug-in as well as a few functions.
 (Those are interacting with UI-objects, for example the text-fields.)
 
 ### Which files do I need for contributing to TheImageIterator?
-* In our case, the most important file is the configuration file called <b>"imageIteratorSettings.json"</b>. 
+* In our case, the most important file is the configuration file called `imageIteratorSettings.json`. 
 You can save the settings in the configuration file or use our UI for modifying the configuration file.
 The configuration file contains the settings for editing and other infomation. You can store everything about the settings, the export and more in this file. 
-We implemented <code> export_format </code> and our Settings for editing. If you want to save for example the metadata, you have to implement functions in the plugin. 
+We implemented `export_format` and our Settings for editing. If you want to save for example the metadata, you have to implement functions in the plugin. 
 In short, the configuration file contains information for the processing.
 
-* Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution is called <b>"json.lua"</b>. It's an external file from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). This file makes decoding and encoding easier. 
+* Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution for it is `json.lua`. It's an external JSON library for Lua from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). This file makes decoding and encoding between JSON and Lua easier. 
 We changed the lines 85 and 96 for a better look of our configuration file. 
-Here is the License for the <b>"json.lua"</b> file: (You can find it in the json.lua as well.)
+Here is the License for the `json.lua` file: (You can find it in json.lua as well.)
 >-- Copyright (c) 2020 rxi
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -191,17 +191,17 @@ Here is the License for the <b>"json.lua"</b> file: (You can find it in the json
 -- SOFTWARE.
 --
   
-All the external sources used in our plug-in are listed at the end of this README.
+All the external sources used in our Plug-in are listed at the end of this README.
 
-* The file called <b>"AdjustConfigurationFile.lua"</b> is the interface between the <b>"LibraryMenuItemPluginUI.lua"</b> and the configuration file. 
-  It checks whether the configuration file exists, reads the configuration file, writes into the configuration file and more.
-  For the last two tasks, the <b>"json.lua"</b> is absolutely necessary. 
+* The file called `AdjustConfigurationFile.lua` is the interface between `LibraryMenuItemPluginUI.lua` and the configuration file. 
+  It checks whether the configuration file exists, reads the configuration file, writes into the configuration file and so on.
+  For the last two tasks, `json.lua` is absolutely necessary. 
   
-* Another file is the <b>"DevelopSettingsCombinations.lua"</b>. It's an external code as well. [Click here for getting to the source](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua). 
-Because it's code from Stack Overflow, it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
-  We modified the code for our usage. This file gets the settings from the configuration file and creates a new table with all the possible combinations from the settings of our configuration file. The code is well commented, so you should read the comments for understanding each function. 
+* Another file is `DevelopSettingsCombinations.lua`. It's an external code as well. [Click here for getting to the source](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua). 
+Because it is code from Stack Overflow, it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
+We extend the code for our usage with some functions based on it. This file gets the settings from the configuration file and creates a new table with all possible combinations from the settings of our configuration file. The code is well commented, so you should be able to read the comments for understanding each function. 
   
-* The last file is the <b>"ExportPhotos.lua"</b>. A very short file with the duty to export our images.
+* The last file is `ExportPhotos.lua`. A very short file with the duty to export our images.
 
 So for summary: 
   * LibraryMenuItemPluginUI.lua
@@ -213,20 +213,30 @@ So for summary:
   * ExportPhotos.lua
 
 ### Import of the images
-The easiest way for importing images into our plug-in is to import them into the Lightroom Classic Catalog and select them.
+The easiest way for importing images into our Plug-in is to import them into the Lightroom Classic Catalog and select them.
 
- <pre><code>local catalog = LrApplication.activeCatalog()
-local targetPhotos = catalog.targetPhotos</code></pre>
-In this code, the <code>targetPhotos</code> are the selected photos in the catalog. Now you can work with them. It's that simple. 
+ ```lua
+ local catalog = LrApplication.activeCatalog()
+local targetPhotos = catalog.targetPhotos
+```
+
+In this code, the `targetPhotos` are the selected photos in the catalog. Now you can work with them. It's that simple. 
 
 ### Export images
-The <b>"ExportPhotos.lua"</b> file is responsible for the export of our images. You don't have to implement a ExportServiceProvider.
-<pre><code> function ExportPhotos.processRenderedPhotos(photos, folderName)</code></pre> gets the images and the foldername for the export. 
+`ExportPhotos.lua` is responsible for the export of our images. You don't have to implement a ExportServiceProvider.
+```lua
+function ExportPhotos.processRenderedPhotos(photos, folderName)
+```
+gets the images and the foldername for the export. 
 This function creates an exportsession where you can change the settings for the export e.g. the format. 
-We used <pre><code> LR_export_destinationPathSuffix = folderName </code></pre> for exporting in different folders. Each time the function <code> function ExportPhotos.processRenderedPhotos(photos, folderName)</code> is called, the photos will be exported in the associated folders. If you want to export all of the images into one folder then you have to change the variable <code> folderName </code> into a string.
+We used 
+```
+LR_export_destinationPathSuffix = folderName
+```
+for exporting in different folders. Each time the function `function ExportPhotos.processRenderedPhotos(photos, folderName)` is called, the photos will be exported in the associated folders. If you want to export all of the images into one folder then you have to change the variable `folderName` into a string.
 
 ### Editing images
-We use the function <code> photo:quickDevelopAdjustImage(settingName, size)</code> from the class called "LrPhoto" for editing our images.
+We use the function `photo:quickDevelopAdjustImage(settingName, size)` from the class `LrPhoto` for editing our images.
 The following settings are available for editing with this function: 
 * Exposure
 * Contrast
@@ -238,7 +248,7 @@ The following settings are available for editing with this function:
 * Vibrance
 * Saturation
 
-You can find more settings in the Namespace "LrDevelopController". The settings that we have not listed, <b> can not be used </b> within the  <code> photo:quickDevelopAdjustImage(settingName, size)</code>. 
+You can find more settings in the Namespace `LrDevelopController`. The settings that we have not listed, <b> can not be used </b> within the   `photo:quickDevelopAdjustImage(settingName, size)`. 
 If you want more available settings, you have to implement the whole Develop Controller. 
 ### Debugging
 
