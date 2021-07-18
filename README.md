@@ -50,7 +50,7 @@ the following combinations will be applied on your selected photos: <br>
   
      + for Mac OS: `/Users/username/`
   
-+ Make sure to save the configuration file [imageIteratorSettings.json](#lightroom_plugin.lrdevplugin/imageIteratorSettings.json) under this folder. 
++ Make sure to save the configuration file [imageIteratorSettings.json](lightroom_plugin.lrdevplugin/TheImageIterator/imageIteratorSettings.json) under this folder. 
 + Add the Plug-in in Lightroom Classic: File -> Plug-in Manager... -> Add -> Select the folder of the plugin `lightroom_plugin.lrdevplugin` -> Done
 ![addplugin](README-files/addingplugin.gif)
 + Choose the pictures you want to edit.
