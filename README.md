@@ -249,7 +249,10 @@ The following settings are available for editing with this function:
 * Saturation
 
 You can find more settings in the Namespace `LrDevelopController`. The settings that we have not listed, <b> can not be used </b> within the   `photo:quickDevelopAdjustImage(settingName, size)`. 
-If you want more available settings, you have to implement the whole Develop Controller. 
+If you want more available settings, you have to implement the whole Develop Controller.
+Our UI creates arrays with the length of 3. If you want to edit your photos with arrays of a length greater than 3, you can use the configuration file. 
+If the UI should create array of length of n elements, you have to implement this.
+
 ### Debugging
 
 ## Acknowledgements
