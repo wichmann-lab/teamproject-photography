@@ -40,8 +40,6 @@ the following combinations will be applied on your selected photos: <br>
 ## 🛠Getting Started
 
 Add:
-
-* language: Lua
 * works with Adobe Lightroom Classic 10.3
 
 ### Set up
@@ -153,6 +151,7 @@ The added settings should look like this ```"Settingname":[x,y,z] ```.
 ## 💻Contributing
 
 ### How to start programming my own plug-in?
+* The programming language of our project is Lua.
 * Read the [Lightroom Classic SDK guide](https://www.adobe.io/apis/creativecloud/lightroomclassic.htm). (You don't have to read each chapter). We would recommend reading the first two chapters of the SDK.
 * Try to program your own small "Hello World" plug-in using the SDK.
 
