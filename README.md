@@ -84,6 +84,9 @@ Add:
 + After adding the preferred settings and values correctly start the editing and exporting progress by using the SAVE AND EDIT-Button and confirming the progress. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin` (first time using SAVE AND EDIT-Button) and there will be all edited photographs. For later use, all photographs will be stored in this folder.
 ![export](README-files/export.gif)
 (Update: GIF not up to date, window to confirm progress was changed)
+As shown, our UI creates arrays with the length of 3.
+If you want to edit your photos with arrays of a length greater than 3, you can use the configuration file.
+
 + You have two options to cancel the progress:
 1. By using the CANCEL PROGRESS AND EXIT-Button. The progress will immediately stop and the Plug-in will be closed.
 ![cancelbutton](README-files/cancelbutton.gif)
