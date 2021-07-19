@@ -257,3 +257,4 @@ Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License.
 ## Sources
 1. [JSON Library for Lua Accessed: May 20, 2021](https://github.com/rxi/json.lua/blob/master/json.lua)
 2. [Sample pictures for testing the Plug-in Accessed: May 22, 2021](https://pixabay.com/de/)
+3. [Code from Stack Overflow for finding all possible combinations of arrays recursively](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua)
