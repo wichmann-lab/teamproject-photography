@@ -33,7 +33,7 @@ We are 4 students at the University of Tübingen and we are all studying compute
 * exports selected images in a matrix-modification format
 * processes the images using all possible combinations e.g. Contrast = [10,20], Saturation = [30,40] <br>
 the following combinations will be applied on your selected photos: <br>
-{[Contrast = 10, Saturation = 30],[Contrast = 10 , Saturation = 40], [Contrast = 20, Saturation = 30], [Contrast = 20 , Saturation = 40]}
+<code>{[Contrast = 10, Saturation = 30],[Contrast = 10 , Saturation = 40], [Contrast = 20, Saturation = 30], [Contrast = 20 , Saturation = 40]}</code>
 * available settings: Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Clarity, Vibrance, Saturation
 
 
