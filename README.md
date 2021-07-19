@@ -191,17 +191,17 @@ Here is the License for the `json.lua` file: (You can find it in json.lua as wel
 -- SOFTWARE.
 --
   
-All the external sources used in our Plug-in are listed at the end of this README.
+All external sources used in our Plug-in are listed at the end of this README.
 
-* The file called `AdjustConfigurationFile.lua` is the interface between `LibraryMenuItemPluginUI.lua` and the configuration file. 
+* `AdjustConfigurationFile.lua` is the interface between `LibraryMenuItemPluginUI.lua` and the configuration file. 
   It checks whether the configuration file exists, reads the configuration file, writes into the configuration file and so on.
   For the last two tasks, `json.lua` is absolutely necessary. 
   
-* Another file is `DevelopSettingsCombinations.lua`. It's an external code as well. [Click here for getting to the source](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua). 
+* `DevelopSettingsCombinations.lua` is an external code as well. [Click here for getting to the source](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua). 
 Because it is code from Stack Overflow, it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
 We extend the code for our usage with some functions based on it. This file gets the settings from the configuration file and creates a new table with all possible combinations from the settings of our configuration file. The code is well commented, so you should be able to read the comments for understanding each function. 
   
-* The last file is `ExportPhotos.lua`. A very short file with the duty to export our images.
+* `ExportPhotos.lua` is a very short file with the duty to export our images.
 
 So for summary: 
   * LibraryMenuItemPluginUI.lua
