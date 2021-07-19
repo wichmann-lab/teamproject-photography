@@ -40,7 +40,7 @@ the following combinations will be applied on your selected photos: <br>
 ## 🛠Getting Started
 
 ### Set up
-+ You need Adobe Lightroom Classic 10.3 with an access to the Creative Cloud.
++ You need [Adobe Lightroom Classic 10.3](https://helpx.adobe.com/lightroom-classic/get-started.html#) with an access to the Creative Cloud.
 + Download the whole project or only the folder `lightroom_plugin.lrdevplugin`. The folder itself can be anywhere on your computer.
 + Create a new directory called "TheImageIterator" under the standard home directory.
 
