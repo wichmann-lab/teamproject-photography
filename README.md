@@ -34,8 +34,16 @@ We are 4 students at the University of Tübingen and we are all studying compute
 * processes the images using all possible combinations e.g. <code> Contrast = [10,20], Saturation = [30,40]</code><br>
 the following combinations will be applied on your selected photos: <br>
 <code>{[Contrast = 10, Saturation = 30],[Contrast = 10 , Saturation = 40], [Contrast = 20, Saturation = 30], [Contrast = 20 , Saturation = 40]}</code>
-* available settings: Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Clarity, Vibrance, Saturation
-
+* available settings: 
+> * Exposure
+> * Contrast
+> * Highlights
+> * Shadows
+> * Whites
+> * Blacks
+> * Clarity
+> * Vibrance
+> * Saturation
 
 ## 🛠Getting Started
 
@@ -92,7 +100,7 @@ If you want to edit your photos with arrays of a length greater than 3, you can 
 + If you add an unavailable setting or an invalid text (as the following example "Helloworld") the following error will be generated:  
 <p align="center"><img src="README-files/error_unavailablesettingTextfield.jpeg" width="500" height="613.38"></p>
 
-+ You can find all available settings in [Editing images](#editing-images) or by using the HELP-Button.
++ You can find all available settings in [Features](#features) or by using the HELP-Button.
 
 + If there is already an unavailable setting or an invalid text in the configuration file and you want to start the editing and exporting progress by using the SAVE AND EDIT-Button, the following error will be generated: 
 <p align="center"><img src="README-files/error_unavailablesettingConfig.jpeg" width="500" height="610.08"></p>
@@ -203,15 +211,6 @@ We extend the code for our usage with some functions based on it. This file gets
   
 * `ExportPhotos.lua` is a very short file with the duty to export our images.
 
-So for summary: 
-  * LibraryMenuItemPluginUI.lua
-  * json.lua
-  * info.lua
-  * imageIteratorSettings.json
-  * AdjustConfigurationFile.lua
-  * DevelopSettingsCombinations.lua
-  * ExportPhotos.lua
-
 ### Import of the images
 The easiest way for importing images into our Plug-in is to import them into the Lightroom Classic Catalog and select them.
 
@@ -223,30 +222,21 @@ local targetPhotos = catalog.targetPhotos
 In this code, the `targetPhotos` are the selected photos in the catalog. Now you can work with them. It's that simple. 
 
 ### Export images
-`ExportPhotos.lua` is responsible for the export of our images. You don't have to implement a ExportServiceProvider.
+`ExportPhotos.lua` is responsible for the export of our images. You don't have to implement an ExportServiceProvider.
 ```lua
 function ExportPhotos.processRenderedPhotos(photos, folderName)
 ```
-gets the images and the foldername for the export. 
+gets the images and the foldername for export. 
 This function creates an exportsession where you can change the settings for the export e.g. the format. 
 We used 
 ```
 LR_export_destinationPathSuffix = folderName
 ```
-for exporting in different folders. Each time the function `function ExportPhotos.processRenderedPhotos(photos, folderName)` is called, the photos will be exported in the associated folders. If you want to export all of the images into one folder then you have to change the variable `folderName` into a string.
+for exporting in different folders. Each time the function `function ExportPhotos.processRenderedPhotos(photos, folderName)` is called, the photos will be exported in the associated folders. If you want to export all of the images into one folder, then you have to change the variable `folderName` into a string.
 
 ### Editing images
 We use the function `photo:quickDevelopAdjustImage(settingName, size)` from the class `LrPhoto` for editing our images.
 The following settings are available for editing with this function: 
-* Exposure
-* Contrast
-* Highlights
-* Shadows
-* Whites
-* Blacks
-* Clarity
-* Vibrance
-* Saturation
 
 You can find more settings in the Namespace `LrDevelopController`. The settings that we have not listed, <b> can not be used </b> within the   `photo:quickDevelopAdjustImage(settingName, size)`. 
 If you want more available settings, you have to implement the whole Develop Controller.
