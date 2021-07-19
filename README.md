@@ -236,7 +236,7 @@ for exporting in different folders. Each time the function `function ExportPhoto
 
 ### Editing images
 We use the function `photo:quickDevelopAdjustImage(settingName, size)` from the class `LrPhoto` for editing our images.
-The following settings are available for editing with this function: 
+The following settings are available for editing with this function : [Features](#features) 
 
 You can find more settings in the Namespace `LrDevelopController`. The settings that we have not listed, <b> can not be used </b> within the   `photo:quickDevelopAdjustImage(settingName, size)`. 
 If you want more available settings, you have to implement the whole Develop Controller.
