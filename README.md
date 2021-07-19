@@ -19,7 +19,7 @@
 ## 👥About the project 
 
 This is the repository for the teamproject course, summer term 2021, working on automating photography manipulation.
-The plugin is part of the teamproject of the University of Tübingen.
+The Plug-in is part of the teamproject of the University of Tübingen.
 
 
 ### Who are we?
@@ -29,7 +29,7 @@ We are 4 students at the University of Tübingen and we are all studying compute
 
 ## 🌅Features
 
-* The special thing about our plugin is that you can select several images at once and import, export and edit them.
+* The special thing about our Plug-in is that you can select several images at once and import, export and edit them.
 * exports selected images in a matrix-modification format
 * processes the images using all possible combinations e.g. <code> Contrast = [10,20], Saturation = [30,40]</code><br>
 the following combinations will be applied on your selected photos: <br>
@@ -148,10 +148,10 @@ If you want to modify the configuration file, you have to write the settings in 
 The added settings should look like this ```"Settingname":[x,y,z] ```.
 ## 💻Contributing
 
-### How to start programming my own plug-in?
-* The programming language of our project is Lua.
+### How to start programming my own Plug-in?
+* The programming language of our project is [Lua](http://www.lua.org/).
 * Read the [Lightroom Classic SDK guide](https://www.adobe.io/apis/creativecloud/lightroomclassic.htm). (You don't have to read each chapter). We would recommend reading the first two chapters of the SDK.
-* Try to program your own small "Hello World" plug-in using the SDK.
+* Try to program your own small "Hello World" Plug-in using the SDK.
 
 ### Which files do I need?
 * `Info.lua`: This file describes your Plug-in e.g. the Lightroom Version, the title of your Plug-in and more
@@ -163,11 +163,11 @@ This is where the magic happens. This file implements the whole User Interface o
 ### Which files do I need for contributing to TheImageIterator?
 * In our case, the most important file is the configuration file called `imageIteratorSettings.json`. 
 You can save the settings in the configuration file or use our UI for modifying the configuration file.
-The configuration file contains the settings for editing and other infomation. You can store everything about the settings, the export and more in this file. 
-We implemented `export_format` and our Settings for editing. If you want to save for example the metadata, you have to implement functions in the plugin. 
+The configuration file contains the settings for editing and other infomation.
+We implemented `export_format` and our Settings for editing. If you want to save for example the metadata, you have to implement functions in the Plug-in. 
 In short, the configuration file contains information for the processing.
 
-* Because it's a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution for it is `json.lua`. It's an external JSON library for Lua from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). This file makes decoding and encoding between JSON and Lua easier. 
+* Because the `imageIteratorSettings.json` file is a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution for it is `json.lua`. It's an external JSON library for Lua from [this source](https://github.com/rxi/json.lua/blob/master/json.lua). This file makes decoding and encoding between JSON and Lua easier. 
 We changed the lines 85 and 96 for a better look of our configuration file. 
 Here is the License for the `json.lua` file: (You can find it in json.lua as well.)
 >-- Copyright (c) 2020 rxi
@@ -266,4 +266,4 @@ Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License.
 
 ## Sources
 1. [JSON Library for Lua Accessed: May 20, 2021](https://github.com/rxi/json.lua/blob/master/json.lua)
-2. [Sample pictures for testing the plug-in Accessed: May 22, 2021](https://pixabay.com/de/)
+2. [Sample pictures for testing the Plug-in Accessed: May 22, 2021](https://pixabay.com/de/)
