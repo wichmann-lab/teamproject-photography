@@ -208,6 +208,7 @@ All external sources used in our Plug-in are listed at the end of this README.
 * `DevelopSettingsCombinations.lua` is an external code as well. [Click here for getting to the source](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua). 
 Because it is code from Stack Overflow, it is licensed under (https://stackoverflow.com/legal/terms-of-service/public) -- NOCHMAL NACHLESEN! WICHTIG
 We extend the code for our usage with some functions based on it. This file gets the settings from the configuration file and creates a new table with all possible combinations from the settings of our configuration file. The code is well commented, so you should be able to read the comments for understanding each function. 
+The split function is also external code from [this source](https://www.codegrepper.com/code-examples/lua/lua+split+string+by+delimiter) licensed under Creative Common.
   
 * `ExportPhotos.lua` is a very short file with the duty to export our images.
 
@@ -258,3 +259,4 @@ Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License.
 1. [JSON Library for Lua Accessed: May 20, 2021](https://github.com/rxi/json.lua/blob/master/json.lua)
 2. [Sample pictures for testing the Plug-in Accessed: May 22, 2021](https://pixabay.com/de/)
 3. [Code from Stack Overflow for finding all possible combinations of arrays recursively](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua)
+4. [split function for strings](https://www.codegrepper.com/code-examples/lua/lua+split+string+by+delimiter)
