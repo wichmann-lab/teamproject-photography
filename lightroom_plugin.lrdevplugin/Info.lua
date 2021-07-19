@@ -1,5 +1,5 @@
 return {
-    LrSdkVersion = 9.0,
+    LrSdkVersion = 10.3,
     LrToolkitIdentifier = "com.adobe.lightroom.sdk.theImageIterator",
     LrPluginName = "The Image Iterator - Plug-in",
     LrLibraryMenuItems = {
