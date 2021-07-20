@@ -12,7 +12,6 @@
 3. [Getting Started](#getting-started)
 4. [Usage](#usage)
 5. [Contributing](#contributing)
-6. [Acknowledgements](#acknowledgements)
 7. [License](#license)
 8. [Sources](#sources)
 
@@ -243,13 +242,6 @@ You can find more settings in the Namespace `LrDevelopController`. The settings 
 If you want more available settings, you have to implement the whole Develop Controller.
 Our UI creates arrays with the length of 3. If you want to edit your photos with arrays of a length greater than 3, you can use the configuration file. 
 If the UI should create array of length of n elements, you have to implement this.
-
-### Debugging
-
-## Acknowledgements
-  
-* interested in image editing
-* programming skills would be an advantage
 
 ## License
 
