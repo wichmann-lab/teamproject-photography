@@ -16,7 +16,7 @@
 7. [License](#license)
 8. [Sources](#sources)
 
-## 👥About the project 
+## 👩🏻‍💻👩🏽‍💻 About the project 👩🏽‍💻👩🏻‍💻
 
 This is the repository for the teamproject course, summer term 2021, working on automating photography manipulation.
 The Plug-in is part of the teamproject of the University of Tübingen.
@@ -24,7 +24,7 @@ The Plug-in is part of the teamproject of the University of Tübingen.
 
 ### Who are we?
 
-We are 4 students at the University of Tübingen and we are all studying computer science. 
+We are four female students at the University of Tübingen and we are all studying computer science. 
 
 
 ## 🌅Features
