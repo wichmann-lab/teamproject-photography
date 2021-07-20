@@ -48,14 +48,14 @@ the following combinations will be applied on your selected photos: <br>
 
 ### Set up
 + You need [Adobe Lightroom Classic 10.3](https://helpx.adobe.com/lightroom-classic/get-started.html#) with an access to the Creative Cloud.
-+ Download the whole project or only the folder `lightroom_plugin.lrdevplugin`. The folder itself can be anywhere on your computer.
++ Download the whole project or only the folder `lightroom_plugin.lrdevplugin`(use green "Code"-Button). The folder itself can be anywhere on your computer.
 + Create a new directory called "TheImageIterator" under the standard home directory.
 
   Home directory..
 
      + for Windows: `C/Users/username/`
   
-     + for Mac OS: `/Users/username/`
+     + for Mac OS: `/Users/username/` (Shortcut: Command+Shift+H)
   
 + Make sure to save the configuration file [imageIteratorSettings.json](lightroom_plugin.lrdevplugin/TheImageIterator/imageIteratorSettings.json) under this folder. 
 + Add the Plug-in in Lightroom Classic: File -> Plug-in Manager... -> Add -> Select the folder of the plugin `lightroom_plugin.lrdevplugin` -> Done
