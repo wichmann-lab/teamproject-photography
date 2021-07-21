@@ -205,7 +205,7 @@ All external sources used in our Plug-in are listed at the end of this README.
   For the last two tasks, `json.lua` is absolutely necessary. 
   
 * `DevelopSettingsCombinations.lua` is an external code as well. [Click here for getting to the source](https://stackoverflow.com/questions/58668988/find-all-possible-combination-of-these-two-sets-of-items-lua). 
-Because it is code from Stack Overflow, it is licensed under the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). The source of the [Public Network Terms of Service](https://stackoverflow.com/legal/terms-of-service/public)
+Because it is code from Stack Overflow, it is licensed under the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). Here is the source of the [Public Network Terms of Service](https://stackoverflow.com/legal/terms-of-service/public).
 We extend the code for our usage with some functions based on it. This file gets the settings from the configuration file and creates a new table with all possible combinations from the settings of our configuration file. The code is well commented, so you should be able to read the comments for understanding each function. 
 The split function is also external code from [this source](https://www.codegrepper.com/code-examples/lua/lua+split+string+by+delimiter) licensed under Creative Common.
   
