@@ -174,7 +174,7 @@ The configuration file contains the settings for editing and other infomation.
 We implemented `export_format` and our Settings for editing. If you want to save for example the metadata, you have to implement functions in the Plug-in. 
 In short, the configuration file contains information for the processing.
 
-* Because the `imageIteratorSettings.json` file is a JSON-file, it isn't possible to use JSON-code in a Lua script. The solution for it is `json.lua`. It's an external JSON library for Lua. This file makes decoding and encoding between JSON and Lua easier. 
+* Because the `imageIteratorSettings.json` file is a JSON-file, we use `json.lua` for decoding and encoding between JSON and Lua. It's an external JSON library for Lua.
 Here is the License for the `json.lua` file: (You can find it in json.lua as well.)
 >-- Copyright (c) 2020 rxi
 --
