@@ -42,6 +42,7 @@ function arrayCombine2(array1, array2)
 end
 
 -- function to split string in table
+-- source for this code snippet: 
 -- https://www.codegrepper.com/code-examples/lua/lua+split+string+by+delimiter
 local function Split(s, delimiter)
     result = {};
