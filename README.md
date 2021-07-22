@@ -160,7 +160,7 @@ The added settings should look like this ```"Settingname":[x,y,z] ```.
 * Read the [Lightroom Classic SDK guide](https://www.adobe.io/apis/creativecloud/lightroomclassic.htm). (You don't have to read each chapter). We would recommend reading the first two chapters of the SDK.
 * Try to program your own small "Hello World" Plug-in using the SDK.
 
-### Which files do I need?
+### Which files do I need for running Plug-ins?
 * `Info.lua`: This file describes your Plug-in e.g. the Lightroom Version, the title of your Plug-in and more
 * Main file or as we call it "the UI file": in our case this file is called `LibraryMenuItemPluginUI.lua`
 It is called by the `Info.lua` file as the main script.
