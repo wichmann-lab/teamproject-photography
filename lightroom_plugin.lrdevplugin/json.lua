@@ -1,3 +1,6 @@
+-- source of this code: https://github.com/rxi/json.lua/blob/master/json.lua
+-- We changed the lines 85 and 96 for a better look of our configuration file.
+
 --
 -- json.lua
 --
