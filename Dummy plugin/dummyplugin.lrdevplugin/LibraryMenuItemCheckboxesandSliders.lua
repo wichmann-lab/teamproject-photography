@@ -5,8 +5,8 @@ local LrView = import 'LrView'
 local LrColor = import 'LrColor'
 
 -- require 'json'
-local json = loadfile("./json.lua")()
-local open = io.open
+--local json = loadfile("./json.lua")()
+--local open = io.open
 
 local function read_file(path)
     local file = open(path, "rb") -- r read mode and b binary mode
@@ -16,10 +16,10 @@ local function read_file(path)
     return content
 end
 
-local fileContent = read_file("./config.json");
+--local fileContent = read_file("./config.json");
 -- print (fileContent);
 -- print (fileContent);
-local configFile = json.decode(fileContent);
+--local configFile = json.decode(fileContent);
 
 MyDummyPluginLibraryItem = {}
 function MyDummyPluginLibraryItem.showCustomDialogWithSliders()
@@ -34,7 +34,7 @@ function MyDummyPluginLibraryItem.showCustomDialogWithSliders()
         tableOne.sliderTwoischecked = false
         tableOne.sliderThreeischecked = false
         tableTwo.sliderOneischecked = false
-        tableTwo.sliderTwoischecked = configFile.testConfig
+        --tableTwo.sliderTwoischecked = configFile.testConfig
 
         -- create view hierarchy
         local f = LrView.osFactory() -- get view factory object
@@ -58,7 +58,7 @@ function MyDummyPluginLibraryItem.showCustomDialogWithSliders()
                 }, f:slider{            -- Create Slider
                     value = LrView.bind("Slider One"),
                     min = 0,
-                    max = configFile.testMax,
+                    --max = configFile.testMax,
                     enabled = LrView.bind("sliderOneischecked")
                 }},
 

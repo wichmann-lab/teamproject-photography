@@ -26,8 +26,8 @@ local LrLogger = import 'LrLogger'
 local LrColor = import 'LrColor'
 
 -- require 'json'
-local json = loadfile("D:/Teamprojekt local und git/Teamprojekt Local/Sample Plugins/dummyplugin.lrdevplugin/json.lua")()
-local open = io.open
+--local json = loadfile("D:/Teamprojekt local und git/Teamprojekt Local/Sample Plugins/dummyplugin.lrdevplugin/json.lua")()
+--local open = io.open
 
 local function read_file(path)
     local file = open(path, "rb") -- r read mode and b binary mode
