@@ -75,17 +75,17 @@ the following combinations will be applied on your selected photos: <br>
 + The added setting is now visible in `Overview Develop settings`
 + Every new added setting and every new change of values for a setting will make the text color of `Overview Develop settings` red. If nothing has changed and the ADD-Button is used again the text color will turn black.
 
-![addsetting](README-files/addsetting.gif)
+![addsetting](README-images/addsetting.gif)
 + Use the HELP-Button so see a list of all available settings.
-<p align="center"><img src="README-files/helpwindow.png" width="258" height="327"></p>
+<p align="center"><img src="README-images/helpwindow.png" width="258" height="327"></p>
 
 **CAUTION:** If you add a setting and delete it afterwards in the configuration file, you have to **RELOAD** the Plug-in (File -> Plug-in Manager -> RELOAD-Button -> Done). Now you can execute the Plug-in again. 
 
 + You can reset the values of every setting to 0 by using the RESET-Button.  
-![reset](README-files/reset.gif)
+![reset](README-images/reset.gif)
 
 + After adding the preferred settings and values correctly, start the editing and exporting progress by using the SAVE AND EDIT-Button and by confirming the progress. A progress bar will appear in the upper left corner. A window will pop up after successfully editing and exporting every photograph. A folder named `Exported Photos` will be created in `lightroom_plugin.lrdevplugin` (first time using SAVE AND EDIT-Button) and there will be all edited photographs. For later use, all photographs will be stored in this folder.
-![export](README-files/export.gif)
+![export](README-images/export.gif)
 (Update: GIF not up to date, window to confirm the progress was changed).
 As shown, our UI creates arrays with the length of 3.
 If you want to edit your photos with arrays of a length greater than 3, you can use the configuration file.
