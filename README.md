@@ -62,14 +62,14 @@ the following combinations will be applied on your selected photos: <br>
 ![addplugin](README-images/addingplugin.gif)
 + Choose the pictures you want to edit.
 + Execute the Plug-in: Library -> Plug-in Extras -> The Image Iterator
-![openplugin](Gifs-and Screenshots-for-README/openplugin.gif)
+![openplugin](README-images/openplugin.gif)
 
 ## 💡 Usage
 + After opening the Plug-in you can see the path of your created configuration file under the standard home directory.
 + `Overview Develop settings` displays all settings, that were initially added to the configuration file (see [Config file](#config-file)) and the current content of the key "Settings" in the configuration file.
 
 + If you need any help for using the Plug-in, press the SUPPORT-Button. The following window will pop up:
-<p align="center"><img src="README-files/supportwindow.png" width="259" height="433"></p>
+<p align="center"><img src="README-images/supportwindow.png" width="259" height="433"></p>
 
 + Add settings by typing them into the text field and set (max. 3) different values for these. Press the ADD-Button afterwards. 
 + The added setting is now visible in `Overview Develop settings`
@@ -92,23 +92,23 @@ If you want to edit your photos with arrays of a length greater than 3, you can 
 
 + You have two options to cancel the progress:
 1. By using the CANCEL PROGRESS AND EXIT-Button. The progress will immediately stop and the Plug-in will be closed.
-![cancelbutton](README-files/cancelbutton.gif)
+![cancelbutton](README-images/cancelbutton.gif)
 2. By closing the Plug-in and by using the X at the right end of the progress bar.
-![cancelX](README-files/cancelX.gif)
+![cancelX](README-images/cancelX.gif)
 ### Errors
 + If you add an unavailable setting or an invalid text (as the following example "Helloworld") the following error will be generated:  
-<p align="center"><img src="README-files/error_unavailablesettingTextfield.jpeg" width="500" height="613.38"></p>
+<p align="center"><img src="README-images/error_unavailablesettingTextfield.jpeg" width="500" height="613.38"></p>
 
 + You can find all available settings in [Features](#features) or by using the HELP-Button.
 
 + If there is already an unavailable setting or an invalid text in the configuration file and you want to start the editing and exporting progress by using the SAVE AND EDIT-Button, the following error will be generated: 
-<p align="center"><img src="README-files/error_unavailablesettingConfig.jpeg" width="500" height="610.08"></p>
+<p align="center"><img src="README-images/error_unavailablesettingConfig.jpeg" width="500" height="610.08"></p>
 
 + Open the configuration file `imageIteratorSettings.json`, remove every setting that is not mentioned in the list of available settings and reload the Plug-in.
 
 + Don't delete the `Exported Photos` folder. Remove the content only, otherwise the following error will occur:
 + 
-<p align="center"><img src="README-files/error_exportedphotos.jpg" width="200" height="231.25"></p>
+<p align="center"><img src="README-images/error_exportedphotos.jpg" width="200" height="231.25"></p>
 
 + After resolving the errors, reload the Plug-in and start it again.
 
@@ -134,7 +134,7 @@ Example for configuration file `imageIteratorSettings.json`:
 
 If there is no directory under the standard home directory with the configuration file in it, or if the directory exists, but the configuration file is missing, the following error will occur: 
 
-<p align="center"><img src="README-files/error_noconfigfile.png" width="200" height="217.32"></p>
+<p align="center"><img src="README-images/error_noconfigfile.png" width="200" height="217.32"></p>
 
 
 It's important that the structure is preserved. 
@@ -143,10 +143,10 @@ It's important that the structure is preserved.
 ```
 If there is no `Settings` key or no `export_format`, the Plug-in won't work and the following error messages will appear: 
 + Missing keys: 
-<p align="center"><img src="README-files/error_nokey.png" width="200" height="192"></p>
+<p align="center"><img src="README-images/error_nokey.png" width="200" height="192"></p>
 
 + Missing values for "Settings": 
- <p align="center"><img src="README-files/error_novaluesinkey.png" width="200" height="188.42"></p>
+ <p align="center"><img src="README-images/error_novaluesinkey.png" width="200" height="188.42"></p>
 
 Of course you can add more keys, but don't delete the existing ones. Otherwise we cannot guarantee that the Plug-in will work.
 
