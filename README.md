@@ -59,7 +59,7 @@ the following combinations will be applied on your selected photos: <br>
   
 + Make sure to save the configuration file [imageIteratorSettings.json](lightroom_plugin.lrdevplugin/TheImageIterator/imageIteratorSettings.json) under this folder. 
 + Add the Plug-in in Lightroom Classic: File -> Plug-in Manager... -> Add -> Select the folder of the plugin `lightroom_plugin.lrdevplugin` -> Done
-![addplugin](README-files/addingplugin.gif)
+![addplugin](Gifs and Screenshots for README/addingplugin.gif)
 + Choose the pictures you want to edit.
 + Execute the Plug-in: Library -> Plug-in Extras -> The Image Iterator
 ![openplugin](README-files/openplugin.gif)
