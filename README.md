@@ -1,3 +1,5 @@
+*This project was created by undergraduate computer science students, supervised by David-Elias Künstle and Felix Wichmann, as part of a practical software development course at the University of Tübingen. The final version of the students is marked as [v1.0](https://github.com/wichmann-lab/teamproject-photography/releases/tag/v1.0).*
+
 ***
 # ⭐ THE IMAGE ITERATOR 📸 ⭐
 ***
