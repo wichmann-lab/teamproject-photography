@@ -18,6 +18,11 @@ local catalog = LrApplication.activeCatalog()
 local targetPhotos = catalog.targetPhotos
 local targetPhotosCopies = targetPhotos
 ArraySettings = configFile.Settings
+-- settings only available via presets
+developPresetSettingsTable = {
+    "Texture",
+    "Dehaze"
+}
 developSettingsTable = {
     "Exposure",
     "Contrast",
@@ -27,7 +32,8 @@ developSettingsTable = {
     "Blacks",
     "Clarity",
     "Vibrance",
-    "Saturation"
+    "Saturation",
+    unpack(developPresetSettingsTable)
 }
 -- Initial values
 showSuccess = true
@@ -68,6 +74,18 @@ function isAvailable()
     return true
 end
 
+-- checks whether a single setting is available only by creating a preset
+function requiresPreset(setting)
+    res = false
+    for index, value in ipairs(developPresetSettingsTable) do
+        if value == setting then
+            res = true
+            break
+        end
+    end
+    return res
+end
+
 -- Edits selected photos if all settings are available
 -- quit processing if progress is canceled (via X)
 -- exports edited photos into the folder
@@ -83,7 +101,11 @@ function editPhotos(photos, keyTable, settingsTable)
             folderName = ""
             for p, picture in pairs(result) do
                 for key, value in pairs(data) do
-                    picture:quickDevelopAdjustImage(keyTable[key], 0) -- reset values for further editing
+                    if requiresPreset(keyTable[key]) then
+                        adjustImageUsingPreset(picture, keyTable[key], 0)
+                    else
+                        picture:quickDevelopAdjustImage(keyTable[key], 0) -- reset values for further editing
+                    end
                 end
             end
         end
@@ -108,13 +130,30 @@ function editSinglePhoto(keyTable, photos, data)
         end
         folderName = ""
         for key, value in pairs(data) do
-            photo:quickDevelopAdjustImage(keyTable[key], tonumber(value))
+            if requiresPreset(keyTable[key]) then
+                adjustImageUsingPreset(photo, keyTable[key], tonumber(value))
+            else
+                photo:quickDevelopAdjustImage(keyTable[key], tonumber(value))
+            end
             progressBar:setPortionComplete(count, times * #targetPhotosCopies)
             folderName = folderName .. keyTable[key] .. value
         end
         count = count + 1
     end
     return photos
+end
+
+-- sets the value of the specified setting to the specified value
+-- like photo:quickDevelopAdjustImage(setting, value), but uses a develop Preset
+-- should work for all settings that are listed when applying a develop preset in the GUI
+function adjustImageUsingPreset(photo, setting, value)
+    LrTasks.startAsyncTask (function ()
+	catalog:withWriteAccessDo ("Create Preset", function()
+	    local presetSettings = {setting = value}
+            local tmpPreset = LrApplication.addDevelopPresetForPlugin(_PLUGIN, "TmpPreset", presetSettings)
+            photo:applyDevelopPreset(tmpPreset, _PLUGIN)
+	end, {timeout = 15})
+    end)
 end
 
 --resets values in the configuration file
