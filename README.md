@@ -45,6 +45,8 @@ the following combinations will be applied on your selected photos: <br>
 > * Clarity
 > * Vibrance
 > * Saturation
+> * Texture
+> * Dehaze
 
 ## 🛠Getting Started
 
