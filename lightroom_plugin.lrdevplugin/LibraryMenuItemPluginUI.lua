@@ -149,7 +149,8 @@ end
 function adjustImageUsingPreset(photo, setting, value)
     LrTasks.startAsyncTask (function ()
 	catalog:withWriteAccessDo ("Create Preset", function()
-	    local presetSettings = {setting = value}
+	    local presetSettings = {}
+            presetSettings[setting] = value
             local tmpPreset = LrApplication.addDevelopPresetForPlugin(_PLUGIN, "TmpPreset", presetSettings)
             photo:applyDevelopPreset(tmpPreset, _PLUGIN)
 	end, {timeout = 15})
