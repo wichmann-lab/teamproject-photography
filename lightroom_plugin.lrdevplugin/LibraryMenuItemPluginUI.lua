@@ -104,7 +104,7 @@ function editPhotos(photos, keyTable, settingsTable)
                     if requiresPreset(keyTable[key]) then
                         adjustImageUsingPreset(picture, keyTable[key], 0)
                     else
-                        picture:quickDevelopAdjustImage(keyTable[key], 0) -- reset values for further editing
+                        picture:quickDevelopAdjustImage(keyTable[key], 0)
                     end
                 end
             end
@@ -133,6 +133,11 @@ function editSinglePhoto(keyTable, photos, data)
             if requiresPreset(keyTable[key]) then
                 adjustImageUsingPreset(photo, keyTable[key], tonumber(value))
             else
+                photo:quickDevelopAdjustImage(keyTable[key], 0)
+                -- photo:quickDevelopAdjustImage( settingName, size ) seems to act pretty weird:
+                -- if size is a number different from 0, the setting is set to <value before> + size
+                -- however, if size is 0, the setting is set to 0
+                -- the line above ensures that the setting is 0 before the next line
                 photo:quickDevelopAdjustImage(keyTable[key], tonumber(value))
             end
             progressBar:setPortionComplete(count, times * #targetPhotosCopies)
